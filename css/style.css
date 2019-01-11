@@ -1,0 +1,196 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+div {
+  box-sizing: border-box;
+}
+div:after,
+div:before {
+  clear: both;
+  content: '';
+  display: block;
+}
+body {
+  font: 16px sans-serif;
+}
+.container-fluid {
+  padding: 0;
+}
+.container-fluid .header {
+  background: -moz- linear-gradient(to bottom, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%);
+  background: -webkit- linear-gradient(to bottom, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%);
+  background: linear-gradient(to bottom, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%);
+}
+.container-fluid .header .logo {
+  padding: 15px;
+}
+.container-fluid .header .logo .sun {
+  position: relative;
+  background: -moz- radial-gradient(ellipse at center, #fefcea 0%, #f1da36 100%);
+  background: -webkit- radial-gradient(ellipse at center, #fefcea 0%, #f1da36 100%);
+  background: radial-gradient(ellipse at center, #fefcea 0%, #f1da36 100%);
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+}
+.container-fluid .header .logo .sun:after,
+.container-fluid .header .logo .sun:before {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: black;
+  top: 20px;
+  border-radius: 100%;
+}
+.container-fluid .header .logo .sun:after {
+  right: 10px;
+}
+.container-fluid .header .logo .sun:before {
+  left: 10px;
+}
+.container-fluid .header .logo .sun .roth {
+  border-top: 10px solid black;
+  border-radius: 50% ;
+}
+.container-fluid .header .logo .sun,
+.container-fluid .header .logo .slang {
+  float: left;
+}
+.container-fluid .header .logo .slang {
+  padding: 20px 10px;
+}
+.container-fluid .header .logo .slang p {
+  margin-bottom: 0;
+  text-transform: uppercase;
+  font-size: 17px;
+  color: white;
+}
+.container-fluid .header .menu {
+  position: relative;
+  display: block;
+  height: 60px;
+}
+.container-fluid .header .menu-header {
+  position: absolute;
+  top: 0;
+}
+.container-fluid .header .menu #checkbox {
+  display: none;
+}
+.container-fluid .header .menu #checkbox:checked ~ nav {
+  display: block;
+}
+.container-fluid .header .menu label {
+  cursor: pointer;
+  z-index: 2;
+  position: absolute;
+  display: block;
+}
+.container-fluid .header .menu .burger {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  right: 10px;
+  top: 12px;
+}
+.container-fluid .header .menu .burger_open {
+  position: relative;
+  background: white;
+  width: 50px;
+  height: 5px;
+}
+.container-fluid .header .menu .burger_open:after,
+.container-fluid .header .menu .burger_open:before {
+  position: absolute;
+  left: 0;
+  top: 15px;
+  background: white;
+  width: 50px;
+  height: 5px;
+}
+.container-fluid .header .menu .burger_open:before {
+  top: 30px;
+}
+.container-fluid .header .menu nav {
+  display: none;
+  width: 100%;
+  background: #52B152;
+  position: absolute;
+  top: 100%;
+}
+.container-fluid .header .menu nav ul {
+  margin-bottom: 0;
+}
+.container-fluid .header .menu nav ul li {
+  float: left;
+  width: 50%;
+  display: block;
+  text-align: left;
+  font-size: 16px;
+  padding-left: 20px;
+}
+.container-fluid .header .menu nav ul li:hover {
+  background: aqua;
+}
+.container-fluid .header .menu nav ul li:nth-child(2n) {
+  padding-right: 20px;
+}
+.container-fluid .header .menu nav ul li:nth-child(2n) a {
+  text-align: right;
+}
+.container-fluid .header .menu nav ul li a {
+  color: white;
+  display: block;
+  text-decoration: none;
+  padding: 12px 0;
+}
+.container-fluid .container .post {
+  background: #8c8c95;
+  border: 2px solid black;
+  border-radius: 10px;
+  margin: 5px 0;
+  padding: 10px;
+  width: 100%;
+}
+.container-fluid .footer {
+  height: 100px;
+  padding: 10px;
+  background: -moz- linear-gradient(to bottom, #b4ddb4 0%, #83c783 17%, #52b152 33%, #008a00 67%, #005700 83%, #002400 100%);
+  background: -webkit- linear-gradient(to bottom, #b4ddb4 0%, #83c783 17%, #52b152 33%, #008a00 67%, #005700 83%, #002400 100%);
+  background: linear-gradient(to bottom, #b4ddb4 0%, #83c783 17%, #52b152 33%, #008a00 67%, #005700 83%, #002400 100%);
+}
+.container-fluid .footer .block_icon {
+  float: right;
+}
+.container-fluid .footer .block_icon .block_img {
+  float: left;
+  display: table;
+}
+.container-fluid .footer .block_icon .block_img .img_icons {
+  background-image: url(../photo/icons.png);
+  width: 48px;
+  height: 48px;
+  display: block;
+  float: left;
+}
+.container-fluid .footer .block_icon .block_img .icon_ok {
+  width: 48px;
+  height: 48px;
+  background-position: 0 0;
+}
+.container-fluid .footer .block_icon .block_img .icon_instagram {
+  width: 48px;
+  height: 48px;
+  background-position: -96px 0;
+}
+.container-fluid .footer .block_icon .block_img .icon_facebook {
+  width: 48px;
+  height: 48px;
+  background-position: -144px 0;
+}
+.container-fluid .footer .block_icon .block_img .icon_vk {
+  width: 48px;
+  height: 48px;
+  background-position: -240px 0;
+}
