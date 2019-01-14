@@ -17,7 +17,7 @@
                 <div class="col-12">
 
                     <div class="logo">
-                        <div class="sun">
+                        <div class="sun move">
                             <div class="roth"></div>
                         </div>
                         <div class="slang"><p>сверхвидящее</p><p>кострово</p></div>
