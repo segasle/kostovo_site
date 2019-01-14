@@ -54,32 +54,37 @@ function get_soclal()
 
 function get_post_vk()
 {
-    global $token;
     $out = '<div class="row">';
-    $content2 = file_get_contents("https://api.vk.com/method/wall.get?owner_id=-70567817&count=1&extended=1&filter=all&access_token=6b3dcb09a02d5b169df16faeb42f9c192a94b804697aaf1b1cc17bc9289c46893523fe04436fa7731d46b&v=5.60");
+        $content2 = file_get_contents("https://api.vk.com/method/wall.get?owner_id=-70567817&count=100&extended=1&filter=all&access_token=6b3dcb09a02d5b169df16faeb42f9c192a94b804697aaf1b1cc17bc9289c46893523fe04436fa7731d46b&v=5.60");
     $elements2 = json_decode($content2, true);
     foreach ($elements2 as $value) {
+        foreach ($value['profiles'] as $profile) {
+        $fio = $profile['first_name'] . ' ' . $profile['last_name'];
+            $link = $profile['screen_name'];
+          
+        }
         foreach ($value['items'] as $item) {
-            // print_r($item);
+            $link_post = $item['from_id'].'_'.$item['id'];
             $data = date('d.m.Y h:m', $item['date']);
-            $out .= '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><div class="post"><p>' . $item['text'] . '</p>';
-            foreach ($item['attachments'] as $key => $values) {
-                foreach ($values as $element) {
-                    echo '<pre>';
-                    print_r($element);
-                    echo '</pre>';
-
-                    $out2 = '<img src="' . $element['photo_604'] . '" class="post_img">' . '<p>' . $data . '</p></div></div>';
+            $text = $item['text'];
+  //            print_r($value);
+            if (isset($item['attachments'])) {
+                if (is_array($item['attachments']) || is_object($item['attachments'])) {
+                    foreach ($item['attachments'] as $key => $values) {
+                        if (isset($values['photo'])) {
+                            $img = $values['photo']['photo_604'];//;
+                        } else {
+                            $img = '';
+                        }
+                    }
                 }
             }
-            $content2 = $out . $out2;
-
+            $out .= '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><div class="post"><p class="post_text">' . $text . '</p>'.'<img src="' . $img .'" class="post_img">' . '<a class="post_link" href="https://vk.com/' . $link . '" target="_blank">' . $fio . '</a>' . '<p class="post_data">' . $data . '</p><a href="https://vk.com/wall'.$link_post.'" target="_blank">Ссылка на пост</a></div></div>';
         }
-//        foreach ($value as $item) {
-
-  //      }
     }
-    $content2 .= ' </div > ';
-    echo $content2;
+    $out .= '</div>';
+
+    echo $out;
     return;
 }
+//get_post_vk();
