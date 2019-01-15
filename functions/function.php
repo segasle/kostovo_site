@@ -39,6 +39,17 @@ function get_menu()
     echo $output;
     return;
 }
+function input_reg()
+{
+    $sql = do_query('SELECT * FROM `input_reg`');
+    $output = "<form method='post' action=''>";
+    foreach ($sql as $r) {
+        $output .= "<div class='form-group'><label for='".$r['for']."'>".$r['text']."</label><input class='form-control' type='".$r['type']."' name='".$r['name']."' placeholder='".$r['placeholder']."' id='".$r['for']."' ></div>";
+    }
+    $output .= "</form>";
+    echo $output;
+    return;
+}
 function link_reg()
 {
     $sql = do_query('SELECT * FROM `reg`');
