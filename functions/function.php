@@ -39,6 +39,17 @@ function get_menu()
     echo $output;
     return;
 }
+function link_reg()
+{
+    $sql = do_query('SELECT * FROM `reg`');
+    $output = "";
+    foreach ($sql as $r) {
+        $output .= "<p>".$r['description']."<a href='" . $r['url'] . "'>"." " . $r['title'] . "</a></p>";
+    }
+
+    echo $output;
+    return;
+}
 
 function get_soclal()
 {
