@@ -394,12 +394,12 @@ body {
   background-position: -240px 0;
 }
 @media (min-width: 1024px) {
-  label {
-    display: none;
-  }
   .container-fluid .header .menu {
     position: inherit;
     height: auto;
+  }
+  .container-fluid .header .menu label {
+    display: none;
   }
   .container-fluid .header .menu-header {
     position: inherit;

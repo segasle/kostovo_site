@@ -43,12 +43,12 @@
                                         <div class="modal-body">
                                             <form action="" method="post">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Email</label>
-                                                    <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="Email">
+                                                    <label for="exampleInputEmail">Email</label>
+                                                    <input type="email" class="form-control" id="exampleInputEmail" name="email" placeholder="Email">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="exampleInputPassword1">Пароль</label>
-                                                    <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
+                                                    <label for="exampleInputPassword">Пароль</label>
+                                                    <input type="password" class="form-control" name="password" id="exampleInputPassword" placeholder="Password">
                                                 </div>
                                                 <div class="checkbox">
                                                     <label>
