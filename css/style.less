@@ -41,13 +41,12 @@ body{
       .move{
         position: absolute;
         animation-name: move;
-        animation-delay: 3s;
+        animation-delay: 1s;
         animation-timing-function: ease-in-out;
-        animation-iteration-count: infinite;
+        animation-iteration-count: 1;
         animation-duration: 10s;
       }
       .sun{
-
         @sun: 80px;
         position: relative;
         background: -moz-@bg_sun;
@@ -85,13 +84,46 @@ body{
         float: left;
       }
       .slang{
-
         padding: 20px 10px;
         p{
           margin-bottom: 0;
           text-transform: uppercase;
           font-size: 17px;
           color: white;
+        }
+      }
+    }
+    .modal{
+      &-open{
+        float: right;
+        margin: 5px;
+      }
+      &-body{
+        form{
+          padding-bottom: 15px;
+          .btn{
+            width: 100%;
+          }
+        }
+        .block{
+          &-icons{
+            .fa{
+              &-facebook{
+                &-official{
+                  color: #249dff;
+                }
+              }
+              &-odnoklassniki{
+                color: #ffa210;
+              }
+              &-vk{
+                color: #2c54ff;
+              }
+              &-instagram{
+                color: #ff6037;
+              }
+            }
+          }
         }
       }
     }
