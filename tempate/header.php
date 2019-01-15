@@ -25,7 +25,7 @@
                             <p>кострово</p></div>
                     </div>
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12 no-col">
                             <button type="button" class="btn btn-primary modal-open" data-toggle="modal"
                                     data-target="#exampleModal">
                                 <span class="fa fa-user-circle-o fa-1x">Авторизоваться</span>

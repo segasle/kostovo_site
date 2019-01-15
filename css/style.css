@@ -394,6 +394,14 @@ body {
   background-position: -240px 0;
 }
 @media (min-width: 1024px) {
+  .container-fluid .header .no-col {
+    position: absolute;
+    top: 0;
+  }
+  .container-fluid .header .no-col .btn-primary {
+    background: transparent;
+    border: none;
+  }
   .container-fluid .header .menu {
     position: inherit;
     height: auto;
