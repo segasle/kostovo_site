@@ -45,7 +45,8 @@ function input_reg()
     $sql = do_query('SELECT * FROM `input_reg` ORDER BY input_reg.id');
     $output = "<form method='post' action=''>";
     foreach ($sql as $r) {
-        $output .= "<div class='form-group'><label for='" . $r['for'] . "'>" . $r['text'] . "</label><input class='form-control' type='" . $r['type'] . "' name='" . $r['name'] . "' placeholder='" . $r['placeholder'] . "' id='" . $r['for'] . "' value='".$_POST[$r['name']]."'></div>";
+        $name = $r['name'];
+        $output .= "<div class='form-group'><label for='" . $r['for'] . "'>" . $r['text'] . "</label><input class='form-control' type='" . $r['type'] . "' name='" . $r['name'] . "' placeholder='" . $r['placeholder'] . "' id='" . $r['for'] . "' value='".@$_POST[$name]."'></div>";
     }
     $output .= "<div class=\"checkbox\">
     <label>
@@ -151,9 +152,14 @@ function users_reg(){
 function users_authorization(){
     $data = $_POST;
     if (isset($data['submit'])){
-       $resilt = do_query("SELECT * FROM `users` WHERE `email` ='".$data['email']."',`password` ='".password_verify($data['password'], password)."'");
+       $resilt = do_query("SELECT * FROM `users` WHERE `email` ='".$data['email']."'");
        if ($resilt){
-           echo '<div class="go">Успешно авторизовались</div>';
+         //  ';
+           if (password_verify($data['password'], $resilt)){
+               echo '<div class="go">Успешно авторизовались</div>';
+           } else{
+             echo '<div class="errors">Пароль не верный</div>';
+           }
        }else{
            echo '<div class="errors">Пользоаатель не найден</div>';
        }
