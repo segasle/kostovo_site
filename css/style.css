@@ -180,6 +180,16 @@ body {
   float: right;
   margin: 5px;
 }
+.container-fluid .header .modal-body form {
+  padding-bottom: 15px;
+}
+.container-fluid .header .modal-body form .btn {
+  width: 100%;
+}
+.container-fluid .header .modal-body form .btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
 .container-fluid .header .modal-body .block-icons .fa-facebook-official {
   color: #249dff;
 }

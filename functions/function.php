@@ -45,7 +45,7 @@ function input_reg()
     $sql = do_query('SELECT * FROM `input_reg` ORDER BY input_reg.id');
     $output = "<form method='post' action=''>";
     foreach ($sql as $r) {
-        $output .= "<div class='form-group'><label for='" . $r['for'] . "'>" . $r['text'] . "</label><input class='form-control' type='" . $r['type'] . "' name='" . $r['name'] . "' placeholder='" . $r['placeholder'] . "' id='" . $r['for'] . "' ></div>";
+        $output .= "<div class='form-group'><label for='" . $r['for'] . "'>" . $r['text'] . "</label><input class='form-control' type='" . $r['type'] . "' name='" . $r['name'] . "' placeholder='" . $r['placeholder'] . "' id='" . $r['for'] . "' value='".$_POST[$r['name']]."'></div>";
     }
     $output .= "<div class=\"checkbox\">
     <label>
@@ -124,8 +124,9 @@ function users_reg(){
         }
         if ($data['password1'] == ''){
             $errors[] = 'Вы не ввели пароль';
+
         }
-        if ($data['password2'] !== $data['password1']){
+        if ($data['password2'] != $data['password1']){
             $errors[] = 'Вы не правильно ввели пароль';
         }
         if (empty($errors)){
@@ -133,7 +134,7 @@ function users_reg(){
             $result = $result->fetch_object();
             if (empty($result->count)) {
                 // сохраняет все данные в БД
-                $wer =  do_query("INSERT INTO users (`name`,`email`, `password`) VALUES ('{$data['name']}','{$data['email']}','{$data['password2']}')");
+                $wer =  do_query("INSERT INTO users (`name`,`email`, `password`) VALUES ('{$data['name']}','{$data['email']}','".password_hash($data['password2'], PASSWORD_DEFAULT)."')");
                 if (!empty($wer)){
                     echo '<div class="go">Успешно зарегиревались</div>';
                 }
@@ -144,6 +145,18 @@ function users_reg(){
             echo '<div class="errors">'.array_shift($errors).'</div>';
         }
 
+    }
+    return;
+}
+function users_authorization(){
+    $data = $_POST;
+    if (isset($data['submit'])){
+       $resilt = do_query("SELECT * FROM `users` WHERE `email` ='".$data['email']."',`password` ='".password_verify($data['password'], password)."'");
+       if ($resilt){
+           echo '<div class="go">Успешно авторизовались</div>';
+       }else{
+           echo '<div class="errors">Пользоаатель не найден</div>';
+       }
     }
     return;
 }

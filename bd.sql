@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:8889
--- Время создания: Янв 15 2019 г., 15:49
+-- Время создания: Янв 16 2019 г., 13:13
 -- Версия сервера: 5.7.23
 -- Версия PHP: 7.2.8
 
@@ -37,8 +37,7 @@ INSERT INTO `input_reg` (`id`, `placeholder`, `type`, `for`, `text`, `name`) VAL
 (1, 'Имя', 'text', 'exampleInputName', 'Введите имя', 'name'),
 (2, 'Почта', 'email', 'exampleInputEmail1', 'Введите электронную почту', 'email'),
 (3, 'Пароль', 'password', 'exampleInputPassword1', 'Введите пароль', 'password1'),
-(4, 'Пароль', 'password', 'exampleInputPassword2', 'Подтвердите пароль', 'password2'),
-(5, '', 'checkbox', '', 'Вы должны согласиться со правами на передачу данных ', '');
+(4, 'Пароль', 'password', 'exampleInputPassword2', 'Подтвердите пароль', 'password2');
 
 -- --------------------------------------------------------
 
@@ -108,6 +107,26 @@ INSERT INTO `social_network` (`id`, `url`, `class`) VALUES
 (3, 'https://www.facebook.com/segasle', 'icon_facebook'),
 (4, 'https://vk.com/serg_slepenkov', 'icon_vk');
 
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` text NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
+(3, 'Slepenkov Dmitry', 'segasle@gmail.com', '$2y$10$sv4R0OgiNul.A1VhiMSrEOTHN3EvWslxZacd6LfB9rJ3UUkrNRA2m');
+
 --
 -- Индексы сохранённых таблиц
 --
@@ -137,6 +156,12 @@ ALTER TABLE `social_network`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
@@ -144,13 +169,13 @@ ALTER TABLE `social_network`
 -- AUTO_INCREMENT для таблицы `input_reg`
 --
 ALTER TABLE `input_reg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT для таблицы `reg`
@@ -163,3 +188,9 @@ ALTER TABLE `reg`
 --
 ALTER TABLE `social_network`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT для таблицы `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
