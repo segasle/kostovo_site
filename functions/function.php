@@ -39,23 +39,29 @@ function get_menu()
     echo $output;
     return;
 }
+
 function input_reg()
 {
-    $sql = do_query('SELECT * FROM `input_reg`');
+    $sql = do_query('SELECT * FROM `input_reg` ORDER BY input_reg.id');
     $output = "<form method='post' action=''>";
     foreach ($sql as $r) {
-        $output .= "<div class='form-group'><label for='".$r['for']."'>".$r['text']."</label><input class='form-control' type='".$r['type']."' name='".$r['name']."' placeholder='".$r['placeholder']."' id='".$r['for']."' ></div>";
+        $output .= "<div class='form-group'><label for='" . $r['for'] . "'>" . $r['text'] . "</label><input class='form-control' type='" . $r['type'] . "' name='" . $r['name'] . "' placeholder='" . $r['placeholder'] . "' id='" . $r['for'] . "' ></div>";
     }
-    $output .= "</form>";
+    $output .= "<div class=\"checkbox\">
+    <label>
+      <input type=\"checkbox\">Вы должны согласиться со правами на передачу данных
+    </label>
+  </div> <button type=\"submit\" class=\"btn btn-default btn-primary\" name='submit'>Отправить</button></form>";
     echo $output;
     return;
 }
+
 function link_reg()
 {
     $sql = do_query('SELECT * FROM `reg`');
     $output = "";
     foreach ($sql as $r) {
-        $output .= "<p>".$r['description']."<a href='" . $r['url'] . "'>"." " . $r['title'] . "</a></p>";
+        $output .= "<p>" . $r['description'] . "<a href='" . $r['url'] . "'>" . " " . $r['title'] . "</a></p>";
     }
 
     echo $output;
@@ -77,19 +83,17 @@ function get_soclal()
 function get_post_vk()
 {
     $out = '<div class="row">';
-        $content2 = file_get_contents("https://api.vk.com/method/wall.get?owner_id=-70567817&count=100&extended=1&filter=all&access_token=6b3dcb09a02d5b169df16faeb42f9c192a94b804697aaf1b1cc17bc9289c46893523fe04436fa7731d46b&v=5.60");
+    $content2 = file_get_contents("https://api.vk.com/method/wall.get?owner_id=-70567817&count=100&extended=1&filter=all&access_token=6b3dcb09a02d5b169df16faeb42f9c192a94b804697aaf1b1cc17bc9289c46893523fe04436fa7731d46b&v=5.60");
     $elements2 = json_decode($content2, true);
     foreach ($elements2 as $value) {
         foreach ($value['profiles'] as $profile) {
-        $fio = $profile['first_name'] . ' ' . $profile['last_name'];
+            $fio = $profile['first_name'] . ' ' . $profile['last_name'];
             $link = $profile['screen_name'];
-          
         }
         foreach ($value['items'] as $item) {
-            $link_post = $item['from_id'].'_'.$item['id'];
+            $link_post = $item['from_id'] . '_' . $item['id'];
             $data = date('d.m.Y h:m', $item['date']);
             $text = $item['text'];
-  //            print_r($value);
             if (isset($item['attachments'])) {
                 if (is_array($item['attachments']) || is_object($item['attachments'])) {
                     foreach ($item['attachments'] as $key => $values) {
@@ -101,12 +105,45 @@ function get_post_vk()
                     }
                 }
             }
-            $out .= '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><div class="post"><p class="post_text">' . $text . '</p>'.'<img src="' . $img .'" class="post_img">' . '<a class="post_link" href="https://vk.com/' . $link . '" target="_blank">' . $fio . '</a>' . '<p class="post_data">' . $data . '</p><a href="https://vk.com/wall'.$link_post.'" target="_blank">Ссылка на пост</a></div></div>';
+            $out .= '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><div class="post"><p class="post_text">' . $text . '</p>' . '<img src="' . $img . '" class="post_img">' . '<a class="post_link" href="https://vk.com/' . $link . '" target="_blank">' . $fio . '</a>' . '<p class="post_data">' . $data . '</p><a href="https://vk.com/wall' . $link_post . '" target="_blank">Ссылка на пост</a></div></div>';
         }
     }
     $out .= '</div>';
-
     echo $out;
     return;
 }
-//get_post_vk();
+function users_reg(){
+    $data = $_POST;
+    if (isset($data['submit'])){
+        $errors = array();
+        if (trim($data['name']) == ''){
+            $errors[] = 'Вы не ввели имя';
+        }
+        if (trim($data['email']) == ''){
+            $errors[] = 'Вы не ввели электронную почту';
+        }
+        if ($data['password1'] == ''){
+            $errors[] = 'Вы не ввели пароль';
+        }
+        if ($data['password2'] !== $data['password1']){
+            $errors[] = 'Вы не правильно ввели пароль';
+        }
+        if (empty($errors)){
+            $result = do_query("SELECT COUNT(*) as count FROM users WHERE `email` = '{$data['email']}'");
+            $result = $result->fetch_object();
+            if (empty($result->count)) {
+                // сохраняет все данные в БД
+                $wer =  do_query("INSERT INTO users (`name`,`email`, `password`) VALUES ('{$data['name']}','{$data['email']}','{$data['password2']}')");
+                if (!empty($wer)){
+                    echo '<div class="go">Успешно зарегиревались</div>';
+                }
+            }else{
+                echo '<div class="errors">Такая электронная почта уже есть</div>';
+            }
+        }else{
+            echo '<div class="errors">'.array_shift($errors).'</div>';
+        }
+
+    }
+    return;
+}
