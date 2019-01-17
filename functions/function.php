@@ -129,11 +129,9 @@ function users_reg(){
         if (!isset($data['checkbox'])){
             $errors[] = 'Не поставили галочку';
         }
-        if (trim($data['name']) == ''){
+        if (trim($data['name']) == '') {
             $errors[] = 'Вы не ввели имя';
 
-        }if (htmlspecialchars($data['name'])){
-            $errors[] = 'Должны быть только буквы';
         }
         if (trim($data['email']) == ''){
             $errors[] = 'Вы не ввели электронную почту';
@@ -141,6 +139,9 @@ function users_reg(){
         if ($data['password1'] == ''){
             $errors[] = 'Вы не ввели пароль';
 
+        }
+        if ($data['password1'] >= 6){
+            $errors[] = 'короткий пароль';
         }
         if ($data['password2'] != $data['password1']){
             $errors[] = 'Вы не правильно ввели пароль';
