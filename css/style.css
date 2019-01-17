@@ -281,82 +281,82 @@ body {
   text-decoration: none;
   padding: 12px 0;
 }
-.container-fluid .container {
-  padding: 10px 0;
+.container-fluid .contain {
+  padding: 10px;
 }
-.container-fluid .container .col,
-.container-fluid .container .col-1,
-.container-fluid .container .col-10,
-.container-fluid .container .col-11,
-.container-fluid .container .col-12,
-.container-fluid .container .col-2,
-.container-fluid .container .col-3,
-.container-fluid .container .col-4,
-.container-fluid .container .col-5,
-.container-fluid .container .col-6,
-.container-fluid .container .col-7,
-.container-fluid .container .col-8,
-.container-fluid .container .col-9,
-.container-fluid .container .col-auto,
-.container-fluid .container .col-lg,
-.container-fluid .container .col-lg-1,
-.container-fluid .container .col-lg-10,
-.container-fluid .container .col-lg-11,
-.container-fluid .container .col-lg-12,
-.container-fluid .container .col-lg-2,
-.container-fluid .container .col-lg-3,
-.container-fluid .container .col-lg-4,
-.container-fluid .container .col-lg-5,
-.container-fluid .container .col-lg-6,
-.container-fluid .container .col-lg-7,
-.container-fluid .container .col-lg-8,
-.container-fluid .container .col-lg-9,
-.container-fluid .container .col-lg-auto,
-.container-fluid .container .col-md,
-.container-fluid .container .col-md-1,
-.container-fluid .container .col-md-10,
-.container-fluid .container .col-md-11,
-.container-fluid .container .col-md-12,
-.container-fluid .container .col-md-2,
-.container-fluid .container .col-md-3,
-.container-fluid .container .col-md-4,
-.container-fluid .container .col-md-5,
-.container-fluid .container .col-md-6,
-.container-fluid .container .col-md-7,
-.container-fluid .container .col-md-8,
-.container-fluid .container .col-md-9,
-.container-fluid .container .col-md-auto,
-.container-fluid .container .col-sm,
-.container-fluid .container .col-sm-1,
-.container-fluid .container .col-sm-10,
-.container-fluid .container .col-sm-11,
-.container-fluid .container .col-sm-12,
-.container-fluid .container .col-sm-2,
-.container-fluid .container .col-sm-3,
-.container-fluid .container .col-sm-4,
-.container-fluid .container .col-sm-5,
-.container-fluid .container .col-sm-6,
-.container-fluid .container .col-sm-7,
-.container-fluid .container .col-sm-8,
-.container-fluid .container .col-sm-9,
-.container-fluid .container .col-sm-auto,
-.container-fluid .container .col-xl,
-.container-fluid .container .col-xl-1,
-.container-fluid .container .col-xl-10,
-.container-fluid .container .col-xl-11,
-.container-fluid .container .col-xl-12,
-.container-fluid .container .col-xl-2,
-.container-fluid .container .col-xl-3,
-.container-fluid .container .col-xl-4,
-.container-fluid .container .col-xl-5,
-.container-fluid .container .col-xl-6,
-.container-fluid .container .col-xl-7,
-.container-fluid .container .col-xl-8,
-.container-fluid .container .col-xl-9,
-.container-fluid .container .col-xl-auto {
+.container-fluid .contain .col,
+.container-fluid .contain .col-1,
+.container-fluid .contain .col-10,
+.container-fluid .contain .col-11,
+.container-fluid .contain .col-12,
+.container-fluid .contain .col-2,
+.container-fluid .contain .col-3,
+.container-fluid .contain .col-4,
+.container-fluid .contain .col-5,
+.container-fluid .contain .col-6,
+.container-fluid .contain .col-7,
+.container-fluid .contain .col-8,
+.container-fluid .contain .col-9,
+.container-fluid .contain .col-auto,
+.container-fluid .contain .col-lg,
+.container-fluid .contain .col-lg-1,
+.container-fluid .contain .col-lg-10,
+.container-fluid .contain .col-lg-11,
+.container-fluid .contain .col-lg-12,
+.container-fluid .contain .col-lg-2,
+.container-fluid .contain .col-lg-3,
+.container-fluid .contain .col-lg-4,
+.container-fluid .contain .col-lg-5,
+.container-fluid .contain .col-lg-6,
+.container-fluid .contain .col-lg-7,
+.container-fluid .contain .col-lg-8,
+.container-fluid .contain .col-lg-9,
+.container-fluid .contain .col-lg-auto,
+.container-fluid .contain .col-md,
+.container-fluid .contain .col-md-1,
+.container-fluid .contain .col-md-10,
+.container-fluid .contain .col-md-11,
+.container-fluid .contain .col-md-12,
+.container-fluid .contain .col-md-2,
+.container-fluid .contain .col-md-3,
+.container-fluid .contain .col-md-4,
+.container-fluid .contain .col-md-5,
+.container-fluid .contain .col-md-6,
+.container-fluid .contain .col-md-7,
+.container-fluid .contain .col-md-8,
+.container-fluid .contain .col-md-9,
+.container-fluid .contain .col-md-auto,
+.container-fluid .contain .col-sm,
+.container-fluid .contain .col-sm-1,
+.container-fluid .contain .col-sm-10,
+.container-fluid .contain .col-sm-11,
+.container-fluid .contain .col-sm-12,
+.container-fluid .contain .col-sm-2,
+.container-fluid .contain .col-sm-3,
+.container-fluid .contain .col-sm-4,
+.container-fluid .contain .col-sm-5,
+.container-fluid .contain .col-sm-6,
+.container-fluid .contain .col-sm-7,
+.container-fluid .contain .col-sm-8,
+.container-fluid .contain .col-sm-9,
+.container-fluid .contain .col-sm-auto,
+.container-fluid .contain .col-xl,
+.container-fluid .contain .col-xl-1,
+.container-fluid .contain .col-xl-10,
+.container-fluid .contain .col-xl-11,
+.container-fluid .contain .col-xl-12,
+.container-fluid .contain .col-xl-2,
+.container-fluid .contain .col-xl-3,
+.container-fluid .contain .col-xl-4,
+.container-fluid .contain .col-xl-5,
+.container-fluid .contain .col-xl-6,
+.container-fluid .contain .col-xl-7,
+.container-fluid .contain .col-xl-8,
+.container-fluid .contain .col-xl-9,
+.container-fluid .contain .col-xl-auto {
   padding: 0 15px;
 }
-.container-fluid .container .post {
+.container-fluid .contain .post {
   background: #9ff2f9;
   border: 2px solid #000;
   border-radius: 10px;
@@ -367,14 +367,14 @@ body {
   cursor: auto;
   overflow: auto;
 }
-.container-fluid .container .post_img {
+.container-fluid .contain .post_img {
   width: 100%;
   margin: 10px 0;
 }
-.container-fluid .container .post_text {
+.container-fluid .contain .post_text {
   font-weight: 300;
 }
-.container-fluid .container .post_data {
+.container-fluid .contain .post_data {
   margin: 10px 0;
   text-align: right;
   font-weight: bold;
