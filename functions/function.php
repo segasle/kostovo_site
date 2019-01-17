@@ -50,7 +50,7 @@ function input_reg()
     }
     $output .= "<div class=\"checkbox\">
     <label>
-      <input type=\"checkbox\">Вы должны согласиться со правами на передачу данных
+      <input type=\"checkbox\" name='checkbox'>Вы должны согласиться со правами на передачу данных
     </label>
   </div> <button type=\"submit\" class=\"btn btn-default btn-primary\" name='submit'>Отправить</button></form>";
     echo $output;
@@ -86,6 +86,14 @@ function get_post_vk()
     $out = '<div class="row">';
     $content2 = file_get_contents("https://api.vk.com/method/wall.get?owner_id=-70567817&count=100&extended=1&filter=all&access_token=6b3dcb09a02d5b169df16faeb42f9c192a94b804697aaf1b1cc17bc9289c46893523fe04436fa7731d46b&v=5.60");
     $elements2 = json_decode($content2, true);
+    if (!empty($_GET['page'])){
+        $page =$_GET['page'];
+        if (0 > $page){
+            $page = 1;
+        }
+    }else{
+        $page = 1;
+    }
     foreach ($elements2 as $value) {
         foreach ($value['profiles'] as $profile) {
             $fio = $profile['first_name'] . ' ' . $profile['last_name'];
@@ -110,6 +118,7 @@ function get_post_vk()
         }
     }
     $out .= '</div>';
+
     echo $out;
     return;
 }
@@ -117,8 +126,14 @@ function users_reg(){
     $data = $_POST;
     if (isset($data['submit'])){
         $errors = array();
+        if (!isset($data['checkbox'])){
+            $errors[] = 'Не поставили галочку';
+        }
         if (trim($data['name']) == ''){
             $errors[] = 'Вы не ввели имя';
+
+        }if (htmlspecialchars($data['name'])){
+            $errors[] = 'Должны быть только буквы';
         }
         if (trim($data['email']) == ''){
             $errors[] = 'Вы не ввели электронную почту';
@@ -152,10 +167,12 @@ function users_reg(){
 function users_authorization(){
     $data = $_POST;
     if (isset($data['submit'])){
-       $resilt = do_query("SELECT * FROM `users` WHERE `email` ='".$data['email']."'");
+        //$password  = $_GET;
+       $resilt = do_query("SELECT * FROM `users` WHERE `email` ='".$data['email']."' and `password` =  '$password'");
+      // var_dump($resilt);
        if ($resilt){
-         //  ';
-           if (password_verify($data['password'], $resilt)){
+
+           if (password_verify($data['password'], $resilt->$password)){
                echo '<div class="go">Успешно авторизовались</div>';
            } else{
              echo '<div class="errors">Пароль не верный</div>';
