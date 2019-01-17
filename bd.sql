@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:8889
--- Время создания: Янв 16 2019 г., 13:13
+-- Время создания: Янв 17 2019 г., 13:34
 -- Версия сервера: 5.7.23
 -- Версия PHP: 7.2.8
 
@@ -125,7 +125,31 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
-(3, 'Slepenkov Dmitry', 'segasle@gmail.com', '$2y$10$sv4R0OgiNul.A1VhiMSrEOTHN3EvWslxZacd6LfB9rJ3UUkrNRA2m');
+(4, 'Slepenkov Dmitry', 'segasle@gmail.com', '$2y$10$W4AFFXYNzxQG7p3sTqE99.pGFlWWO5Yml69k2YXedvHsj2bteWm/a');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users_menu`
+--
+
+CREATE TABLE `users_menu` (
+  `id` int(11) NOT NULL,
+  `url` varchar(255) NOT NULL DEFAULT '?page=',
+  `title` text NOT NULL,
+  `parent` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `users_menu`
+--
+
+INSERT INTO `users_menu` (`id`, `url`, `title`, `parent`) VALUES
+(1, '?page=profile', 'Профиль', 0),
+(2, '?page=settings', 'Настройки', 0),
+(3, '?page=favourites', 'Избранное', 0),
+(4, '?page=ads', 'Мои объявления', 0),
+(5, '?page=message', 'Сообщения', 0);
 
 --
 -- Индексы сохранённых таблиц
@@ -162,6 +186,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `users_menu`
+--
+ALTER TABLE `users_menu`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
@@ -193,4 +223,10 @@ ALTER TABLE `social_network`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT для таблицы `users_menu`
+--
+ALTER TABLE `users_menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
