@@ -15,7 +15,7 @@ function connections()
         $file = $_GET['page'];
     }
     include 'tempate/header.php';
-    if (file_exists($file)){
+    if (file_exists('imip/' . $file. '.php') ){
         include 'imip/' . $file . '.php';
     }else{
         include 'users/' . $file . '.php';
