@@ -15,7 +15,12 @@ function connections()
         $file = $_GET['page'];
     }
     include 'tempate/header.php';
-    include 'imip/' . $file . '.php';
+    if (file_exists($file)){
+        include 'imip/' . $file . '.php';
+    }else{
+        include 'users/' . $file . '.php';
+    }
+
     include 'tempate/footer.php';
 
 }
@@ -31,6 +36,17 @@ function do_query($query)
 function get_menu()
 {
     $sql = do_query('SELECT * FROM `menu` WHERE `parent` = "0" ORDER BY menu.id');
+    $output = "<ul>";
+    foreach ($sql as $r) {
+        $output .= "<li><a href='" . $r['url'] . "'>" . $r['title'] . "</a></li>";
+    }
+    $output .= "</ul>";
+    echo $output;
+    return;
+}
+function get_users_menu()
+{
+    $sql = do_query('SELECT * FROM `users_menu` WHERE `parent` = "0" ORDER BY users_menu.id');
     $output = "<ul>";
     foreach ($sql as $r) {
         $output .= "<li><a href='" . $r['url'] . "'>" . $r['title'] . "</a></li>";
