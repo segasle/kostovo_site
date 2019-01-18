@@ -156,7 +156,7 @@ function users_reg(){
             $errors[] = 'Вы не ввели пароль';
 
         }
-        if ($data['password1'] >= 6){
+        if ($data['password1'] <= 6){
             $errors[] = 'короткий пароль';
         }
         if ($data['password2'] != $data['password1']){
@@ -184,12 +184,15 @@ function users_reg(){
 function users_authorization(){
     $data = $_POST;
     if (isset($data['submit'])){
+        $email = $data['email'];
+        $password = $data['password'];
+
         //$password  = $_GET;
-       $resilt = do_query("SELECT * FROM `users` WHERE `email` ='".$data['email']."' and `password` =  '$password'");
+       $resilt = do_query("SELECT * FROM `users` WHERE `email` ='{$email}' and `password` =  '{$password}'");
       // var_dump($resilt);
        if ($resilt){
 
-           if (password_verify($data['password'], $resilt->$password)){
+           if (password_hash($password, PASSWORD_DEFAULT) == $password){
                echo '<div class="go">Успешно авторизовались</div>';
            } else{
              echo '<div class="errors">Пароль не верный</div>';
