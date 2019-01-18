@@ -18,6 +18,9 @@ body {
 .row {
   margin: 0;
 }
+.float-right {
+  float: right;
+}
 .col,
 .col-1,
 .col-10,
@@ -176,8 +179,15 @@ body {
   font-size: 17px;
   color: white;
 }
+.container-fluid .header form {
+  float: left;
+  padding-bottom: 0;
+}
+.container-fluid .header form .btn {
+  width: auto;
+}
 .container-fluid .header .modal-open {
-  float: right;
+  float: left;
   margin: 5px;
 }
 .container-fluid .header .modal-body form {

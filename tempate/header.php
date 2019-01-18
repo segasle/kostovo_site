@@ -26,10 +26,11 @@
                     </div>
                     <div class="row">
                         <div class="col-12 no-col">
-                            <button type="button" class="btn btn-primary modal-open" data-toggle="modal"
-                                    data-target="#exampleModal">
-                                <span class="fa fa-user-circle-o fa-1x">Авторизоваться</span>
-                            </button>
+                            <div class="float-right">
+                            <?php
+                                auto_users();
+                            ?>
+                        </div>
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                                  aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -55,7 +56,7 @@
                                                 </div>
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox">Запомнить меня
+                                                        <input type="checkbox" value='1' name="checkbox">Запомнить меня
                                                     </label>
                                                 </div>
                                                 <div class="form-group">
@@ -87,7 +88,13 @@
                                 </label>
                                 <nav>
                                     <?php
-                                    get_menu();
+                                    if (isset($_SESSION['id'])){
+                                        get_menu();
+                                        get_users_menu();
+                                    }else{
+                                        get_menu();
+                                    }
+
                                     ?>
                                 </nav>
 

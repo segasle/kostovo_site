@@ -15,9 +15,9 @@ function connections()
         $file = $_GET['page'];
     }
     include 'tempate/header.php';
-    if (file_exists('imip/' . $file. '.php') ){
+    if (file_exists('imip/' . $file . '.php')) {
         include 'imip/' . $file . '.php';
-    }else{
+    } else {
         include 'users/' . $file . '.php';
     }
 
@@ -44,6 +44,7 @@ function get_menu()
     echo $output;
     return;
 }
+
 function get_users_menu()
 {
     $sql = do_query('SELECT * FROM `users_menu` WHERE `parent` = "0" ORDER BY users_menu.id');
@@ -62,11 +63,11 @@ function input_reg()
     $output = "<form method='post' action=''>";
     foreach ($sql as $r) {
         $name = $r['name'];
-        $output .= "<div class='form-group'><label for='" . $r['for'] . "'>" . $r['text'] . "</label><input class='form-control' type='" . $r['type'] . "' name='" . $r['name'] . "' placeholder='" . $r['placeholder'] . "' id='" . $r['for'] . "' value='".@$_POST[$name]."'></div>";
+        $output .= "<div class='form-group'><label for='" . $r['for'] . "'>" . $r['text'] . "</label><input class='form-control' type='" . $r['type'] . "' name='" . $r['name'] . "' placeholder='" . $r['placeholder'] . "' id='" . $r['for'] . "' value='" . @$_POST[$name] . "'></div>";
     }
     $output .= "<div class=\"checkbox\">
     <label>
-      <input type=\"checkbox\" name='checkbox'>Вы должны согласиться со правами на передачу данных
+      <input type=\"checkbox\" name='checkbox' >Вы должны согласиться со правами на передачу данных
     </label>
   </div> <button type=\"submit\" class=\"btn btn-default btn-primary\" name='submit'>Отправить</button></form>";
     echo $output;
@@ -102,12 +103,12 @@ function get_post_vk()
     $out = '<div class="row">';
     $content2 = file_get_contents("https://api.vk.com/method/wall.get?owner_id=-70567817&count=100&extended=1&filter=all&access_token=6b3dcb09a02d5b169df16faeb42f9c192a94b804697aaf1b1cc17bc9289c46893523fe04436fa7731d46b&v=5.60");
     $elements2 = json_decode($content2, true);
-    if (!empty($_GET['page'])){
-        $page =$_GET['page'];
-        if (0 > $page){
+    if (!empty($_GET['page'])) {
+        $page = $_GET['page'];
+        if (0 > $page) {
             $page = 1;
         }
-    }else{
+    } else {
         $page = 1;
     }
     foreach ($elements2 as $value) {
@@ -138,68 +139,95 @@ function get_post_vk()
     echo $out;
     return;
 }
-function users_reg(){
+
+function users_reg()
+{
     $data = $_POST;
-    if (isset($data['submit'])){
+    if (isset($data['submit'])) {
         $errors = array();
-        if (!isset($data['checkbox'])){
+        if (!isset($data['checkbox'])) {
             $errors[] = 'Не поставили галочку';
         }
         if (trim($data['name']) == '') {
             $errors[] = 'Вы не ввели имя';
 
         }
-        if (trim($data['email']) == ''){
+        if (trim($data['email']) == '') {
             $errors[] = 'Вы не ввели электронную почту';
         }
-        if ($data['password1'] == ''){
+        if ($data['password1'] == '') {
             $errors[] = 'Вы не ввели пароль';
 
         }
-        if ($data['password1'] <= 6){
+        if ($data['password1'] <= 6) {
             $errors[] = 'короткий пароль';
         }
-        if ($data['password2'] != $data['password1']){
+        if ($data['password2'] != $data['password1']) {
             $errors[] = 'Вы не правильно ввели пароль';
         }
-        if (empty($errors)){
+        if (empty($errors)) {
             $result = do_query("SELECT COUNT(*) as count FROM users WHERE `email` = '{$data['email']}'");
             $result = $result->fetch_object();
             if (empty($result->count)) {
                 // сохраняет все данные в БД
-                $wer =  do_query("INSERT INTO users (`name`,`email`, `password`) VALUES ('{$data['name']}','{$data['email']}','".password_hash($data['password2'], PASSWORD_DEFAULT)."')");
-                if (!empty($wer)){
+                $wer = do_query("INSERT INTO users (`name`,`email`, `password`) VALUES ('{$data['name']}','{$data['email']}','" . password_hash($data['password2'], PASSWORD_DEFAULT) . "')");
+                if (!empty($wer)) {
                     echo '<div class="go">Успешно зарегиревались</div>';
                 }
-            }else{
+            } else {
                 echo '<div class="errors">Такая электронная почта уже есть</div>';
             }
-        }else{
-            echo '<div class="errors">'.array_shift($errors).'</div>';
+        } else {
+            echo '<div class="errors">' . array_shift($errors) . '</div>';
         }
 
     }
     return;
 }
-function users_authorization(){
+
+function users_authorization()
+{
     $data = $_POST;
-    if (isset($data['submit'])){
+    if (isset($data['submit'])) {
         $email = $data['email'];
         $password = $data['password'];
 
-        //$password  = $_GET;
-       $resilt = do_query("SELECT * FROM `users` WHERE `email` ='{$email}' and `password` =  '{$password}'");
-      // var_dump($resilt);
-       if ($resilt){
 
-           if (password_hash($password, PASSWORD_DEFAULT) == $password){
-               echo '<div class="go">Успешно авторизовались</div>';
-           } else{
-             echo '<div class="errors">Пароль не верный</div>';
-           }
-       }else{
-           echo '<div class="errors">Пользоаатель не найден</div>';
-       }
+        $resilt = mysqli_fetch_assoc(do_query("SELECT * FROM `users` WHERE `email` ='" . $email . "'"));
+        //var_dump($resilt['password']);
+        if ($resilt) {
+
+            if (password_verify($password, $resilt['password'])) {
+                //echo '<div class="go"></div>';
+                $_SESSION['outh'] = true;
+                $_SESSION['id'] = $resilt['id'];
+                $_SESSION['email'] = $resilt['email'];
+                $_SESSION['name'] = $resilt['name'];
+                header('location: ?page=main');
+            } else {
+                echo '<div class="errors">Пароль не верный</div>';
+            }
+        } else {
+            echo '<div class="errors">Пользоаатель не найден</div>';
+        }
     }
+    return;
+}
+
+function auto_users()
+{
+    if (isset($_SESSION['id'])) {
+        echo '<a href="?page=profile" class="btn btn-primary modal-open">Привет, ' . $_SESSION['name'] . '!</a><form method="post"><button type="submit" class="btn btn-primary modal-open" name="input">Выйти</button></form>';
+        if (isset($_POST['input'])){
+            unset($_SESSION['id']);
+            header('location: ?page=main');
+        }
+    } else {
+        echo ' <button type="button" class="btn btn-primary modal-open" data-toggle="modal"
+                                    data-target="#exampleModal">
+                                <span class="fa fa-user-circle-o fa-1x">Авторизоваться</span>
+                            </button>';
+    }
+
     return;
 }
