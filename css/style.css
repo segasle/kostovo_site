@@ -21,6 +21,9 @@ body {
 .float-right {
   float: right;
 }
+.float-left {
+  float: left;
+}
 .col,
 .col-1,
 .col-10,
@@ -180,7 +183,6 @@ body {
   color: white;
 }
 .container-fluid .header form {
-  float: left;
   padding-bottom: 0;
 }
 .container-fluid .header form .btn {
@@ -224,7 +226,7 @@ body {
 .container-fluid .header .menu #checkbox {
   display: none;
 }
-.container-fluid .header .menu #checkbox:checked ~ nav {
+.container-fluid .header .menu #checkbox:checked ~ .nav {
   display: block;
 }
 .container-fluid .header .menu label {
@@ -258,19 +260,24 @@ body {
 .container-fluid .header .menu .burger_open:before {
   top: 30px;
 }
-.container-fluid .header .menu nav {
-  display: none;
-  width: 100%;
-  background: #52B152;
+.container-fluid .header .menu .nav {
   position: absolute;
   top: 100%;
+  display: none;
+  background: #52B152;
+  width: 100%;
+}
+.container-fluid .header .menu nav {
+  width: 50%;
+}
+.container-fluid .header .menu nav:nth-child(2) li {
+  text-align: right;
+  padding-right: 20px;
 }
 .container-fluid .header .menu nav ul {
   margin-bottom: 0;
 }
 .container-fluid .header .menu nav ul li {
-  float: left;
-  width: 50%;
   display: block;
   text-align: left;
   font-size: 16px;
@@ -278,12 +285,6 @@ body {
 }
 .container-fluid .header .menu nav ul li:hover {
   background: #007bff;
-}
-.container-fluid .header .menu nav ul li:nth-child(2n) {
-  padding-right: 20px;
-}
-.container-fluid .header .menu nav ul li:nth-child(2n) a {
-  text-align: right;
 }
 .container-fluid .header .menu nav ul li a {
   color: white;
@@ -452,10 +453,16 @@ body {
   .container-fluid .header .menu .burger_open {
     display: none;
   }
-  .container-fluid .header .menu nav {
+  .container-fluid .header .menu .nav {
     display: block;
     top: inherit;
     position: inherit;
+  }
+  .container-fluid .header .menu nav.float-left {
+    float: none;
+  }
+  .container-fluid .header .menu nav {
+    width: 100%;
   }
   .container-fluid .header .menu nav ul {
     width: 100%;

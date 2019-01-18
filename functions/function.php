@@ -188,7 +188,7 @@ function users_reg()
 function users_authorization()
 {
     $data = $_POST;
-    if (isset($data['submit'])) {
+    if (isset($data['sub'])) {
         $email = $data['email'];
         $password = $data['password'];
 
@@ -217,7 +217,7 @@ function users_authorization()
 function auto_users()
 {
     if (isset($_SESSION['id'])) {
-        echo '<a href="?page=profile" class="btn btn-primary modal-open">Привет, ' . $_SESSION['name'] . '!</a><form method="post"><button type="submit" class="btn btn-primary modal-open" name="input">Выйти</button></form>';
+        echo '<a href="?page=profile" class="btn btn-primary modal-open float-left">Привет, ' . $_SESSION['name'] . '!</a><form method="post" class="float-left"><button type="submit" class="btn btn-primary modal-open" name="input">Выйти</button></form>';
         if (isset($_POST['input'])){
             unset($_SESSION['id']);
             header('location: ?page=main');

@@ -45,7 +45,7 @@
                                              <?php
                                                 users_authorization();
                                              ?>
-                                            <form action="" method="post">
+                                            <form action="" method="post" class="float-none">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail">Email</label>
                                                     <input type="email" class="form-control" id="exampleInputEmail" name="email" placeholder="Email">
@@ -60,7 +60,7 @@
                                                     </label>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-default btn-primary" name="submit">Войти</button>
+                                                    <button type="submit" class="btn btn-default btn-primary" name="sub">Войти</button>
                                                 </div>
                                             </form>
                                            <?php link_reg(); ?>
@@ -86,17 +86,26 @@
                                 <label class="burger" for="checkbox">
                                     <div class="burger_open"></div>
                                 </label>
-                                <nav>
+
                                     <?php
                                     if (isset($_SESSION['id'])){
-                                        get_menu();
+                                        echo '<div class="nav">';
+                                        echo '<nav class=\'float-left\'>';
+
                                         get_users_menu();
+                                        echo '</nav>';
+                                        echo '<nav class=\'float-left\'>';
+                                         get_menu();                         echo '</nav>';
+                                        echo '</div>';
                                     }else{
-                                        get_menu();
+
+                                        echo '<nav>';
+
+                                        get_menu();   echo '</nav>';
                                     }
 
                                     ?>
-                                </nav>
+
 
                             </div>
 
