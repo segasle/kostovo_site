@@ -226,7 +226,8 @@ body {
 .container-fluid .header .menu #checkbox {
   display: none;
 }
-.container-fluid .header .menu #checkbox:checked ~ .nav {
+.container-fluid .header .menu #checkbox:checked ~ .nav,
+.container-fluid .header .menu #checkbox:checked ~ nav {
   display: block;
 }
 .container-fluid .header .menu label {
@@ -260,11 +261,15 @@ body {
 .container-fluid .header .menu .burger_open:before {
   top: 30px;
 }
-.container-fluid .header .menu .nav {
+.container-fluid .header .menu .nav,
+.container-fluid .header .menu nav {
   position: absolute;
   top: 100%;
   display: none;
   background: #52B152;
+  width: 100%;
+}
+.container-fluid .header .menu nav.nav-one {
   width: 100%;
 }
 .container-fluid .header .menu nav {
@@ -453,7 +458,8 @@ body {
   .container-fluid .header .menu .burger_open {
     display: none;
   }
-  .container-fluid .header .menu .nav {
+  .container-fluid .header .menu .nav,
+  .container-fluid .header .menu nav {
     display: block;
     top: inherit;
     position: inherit;

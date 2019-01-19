@@ -27,10 +27,10 @@
                     <div class="row">
                         <div class="col-12 no-col">
                             <div class="float-right">
-                            <?php
+                                <?php
                                 auto_users();
-                            ?>
-                        </div>
+                                ?>
+                            </div>
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                                  aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -42,17 +42,19 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                             <?php
-                                                users_authorization();
-                                             ?>
+                                            <?php
+                                            users_authorization();
+                                            ?>
                                             <form action="" method="post" class="float-none">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail">Email</label>
-                                                    <input type="email" class="form-control" id="exampleInputEmail" name="email" placeholder="Email">
+                                                    <input type="email" class="form-control" id="exampleInputEmail"
+                                                           name="email" placeholder="Email">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputPassword">Пароль</label>
-                                                    <input type="password" class="form-control" name="password" id="exampleInputPassword" placeholder="Password">
+                                                    <input type="password" class="form-control" name="password"
+                                                           id="exampleInputPassword" placeholder="Password">
                                                 </div>
                                                 <div class="checkbox">
                                                     <label>
@@ -60,10 +62,12 @@
                                                     </label>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-default btn-primary" name="sub">Войти</button>
+                                                    <button type="submit" class="btn btn-default btn-primary"
+                                                            name="sub">Войти
+                                                    </button>
                                                 </div>
                                             </form>
-                                           <?php link_reg(); ?>
+                                            <?php link_reg(); ?>
                                             <p class="">Или можно авторизоваться с помощью соц сети</p>
                                             <div class="block-icons">
                                                 <i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i>
@@ -73,7 +77,9 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                Отмена
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -87,24 +93,26 @@
                                     <div class="burger_open"></div>
                                 </label>
 
-                                    <?php
-                                    if (isset($_SESSION['id'])){
-                                        echo '<div class="nav">';
-                                        echo '<nav class=\'float-left\'>';
+                                <?php
+                                if (isset($_SESSION['id'])) {
+                                    echo '<div class="nav">';
+                                    echo '<nav class=\'float-left\'>';
 
-                                        get_users_menu();
-                                        echo '</nav>';
-                                        echo '<nav class=\'float-left\'>';
-                                         get_menu();                         echo '</nav>';
-                                        echo '</div>';
-                                    }else{
+                                    get_users_menu();
+                                    echo '</nav>';
+                                    echo '<nav class=\'float-left\'>';
+                                    get_menu();
+                                    echo '</nav>';
+                                    echo '</div>';
+                                } else {
 
-                                        echo '<nav>';
+                                    echo '<nav class="nav-one">';
 
-                                        get_menu();   echo '</nav>';
-                                    }
+                                    get_menu();
+                                    echo '</nav>';
+                                }
 
-                                    ?>
+                                ?>
 
 
                             </div>

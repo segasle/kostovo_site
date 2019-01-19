@@ -184,7 +184,7 @@ body {
       }
       #checkbox {
         display: none;
-        &:checked ~ .nav {
+        &:checked ~ .nav, &:checked ~ nav{
           display: block;
         }
       }
@@ -219,15 +219,17 @@ body {
           }
         }
       }
-      .nav {
+      .nav, nav{
         position: absolute;
         top: 100%;
         display: none;
         background: @bg;
         width: 100%;
       }
+      nav.nav-one{
+        width: 100%;
+      }
       nav {
-
         width: 50%;
         &:nth-child(2){
           li{
@@ -238,8 +240,6 @@ body {
         ul {
           margin-bottom: 0;
           li {
-            //    float: left;
-            //  width: 50%;
             display: block;
             text-align: left;
             font-size: 16px;
@@ -364,7 +364,7 @@ body {
             display: none;
           }
         }
-        .nav {
+        .nav, nav{
           display: block;
           top: inherit;
           position: inherit;
