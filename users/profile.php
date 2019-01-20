@@ -2,7 +2,7 @@
 <form action="" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="exampleInputFile">Загрузите фото</label>
-        <input type="file" id="exampleInputFile" accept="image/jpeg,image/png" name="file">
+        <input type="file" id="exampleInputFile" accept="image/jpeg,image/png" name="file" class="inputfile hide">
     </div>
     <div class="form-group">
         <label for="exampleInputName">Имя</label>
