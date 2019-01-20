@@ -47,8 +47,8 @@
                                             ?>
                                             <form action="" method="post" class="float-none">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail">Email</label>
-                                                    <input type="email" class="form-control" id="exampleInputEmail"
+                                                    <label for="exampleInputEmailGo">Email</label>
+                                                    <input type="email" class="form-control" id="exampleInputEmailGo"
                                                            name="email" placeholder="Email">
                                                 </div>
                                                 <div class="form-group">

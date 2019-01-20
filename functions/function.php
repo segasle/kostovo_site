@@ -247,18 +247,16 @@ function password_recovery()
             $errors[] = 'короткий пароль';
         }
         if ($data['password2'] != $data['password1']) {
-            $errors[] = 'Вы не правильно ввели пароль';
+            $errors[] = 'Вы неправильно ввели пароль';
         }
         if (empty($errors)) {
             $result = do_query("SELECT COUNT(*) as count FROM users WHERE `email` = '{$data['email']}'");
             $result = $result->fetch_object();
             if (!empty($result->count)) {
                 $set = do_query("UPDATE `users` SET `password` = '" . password_hash($data['password2'], PASSWORD_DEFAULT) . "'WHERE `email` = '{$data['email']}' ");
-                //if ($set) {
                     echo '<div class="go">Успешно пароль сменен</div>';
-                //}
             } else {
-                echo '<div class="errors">Такая электронная почта нет в базе</div>';
+                echo '<div class="errors">Такая электронная почта не существует</div>';
             }
     } else {
             echo '<div class="errors">' . array_shift($errors) . '</div>';
