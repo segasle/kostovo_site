@@ -1,7 +1,6 @@
 <h1 class="text-center">Профиль</h1>
 <form action="" method="post" enctype="multipart/form-data">
     <div class="form-group">
-        .author-phono
         <label for="exampleInputFile">Загрузите фото</label>
         <input type="file" id="exampleInputFile" accept="image/jpeg,image/png" name="file">
     </div>
