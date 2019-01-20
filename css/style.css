@@ -262,7 +262,7 @@ body {
   top: 30px;
 }
 .container-fluid .header .menu .nav,
-.container-fluid .header .menu nav {
+.container-fluid .header .menu nav.nav-one {
   position: absolute;
   top: 100%;
   display: none;
@@ -459,7 +459,7 @@ body {
     display: none;
   }
   .container-fluid .header .menu .nav,
-  .container-fluid .header .menu nav {
+  .container-fluid .header .menu nav.nav-one {
     display: block;
     top: inherit;
     position: inherit;
