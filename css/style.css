@@ -120,6 +120,22 @@ body {
   background-color: #007bff;
   border-color: #007bff;
 }
+.container-fluid form .hide {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.container-fluid form label.file {
+  background: #249dff;
+  font-size: 20px;
+  font-weight: 100;
+  border-radius: 100%;
+  cursor: pointer;
+  padding: 20px;
+}
 .container-fluid .header {
   background: -moz- linear-gradient(to bottom, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%);
   background: -webkit- linear-gradient(to bottom, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%);

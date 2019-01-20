@@ -1,8 +1,8 @@
 <h1 class="text-center">Профиль</h1>
 <form action="" method="post" enctype="multipart/form-data">
     <div class="form-group">
-        <label for="exampleInputFile">Загрузите фото</label>
-        <input type="file" id="exampleInputFile" accept="image/jpeg,image/png" name="file" class="inputfile hide">
+        <p>Выберите фото</p>
+        <input type="file" id="exampleInputFile" accept="image/jpeg,image/png" name="file" class="inputfile hide" data-multiple-caption="{count} files selected" multiple>     <label for="exampleInputFile" class="btn-primary btn btn-default"><span>Выбрать</span></label>
     </div>
     <div class="form-group">
         <label for="exampleInputName">Имя</label>
