@@ -264,3 +264,23 @@ function password_recovery()
     }
     return;
 }
+function users_data(){
+    $data = $_POST;
+    if (isset($data['submit'])){
+        if (isset($_FILES['file'])){
+            echo "<pre>";
+
+            print_r($_FILES);
+            echo "</pre>";
+            if (is_uploaded_file($_FILES['file']['tmp_name'])){
+                if ($_FILES['file']['size'] > 1024*2*1024){
+                    echo '<div class="errors">Файл должен быть не больше 2 МБ</div>';
+                }else{
+                 $file =  move_uploaded_file(__DIR__.DIRECTORY_SEPARATOR.$_FILES['file']['tmp_name']);
+                 echo $file;
+                }
+            }
+        }
+    }
+    return;
+}

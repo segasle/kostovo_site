@@ -1,4 +1,7 @@
 <h1 class="text-center">Профиль</h1>
+<?php
+users_data();
+?>
 <form action="" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <p>Выберите фото</p>
