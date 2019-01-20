@@ -231,3 +231,38 @@ function auto_users()
 
     return;
 }
+function password_recovery()
+{
+    $data = $_POST;
+    if (isset($data['submit'])) {
+        $errors = array();
+        if (trim($data['email']) == '') {
+            $errors[] = 'Вы не ввели электронную почту';
+        }
+        if ($data['password1'] == '') {
+            $errors[] = 'Вы не ввели пароль';
+
+        }
+        if ($data['password1'] <= 6) {
+            $errors[] = 'короткий пароль';
+        }
+        if ($data['password2'] != $data['password1']) {
+            $errors[] = 'Вы не правильно ввели пароль';
+        }
+        if (empty($errors)) {
+            $result = do_query("SELECT COUNT(*) as count FROM users WHERE `email` = '{$data['email']}'");
+            $result = $result->fetch_object();
+            if (!empty($result->count)) {
+                $set = do_query("UPDATE `users` SET `password` = '" . password_hash($data['password2'], PASSWORD_DEFAULT) . "'WHERE `email` = '{$data['email']}' ");
+                //if ($set) {
+                    echo '<div class="go">Успешно пароль сменен</div>';
+                //}
+            } else {
+                echo '<div class="errors">Такая электронная почта нет в базе</div>';
+            }
+    } else {
+            echo '<div class="errors">' . array_shift($errors) . '</div>';
+        }
+    }
+    return;
+}
