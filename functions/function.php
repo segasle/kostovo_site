@@ -218,7 +218,7 @@ function auto_users()
 {
     if (isset($_SESSION['id'])) {
         echo '<a href="?page=profile" class="btn btn-primary modal-open float-left">Привет, ' . $_SESSION['name'] . '!</a><form method="post" class="float-left"><button type="submit" class="btn btn-primary modal-open" name="input">Выйти</button></form>';
-        if (isset($_POST['input'])){
+        if (isset($_POST['input'])) {
             unset($_SESSION['id']);
             header('location: ?page=main');
         }
@@ -231,6 +231,7 @@ function auto_users()
 
     return;
 }
+
 function password_recovery()
 {
     $data = $_POST;
@@ -254,32 +255,55 @@ function password_recovery()
             $result = $result->fetch_object();
             if (!empty($result->count)) {
                 $set = do_query("UPDATE `users` SET `password` = '" . password_hash($data['password2'], PASSWORD_DEFAULT) . "'WHERE `email` = '{$data['email']}' ");
-                    echo '<div class="go">Успешно пароль сменен</div>';
+
             } else {
                 echo '<div class="errors">Такая электронная почта не существует</div>';
             }
-    } else {
+        } else {
             echo '<div class="errors">' . array_shift($errors) . '</div>';
         }
     }
     return;
 }
-function users_data(){
-    $data = $_POST;
-    if (isset($data['submit'])){
-        if (isset($_FILES['file'])){
-            echo "<pre>";
 
-            print_r($_FILES);
-            echo "</pre>";
-            if (is_uploaded_file($_FILES['file']['tmp_name'])){
-                if ($_FILES['file']['size'] > 1024*2*1024){
-                    echo '<div class="errors">Файл должен быть не больше 2 МБ</div>';
-                }else{
-                 $file =  move_uploaded_file(__DIR__.DIRECTORY_SEPARATOR.$_FILES['file']['tmp_name']);
-                 echo $file;
+function users_data()
+{
+    $data = $_POST;
+    if (isset($data['submit'])) {
+        if (isset($_FILES['file'])) {
+            $update = 'update/';
+            $file = $_FILES['file']['name'];
+            $update_file = $update . $file;
+            if (!file_exists($update_file)) {
+                if (is_uploaded_file($_FILES['file']['tmp_name'])) {
+                    if ($_FILES['file']['size'] > 1024 * 3 * 1024) {
+                        echo '<div class="errors">Файл должен быть не больше 3 МБ</div>';
+                    } else {
+                        $ext = pathinfo($update_file, PATHINFO_EXTENSION);
+                        $allow = array('jpeg', 'jpg', 'png');
+                        if (in_array($ext, $allow)) {
+                            if (move_uploaded_file($_FILES['file']['tmp_name'], $update_file)) {
+                                $result = do_query("SELECT COUNT(*) as count FROM users WHERE `photo` = '{$file}'");
+                                $result = $result->fetch_object();
+                                if (empty($result->count)) {
+                                    $users = do_query("INSERT INTO `users` (`photo`) VALUES ('{$file}')");
+                                    if ($users) {
+                                        echo '<div class="go">Файл успешно загружен</div>';
+                                    }else
+                                    {
+                                        echo '<div class="errors">ошибкаw55</div>';
+                                    }
+                                } else {
+                                    echo '<div class="errors">ошибка</div>';
+                                }
+                            } else {
+                                echo '<div class="errors">ошибка перемещения</div>';
+                            }
+                        }
+                    }
                 }
             }
+
         }
     }
     return;
