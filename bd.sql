@@ -1,9 +1,9 @@
--- phpMyAdmin SQL Dump
+                                                       -- phpMyAdmin SQL Dump
 -- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:8889
--- Время создания: Янв 18 2019 г., 19:44
+-- Время создания: Янв 21 2019 г., 17:29
 -- Версия сервера: 5.7.23
 -- Версия PHP: 7.2.8
 
@@ -34,10 +34,10 @@ CREATE TABLE `input_reg` (
 --
 
 INSERT INTO `input_reg` (`id`, `placeholder`, `type`, `for`, `text`, `name`) VALUES
-(1, ''Имя'', ''text'', ''exampleInputName'', ''Введите имя'', ''name''),
-(2, ''Почта'', ''email'', ''exampleInputEmail1'', ''Введите электронную почту'', ''email''),
-(3, ''Пароль'', ''password'', ''exampleInputPassword1'', ''Введите пароль'', ''password1''),
-(4, ''Пароль'', ''password'', ''exampleInputPassword2'', ''Подтвердите пароль'', ''password2'');
+(1, 'Имя', 'text', 'exampleInputName', 'Введите имя', 'name'),
+(2, 'Почта', 'email', 'exampleInputEmail1', 'Введите электронную почту', 'email'),
+(3, 'Пароль', 'password', 'exampleInputPassword1', 'Введите пароль', 'password1'),
+(4, 'Пароль', 'password', 'exampleInputPassword2', 'Подтвердите пароль', 'password2');
 
 -- --------------------------------------------------------
 
@@ -47,9 +47,9 @@ INSERT INTO `input_reg` (`id`, `placeholder`, `type`, `for`, `text`, `name`) VAL
 
 CREATE TABLE `menu` (
   `id` int(11) NOT NULL,
-  `url` varchar(255) NOT NULL DEFAULT ''?page='',
+  `url` varchar(255) NOT NULL DEFAULT '?page=',
   `title` text NOT NULL,
-  `parent` int(11) NOT NULL DEFAULT ''0''
+  `parent` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -57,13 +57,13 @@ CREATE TABLE `menu` (
 --
 
 INSERT INTO `menu` (`id`, `url`, `title`, `parent`) VALUES
-(1, ''?page=main'', ''Главная'', 0),
-(2, ''?page=news'', ''Новости'', 0),
-(3, ''?page=history'', ''Истории '', 0),
-(4, ''?page=maps'', ''Карта'', 0),
-(5, ''?page=event'', ''Мероприятия '', 0),
-(6, ''?page=market'', ''Барахолка'', 0),
-(7, ''?page=contant'', ''Контакты'', 0);
+(1, '?page=main', 'Главная', 0),
+(2, '?page=news', 'Новости', 0),
+(3, '?page=history', 'Истории ', 0),
+(4, '?page=maps', 'Карта', 0),
+(5, '?page=event', 'Мероприятия ', 0),
+(6, '?page=market', 'Барахолка', 0),
+(7, '?page=contant', 'Контакты', 0);
 
 -- --------------------------------------------------------
 
@@ -73,7 +73,7 @@ INSERT INTO `menu` (`id`, `url`, `title`, `parent`) VALUES
 
 CREATE TABLE `reg` (
   `id` int(11) NOT NULL,
-  `url` varchar(255) NOT NULL DEFAULT ''?page='',
+  `url` varchar(255) NOT NULL DEFAULT '?page=',
   `title` text NOT NULL,
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -83,7 +83,8 @@ CREATE TABLE `reg` (
 --
 
 INSERT INTO `reg` (`id`, `url`, `title`, `description`) VALUES
-(1, ''?page=reg'', ''Жмите сюда'', ''Еще не зарегистрировались?'');
+(1, '?page=passwordto', 'Восстановить ', 'Забыли пароль?'),
+(2, '?page=reg', 'Жмите сюда', 'Еще не зарегистрировались?');
 
 -- --------------------------------------------------------
 
@@ -102,10 +103,10 @@ CREATE TABLE `social_network` (
 --
 
 INSERT INTO `social_network` (`id`, `url`, `class`) VALUES
-(1, ''https://ok.ru/profile/522349619246'', ''icon_ok''),
-(2, ''https://www.instagram.com/segasle1998/?hl=ru'', ''icon_instagram''),
-(3, ''https://www.facebook.com/segasle'', ''icon_facebook''),
-(4, ''https://vk.com/serg_slepenkov'', ''icon_vk'');
+(1, 'https://ok.ru/profile/522349619246', 'icon_ok'),
+(2, 'https://www.instagram.com/segasle1998/?hl=ru', 'icon_instagram'),
+(3, 'https://www.facebook.com/segasle', 'icon_facebook'),
+(4, 'https://vk.com/serg_slepenkov', 'icon_vk');
 
 -- --------------------------------------------------------
 
@@ -116,17 +117,19 @@ INSERT INTO `social_network` (`id`, `url`, `class`) VALUES
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `surname` varchar(255) DEFAULT NULL,
   `email` text NOT NULL,
   `password` varchar(255) NOT NULL,
-  `cookie` varchar(255) DEFAULT NULL
+  `photo` mediumblob,
+  `phone` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `cookie`) VALUES
-(1, ''Сергей'', ''segasle@gmail.ccm'', ''$2y$10$PVc2zbyE88bHjdPi7Motwe37CghBK1xhbFrqu1TsbWsa3w8lXWOnK'', NULL);
+INSERT INTO `users` (`id`, `name`, `surname`, `email`, `password`, `photo`, `phone`) VALUES
+(1, 'Сергей', NULL, 'segasle@gmail.ccm', '$2y$10$UusrGyJnKaibjCuqvC1Lgej9dtsfNA3FCkBpig2Gf26SZyNbPRLtK', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -136,9 +139,9 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `cookie`) VALUES
 
 CREATE TABLE `users_menu` (
   `id` int(11) NOT NULL,
-  `url` varchar(255) NOT NULL DEFAULT ''?page='',
+  `url` varchar(255) NOT NULL DEFAULT '?page=',
   `title` text NOT NULL,
-  `parent` tinyint(4) NOT NULL DEFAULT ''0''
+  `parent` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -146,11 +149,11 @@ CREATE TABLE `users_menu` (
 --
 
 INSERT INTO `users_menu` (`id`, `url`, `title`, `parent`) VALUES
-(1, ''?page=profile'', ''Профиль'', 0),
-(2, ''?page=settings'', ''Настройки'', 0),
-(3, ''?page=favourites'', ''Избранное'', 0),
-(4, ''?page=ads'', ''Мои объявления'', 0),
-(5, ''?page=message'', ''Сообщения'', 0);
+(1, '?page=profile', 'Профиль', 0),
+(2, '?page=settings', 'Настройки', 0),
+(3, '?page=favourites', 'Избранное', 0),
+(4, '?page=ads', 'Мои объявления', 0),
+(5, '?page=message', 'Сообщения', 0);
 
 --
 -- Индексы сохранённых таблиц
@@ -212,7 +215,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT для таблицы `reg`
 --
 ALTER TABLE `reg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `social_network`
