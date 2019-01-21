@@ -283,21 +283,10 @@ function users_data()
                         $allow = array('jpeg', 'jpg', 'png');
                         if (in_array($ext, $allow)) {
                             if (move_uploaded_file($_FILES['file']['tmp_name'], $update_file)) {
-                                $result = do_query("SELECT COUNT(*) as count FROM users WHERE `photo` = '{$file}'");
-                                $result = $result->fetch_object();
-                                if (empty($result->count)) {
-                                    $users = do_query("INSERT INTO `users` (`photo`) VALUES ('{$file}')");
-                                    if ($users) {
-                                        echo '<div class="go">Файл успешно загружен</div>';
-                                    }else
-                                    {
-                                        echo '<div class="errors">ошибкаw55</div>';
-                                    }
-                                } else {
-                                    echo '<div class="errors">ошибка</div>';
+                                $users = do_query("UPDATE `users` SET `photo` = '" . $file . "'WHERE `email` = '" . $_SESSION['email'] . "' ");
+                                if ($users) {
+                                    echo '<div class="go">Файл успешно загружен</div>';
                                 }
-                            } else {
-                                echo '<div class="errors">ошибка перемещения</div>';
                             }
                         }
                     }
