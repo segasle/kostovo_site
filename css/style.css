@@ -100,6 +100,16 @@ body {
 .container-fluid {
   padding: 0;
 }
+.container-fluid .author-photo {
+  width: 100%;
+}
+.container-fluid .author-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  overflow: hidden;
+  margin: 10px 0;
+}
 .container-fluid .errors,
 .container-fluid .go {
   background: red;

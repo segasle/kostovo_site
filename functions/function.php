@@ -197,6 +197,7 @@ function users_authorization()
                 $_SESSION['outh'] = true;
                 $_SESSION['id'] = $resilt['id'];
                 $_SESSION['email'] = $resilt['email'];
+                $_SESSION['name'] = $resilt['name'];
                 $_SESSION['photo'] = $resilt['photo'];
                 $_SESSION['phone'] = $resilt['phone'];
                 $_SESSION['surname'] = $resilt['surname'];
@@ -292,12 +293,27 @@ function users_data()
                 }
             }
         }
-        if (!empty(trim($data['familia']) or trim($data['phone'])) or trim($data['name'])){
-            $users = do_query("UPDATE `users` SET `phone` = '" .$data['phone'] . "', `surname` ='".$data['familia']."', `name` ='".$data['name']."'WHERE `email` = '" . $_SESSION['email'] . "'");
+        $errors = array();
+        $phone = $data['phone'];  if (trim($data['name']) == ''){
+            $errors[] = "Вы не ввели имя";
+        }
+        if (trim($data['familia']) == ''){
+            $errors[] = "Вы не ввели фамилию";
+        }
+
+        if (!preg_match("/(^(?!\+.*\(.*\).*\-\-.*$)(?!\+.*\(.*\).*\-$)(\+[0-9]{1,3}\([0-9]{1,3}\)[0-9]{1}([-0-9]{0,8})?([0-9]{0,1})?)$)|(^[0-9]{1,4}$)/", "$phone")){
+            $errors[] = "Вы непраильно ввели номер телефона, пример: +1(234) 567-89-00";
+        }
+
+        if (empty($errors)){
+            $users = do_query("UPDATE `users` SET `surname` ='".$data['familia']."', `phone` = '".$phone."', `name` = '".$data['name']."' WHERE `email` = '" . $_SESSION['email'] . "'");
             if ($users){
                 echo '<div class="go">Данные обновлены</div>';
             }
+        } else{
+            echo '<div class="errors">'.array_shift($errors).'</div>';
         }
+
     }
     return;
 }
