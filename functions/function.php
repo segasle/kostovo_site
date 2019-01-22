@@ -191,18 +191,15 @@ function users_authorization()
     if (isset($data['sub'])) {
         $email = $data['email'];
         $password = $data['password'];
-
-
         $resilt = mysqli_fetch_assoc(do_query("SELECT * FROM `users` WHERE `email` ='" . $email . "'"));
-        //var_dump($resilt['password']);
         if ($resilt) {
-
             if (password_verify($password, $resilt['password'])) {
-                //echo '<div class="go"></div>';
                 $_SESSION['outh'] = true;
                 $_SESSION['id'] = $resilt['id'];
                 $_SESSION['email'] = $resilt['email'];
-                $_SESSION['name'] = $resilt['name'];
+                $_SESSION['photo'] = $resilt['photo'];
+                $_SESSION['phone'] = $resilt['phone'];
+                $_SESSION['surname'] = $resilt['surname'];
                 header('location: ?page=main');
             } else {
                 echo '<div class="errors">Пароль не верный</div>';
@@ -217,7 +214,7 @@ function users_authorization()
 function auto_users()
 {
     if (isset($_SESSION['id'])) {
-        echo '<a href="?page=profile" class="btn btn-primary modal-open float-left">Привет, ' . $_SESSION['name'] . '!</a><form method="post" class="float-left"><button type="submit" class="btn btn-primary modal-open" name="input">Выйти</button></form>';
+        echo '<button class="btn btn-primary modal-open float-left">Привет, ' . $_SESSION['name'] . '!</button><form method="post" class="float-left"><button type="submit" class="btn btn-primary modal-open" name="input">Выйти</button></form>';
         if (isset($_POST['input'])) {
             unset($_SESSION['id']);
             header('location: ?page=main');
@@ -284,15 +281,22 @@ function users_data()
                         if (in_array($ext, $allow)) {
                             if (move_uploaded_file($_FILES['file']['tmp_name'], $update_file)) {
                                 $users = do_query("UPDATE `users` SET `photo` = '" . $file . "'WHERE `email` = '" . $_SESSION['email'] . "' ");
+                                print_r($users);
                                 if ($users) {
                                     echo '<div class="go">Файл успешно загружен</div>';
+                                   //
                                 }
                             }
                         }
                     }
                 }
             }
-
+        }
+        if (!empty(trim($data['familia']) or trim($data['phone'])) or trim($data['name'])){
+            $users = do_query("UPDATE `users` SET `phone` = '" .$data['phone'] . "', `surname` ='".$data['familia']."', `name` ='".$data['name']."'WHERE `email` = '" . $_SESSION['email'] . "'");
+            if ($users){
+                echo '<div class="go">Данные обновлены</div>';
+            }
         }
     }
     return;
