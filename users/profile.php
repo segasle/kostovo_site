@@ -2,9 +2,6 @@
 <?php
 users_data();
 
-?>
-
-<?php
 if (isset($_SESSION['id'])) {
     if (isset($_SESSION['photo'])) {
         if (!empty($_SESSION['photo'] or $_SESSION['phone'] or $_SESSION['surname'] or $_SESSION['name']or $_SESSION['email'])) {

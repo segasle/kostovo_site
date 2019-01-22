@@ -1,9 +1,9 @@
-                                                       -- phpMyAdmin SQL Dump
+                                                     -- phpMyAdmin SQL Dump
 -- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:8889
--- Время создания: Янв 21 2019 г., 17:29
+-- Время создания: Янв 22 2019 г., 15:28
 -- Версия сервера: 5.7.23
 -- Версия PHP: 7.2.8
 
@@ -13,6 +13,22 @@ SET time_zone = "+00:00";
 --
 -- База данных: `kostrobo`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `ads`
+--
+
+CREATE TABLE `ads` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `vaul` varchar(255) NOT NULL,
+  `price` tinyint(4) NOT NULL,
+  `text` text NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `photo` mediumblob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -116,20 +132,21 @@ INSERT INTO `social_network` (`id`, `url`, `class`) VALUES
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `surname` varchar(255) DEFAULT NULL,
   `email` text NOT NULL,
   `password` varchar(255) NOT NULL,
   `photo` mediumblob,
-  `phone` varchar(255) DEFAULT NULL
+  `phone` varchar(255) DEFAULT NULL,
+  `address` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `surname`, `email`, `password`, `photo`, `phone`) VALUES
-(1, 'Сергей', NULL, 'segasle@gmail.ccm', '$2y$10$UusrGyJnKaibjCuqvC1Lgej9dtsfNA3FCkBpig2Gf26SZyNbPRLtK', NULL, NULL);
+INSERT INTO `users` (`id`, `name`, `surname`, `email`, `password`, `photo`, `phone`, `address`) VALUES
+(1, 'Сергей', 'Слепенков', 'segasle@gmail.ccm', '$2y$10$UusrGyJnKaibjCuqvC1Lgej9dtsfNA3FCkBpig2Gf26SZyNbPRLtK', 0x52556c454534333275784d2e6a7067, '+7(915)954-37-12', NULL);
 
 -- --------------------------------------------------------
 
@@ -153,11 +170,18 @@ INSERT INTO `users_menu` (`id`, `url`, `title`, `parent`) VALUES
 (2, '?page=settings', 'Настройки', 0),
 (3, '?page=favourites', 'Избранное', 0),
 (4, '?page=ads', 'Мои объявления', 0),
-(5, '?page=message', 'Сообщения', 0);
+(5, '?page=message', 'Сообщения', 0),
+(6, '?page=give-ads', 'Подать объявление', 0);
 
 --
 -- Индексы сохранённых таблиц
 --
+
+--
+-- Индексы таблицы `ads`
+--
+ALTER TABLE `ads`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `input_reg`
@@ -200,6 +224,12 @@ ALTER TABLE `users_menu`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `ads`
+--
+ALTER TABLE `ads`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT для таблицы `input_reg`
 --
 ALTER TABLE `input_reg`
@@ -233,4 +263,4 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `users_menu`
 --
 ALTER TABLE `users_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
