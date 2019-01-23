@@ -460,7 +460,8 @@ function add_ads(){
         $errors = array();
         if ($data['title'] == ''){
             $errors[] = 'Введите пожалуйста заголовок';
-        }if ($data['title'] > 5){
+        }
+        if ($data['title'] > 5){
             $errors[] = 'Короткий заголовок';
         }
         if ($price == ''){
@@ -470,24 +471,25 @@ function add_ads(){
             $errors[] = 'Должны быть только цифры';
         }
         if ($data['text'] == ''){
-            $errors = 'Введите текст о вещи/услуги';
+            $errors[] = 'Введите текст о вещи/услуги';
         }
         if ($data['text'] > 10){
-            $errors = 'Мало символов';
+            $errors[] = 'Мало символов';
         }
         if (empty($errors)){
             $result = do_query("SELECT COUNT(*) as count FROM `ads`, `users` WHERE `title` = '{$data['title']}' AND `email` = '".$_SESSION['email']."'");
             $result = $result->fetch_object();
-            if (!empty($result->count)) {
-                $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['title']}')");
+            if (empty($result->count)) {
+                $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}')");
                 if (!empty($wer)) {
-                    echo '<div class="go">Успешно зарегиревались</div>';
+                    echo '<div class="go">Успешно подано</div>';
             } else {
-                echo '<div class="errors">Такая электронная почта уже есть</div>';
+                echo '<div class="errors">Такая запись уже есть</div>';
             }
             }
         } else{
             echo '<div class="errors">'.array_shift($errors).'</div>';
         }
     }
+    return;
 }

@@ -1,4 +1,7 @@
 <h1 class="text-center">Объявление</h1>
+<?php
+add_ads();
+?>
 <form method="post" enctype="multipart/form-data" class="row">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
         <div class="form-group">
@@ -11,7 +14,7 @@
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
         <div class="form-group">
             <label for="exampleInputTitle">Заголовок</label>
-            <input type="text" class="form-control" id="exampleInputTitle" placeholder="Заголовок" name="title">
+            <input type="text" class="form-control" id="exampleInputTitle" placeholder="Заголовок" name="title" value="<?php @$_POST['title'];?>">
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
