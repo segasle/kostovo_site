@@ -144,6 +144,7 @@ function users_reg()
 {
     $data = $_POST;
     if (isset($data['submit'])) {
+        $email = $data['email'];
         $errors = array();
         if (!isset($data['checkbox'])) {
             $errors[] = 'Не поставили галочку';
@@ -154,6 +155,9 @@ function users_reg()
         }
         if (trim($data['email']) == '') {
             $errors[] = 'Вы не ввели электронную почту';
+        }
+        if (!preg_match("/^(?!.*@.*@.*$)(?!.*@.*\-\-.*\..*$)(?!.*@.*\-\..*$)(?!.*@.*\-$)(.*@.+(\..{1,11})?)$/", "$email")) {
+            $errors[] = 'Вы неправильно ввели электронную почту';
         }
         if ($data['password1'] == '') {
             $errors[] = 'Вы не ввели пароль';
