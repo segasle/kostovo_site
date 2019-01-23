@@ -17,13 +17,13 @@
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
         <div class="form-group">
             <label for="exampleInputPrice">Укажите цену</label>
-            <input type="text" class="form-control" id="exampleInputPrice" placeholder="Цена">
+            <input type="text" class="form-control" id="exampleInputPrice" placeholder="Цена" name="price">
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
         <div class="form-group">
             <label for="exampleInputText">Текст</label>
-            <textarea class="form-control" id="exampleInputText" placeholder="Текст" rows="10"></textarea>
+            <textarea class="form-control" id="exampleInputText" placeholder="Текст" rows="10" name="text"></textarea>
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
@@ -35,6 +35,6 @@
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
-        <button type="submit" class="btn btn-default btn-primary">Подать</button>
+        <button type="submit" class="btn btn-default btn-primary" name="submit">Подать</button>
     </div>
 </form>

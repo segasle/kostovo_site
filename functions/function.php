@@ -453,3 +453,41 @@ function selected(){
     echo $out;
     return;
 }
+function add_ads(){
+    $data = $_POST;
+    if (isset($data['submit'])){
+        $price = $data['price'];
+        $errors = array();
+        if ($data['title'] == ''){
+            $errors[] = 'Введите пожалуйста заголовок';
+        }if ($data['title'] > 5){
+            $errors[] = 'Короткий заголовок';
+        }
+        if ($price == ''){
+            $errors[] = 'Укажите пожалуйста цену';
+        }
+        if (!preg_match("/^(?!0.*$)([0-9]{1,3}(,[0-9]{3})?(,[0-9]{3})?(\.[0-9]{2})?)$/", "$price")){
+            $errors[] = 'Должны быть только цифры';
+        }
+        if ($data['text'] == ''){
+            $errors = 'Введите текст о вещи/услуги';
+        }
+        if ($data['text'] > 10){
+            $errors = 'Мало символов';
+        }
+        if (empty($errors)){
+            $result = do_query("SELECT COUNT(*) as count FROM `ads`, `users` WHERE `title` = '{$data['title']}' AND `email` = '".$_SESSION['email']."'");
+            $result = $result->fetch_object();
+            if (!empty($result->count)) {
+                $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['title']}')");
+                if (!empty($wer)) {
+                    echo '<div class="go">Успешно зарегиревались</div>';
+            } else {
+                echo '<div class="errors">Такая электронная почта уже есть</div>';
+            }
+            }
+        } else{
+            echo '<div class="errors">'.array_shift($errors).'</div>';
+        }
+    }
+}
