@@ -2,9 +2,9 @@
 <form method="post" class="row">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
         <div class="form-group">
-           <?php
-                selected();
-           ?>
+            <?php
+            selected();
+            ?>
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
@@ -18,3 +18,33 @@
         </div>
     </div>
 </form>
+<div class="row">
+    <?php
+    $post = do_query("SELECT * FROM `ads`");
+    while ($us = mysqli_fetch_array($post)) {
+        $title = $us['title'];
+        $text = $us['text'];
+        $price = $us['price'];
+        $data = $us['date'];
+        if (!empty($us['photo'])) {
+            $img = '<img src="' . $us['photo'] . '" class="post_img">';
+        } else {
+            $img = '<div class="post_no-img"><p>Нет фото</p></div>';
+        }
+        ?>
+
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="post"><?php echo $img; ?>
+                <div class="post_title">
+                    <p><?php echo $title;?></p>
+                </div>
+                <div class="post_text"><p><?php echo $text;?></p></div>
+                <div class="post_price"><p><?php echo $price;?></p></div>
+                <div class="post_data"><p><?php echo $data;?></p></div>
+            </div>
+        </div>
+
+        <?php
+    } ?>
+</div>
+
