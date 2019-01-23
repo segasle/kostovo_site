@@ -306,7 +306,7 @@ function users_data()
         }
 
         if (!preg_match("/(^(?!\+.*\(.*\).*\-\-.*$)(?!\+.*\(.*\).*\-$)(\+[0-9]{1,3}\([0-9]{1,3}\)[0-9]{1}([-0-9]{0,8})?([0-9]{0,1})?)$)|(^[0-9]{1,4}$)/", "$phone")){
-            $errors[] = "Вы непраильно ввели номер телефона, пример: +1(234) 567-89-00";
+            $errors[] = "Вы непраильно ввели номер телефона, пример: +7(915)5473712";
         }
 
         if (empty($errors)){
@@ -319,5 +319,137 @@ function users_data()
         }
 
     }
+    return;
+}
+function selected(){
+    $option= array(
+        array(
+           'value' => 'Транспорт',
+        ),
+        array(
+           'value' => '&nbsp; &nbsp; Автомобили',
+        ),
+        array(
+           'value' => '&nbsp; &nbsp; мотоциклы и мототехника',
+        ),
+        array(
+           'value' => '&nbsp; &nbsp; грузовики и спецтехника',
+        ),
+        array(
+           'value' => '&nbsp; &nbsp; водный транспорт',
+        ),
+        array(
+           'value' => '&nbsp; &nbsp; запчасти и аксессуары',
+        ),
+        array(
+           'value' => 'недвижимость',
+        ),
+        array(
+           'value' => '&nbsp; &nbsp; квартиры',
+        ),
+        array(
+           'value' => '&nbsp; &nbsp; комнаты',
+        ),
+        array(
+           'value' => '&nbsp; &nbsp; дома, дачи, коттеджи',
+        ),
+        array(
+            'value' => '&nbsp; &nbsp; земельные участки',
+        ),array(
+            'value' => '&nbsp; &nbsp; гаражи и машиноместа',
+        ),array(
+            'value' => '&nbsp; &nbsp; коммерческая недвижимость',
+        ),array(
+            'value' => '&nbsp; &nbsp; недвижимость за рубежом',
+        ),array(
+            'value' => 'личные вещи',
+        ),array(
+            'value' => '&nbsp; &nbsp; одежда , обувь, аксессуары',
+        ),array(
+            'value' => '&nbsp; &nbsp; детская одежда и обувь',
+        ),array(
+            'value' => '&nbsp; &nbsp; товары для детей и игрушки',
+        ),array(
+            'value' => '&nbsp; &nbsp; часы и украшения',
+        ),array(
+            'value' => '&nbsp; &nbsp; красота и здоровье',
+        ),array(
+            'value' => 'для дома и дачи',
+        ),array(
+            'value' => '&nbsp; &nbsp; бытовая техника',
+        ),array(
+            'value' => '&nbsp; &nbsp; мебель и интерьер',
+        ),array(
+            'value' => '&nbsp; &nbsp; посуда и товары для кухни',
+        ),array(
+            'value' => '&nbsp; &nbsp; продукты питания',
+        ),array(
+            'value' => '&nbsp; &nbsp; ремонт и строительство',
+        ),array(
+            'value' => '&nbsp; &nbsp; растения',
+        ),array(
+            'value' => 'бытовая электроника',
+        ),array(
+            'value' => '&nbsp; &nbsp; аудио и видео',
+        ),array(
+            'value' => '&nbsp; &nbsp; игры ,приставки и программы',
+        ),array(
+            'value' => '&nbsp; &nbsp; настольные компьютеры',
+        ),array(
+            'value' => '&nbsp; &nbsp; ноутбуки',
+        ),array(
+            'value' => '&nbsp; &nbsp; оргтехника и расходники',
+        ),array(
+            'value' => '&nbsp; &nbsp; планшеты и электронные книги',
+        ),array(
+            'value' => '&nbsp; &nbsp; телефоны',
+        ),array(
+            'value' => '&nbsp; &nbsp; товары для компьютера',
+        ),array(
+            'value' => '&nbsp; &nbsp; фототехника',
+        ),array(
+            'value' => 'хобби и отдых',
+        ),array(
+            'value' => '&nbsp; &nbsp; билеты и путешествия',
+        ),array(
+            'value' => '&nbsp; &nbsp; велосипеды',
+        ),array(
+            'value' => '&nbsp; &nbsp; книги и журналы',
+        ),array(
+            'value' => '&nbsp; &nbsp; коллекционирование',
+        ),array(
+            'value' => '&nbsp; &nbsp; музыкальные инструменты',
+        ),array(
+            'value' => '&nbsp; &nbsp; охота и рыбалка',
+        ),array(
+            'value' => '&nbsp; &nbsp; спорт и отдых',
+        ),array(
+            'value' => 'животные',
+        ),array(
+            'value' => '&nbsp; &nbsp; собаки',
+        ),array(
+            'value' => '&nbsp; &nbsp; кошки',
+        ),array(
+            'value' => '&nbsp; &nbsp; птицы',
+        ),array(
+            'value' => '&nbsp; &nbsp; аквариум',
+        ),array(
+            'value' => '&nbsp; &nbsp; другие животные',
+        ),array(
+            'value' => '&nbsp; &nbsp; товары для животных',
+        ),array(
+            'value' => 'для биснеса',
+        ),array(
+            'value' => '&nbsp; &nbsp; готовый бизнес',
+        ),array(
+            'value' => '&nbsp; &nbsp; оборудование для бизнеса',
+        ),
+    );
+    $out = ' <select class="form-control" name="value">';
+    foreach ($option as $item){
+        $out .= '<option value="'.$item['value'].'">'.$item['value'].'</option>';
+    }
+    $out .= '</select>';
+    echo $out;
     return;
 }

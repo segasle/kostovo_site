@@ -2,9 +2,9 @@
 <form method="post" class="row">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
         <div class="form-group">
-            <select class="form-control" name="value">
-                <option>1</option>
-            </select>
+           <?php
+                selected();
+           ?>
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
