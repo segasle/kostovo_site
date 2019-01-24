@@ -533,7 +533,7 @@ function add_ads()
 function search ($query)
 {
     $query = trim($query);
-    $query = mysqli_real_escape_string($query);
+    ///$query = mysqli_real_escape_string($query);
     $query = htmlspecialchars($query);
     if (!empty($query))
     {
@@ -542,29 +542,40 @@ function search ($query)
         } else if (strlen($query) > 128) {
             $text = '<p>Слишком длинный поисковый запрос.</p>';
         } else {
-            $q = do_query("SELECT `id`, `title`, `text`, `title_link`, `category`, `uniq_id`
-                  FROM `table_name` WHERE `text` LIKE '%$query%'
-                  OR `title` LIKE '%$query%' OR `meta_k` LIKE '%$query%'
-                  OR `meta_d` LIKE '%$query%'");
-
-
+            $q = do_query("SELECT `id`, `title`, `text`, `vaul`
+                  FROM `ads` WHERE `text` LIKE '%$query%'
+                  OR `title` LIKE '%$query%' OR `vaul` LIKE '%$query%'");
             if (mysqli_affected_rows() > 0) {
                 $row = mysqli_fetch_assoc($q);
                 $num = mysqli_num_rows($q);
-
                 $text = '<p>По запросу <b>'.$query.'</b> найдено совпадений: '.$num.'</p>';
-
                 do {
                     // Делаем запрос, получающий ссылки на статьи
-                    $q1 = do_query("SELECT `link` FROM `table_name` WHERE `uniq_id` = '$row[page_id]'");
+                    $q1 = do_query("SELECT `title` FROM `ads` WHERE `text` = '$row[id]'");
 
 
                     if (mysqli_affected_rows() > 0) {
-                        $row1 = mysqli_fetch_assoc($q1);
+                        $us = mysqli_fetch_assoc($q1);
                     }
-
-                    $text .= '<p><a> href="'.$row1['link'].'/'.$row['category'].'/'.$row['uniq_id'].'" title="'.$row['title_link'].'">'.$row['title'].'</a></p>
-                    <p>'.$row['desc'].'</p>';
+                    $title = $us['title'];
+                    $text = $us['text'];
+                    $price = $us['price'];
+                    $data = new DateTime($us['date']);
+                    if (!empty($us['photo'])) {
+                        $img = '<img src="ads_img/' . $us['photo'] . '" class="post_img">';
+                    } else {
+                        $img = '<div class="post_no-img"><p>Нет фото</p></div>';
+                    }
+                    $text .= '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+            <div class="post">'.$img.'
+                <div class="post_title">
+                    <p>'. $title.'</p>
+                </div>
+                <div class="post_text"><p>'. $text.'</p></div>
+                <div class="post_price"><p class="fa fa-rub">'.$price.'</p></div>
+                <div class="post_data"><p>' .$data->format('d:m:Y H:m:s').'</p></div>
+            </div>
+        </div>';
 
                 } while ($row = mysqli_fetch_assoc($q));
             } else {

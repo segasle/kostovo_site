@@ -1,4 +1,10 @@
 <h1 class="text-center">Барахолка</h1>
+<?php
+if (!empty($_POST['search'])) {
+    $search_result = search ($_POST['search']);
+    echo $search_result;
+}
+?>
 <form method="post" class="row">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
         <div class="form-group">
