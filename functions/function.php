@@ -289,7 +289,6 @@ function users_data()
                                 print_r($users);
                                 if ($users) {
                                     echo '<div class="go">Файл успешно загружен</div>';
-                                   //
                                 }
                             }
                         }
@@ -298,197 +297,235 @@ function users_data()
             }
         }
         $errors = array();
-        $phone = $data['phone'];  if (trim($data['name']) == ''){
+        $phone = $data['phone'];
+        if (trim($data['name']) == '') {
             $errors[] = "Вы не ввели имя";
         }
-        if (trim($data['familia']) == ''){
+        if (trim($data['familia']) == '') {
             $errors[] = "Вы не ввели фамилию";
         }
 
-        if (!preg_match("/(^(?!\+.*\(.*\).*\-\-.*$)(?!\+.*\(.*\).*\-$)(\+[0-9]{1,3}\([0-9]{1,3}\)[0-9]{1}([-0-9]{0,8})?([0-9]{0,1})?)$)|(^[0-9]{1,4}$)/", "$phone")){
+        if (!preg_match("/(^(?!\+.*\(.*\).*\-\-.*$)(?!\+.*\(.*\).*\-$)(\+[0-9]{1,3}\([0-9]{1,3}\)[0-9]{1}([-0-9]{0,8})?([0-9]{0,1})?)$)|(^[0-9]{1,4}$)/", "$phone")) {
             $errors[] = "Вы непраильно ввели номер телефона, пример: +7(915)5473712";
         }
 
-        if (empty($errors)){
-            $users = do_query("UPDATE `users` SET `surname` ='".$data['familia']."', `phone` = '".$phone."', `name` = '".$data['name']."' WHERE `email` = '" . $_SESSION['email'] . "'");
-            if ($users){
+        if (empty($errors)) {
+            $users = do_query("UPDATE `users` SET `surname` ='" . $data['familia'] . "', `phone` = '" . $phone . "', `name` = '" . $data['name'] . "' WHERE `email` = '" . $_SESSION['email'] . "'");
+            if ($users) {
                 echo '<div class="go">Данные обновлены</div>';
             }
-        } else{
-            echo '<div class="errors">'.array_shift($errors).'</div>';
+        } else {
+            echo '<div class="errors">' . array_shift($errors) . '</div>';
         }
 
     }
     return;
 }
-function selected(){
-    $option= array(
+
+function selected()
+{
+    $option = array(
         array(
-           'value' => 'Транспорт',
+            'value' => 'Транспорт',
         ),
         array(
-           'value' => '&nbsp; &nbsp; Автомобили',
+            'value' => '&nbsp; &nbsp; Автомобили',
         ),
         array(
-           'value' => '&nbsp; &nbsp; мотоциклы и мототехника',
+            'value' => '&nbsp; &nbsp; мотоциклы и мототехника',
         ),
         array(
-           'value' => '&nbsp; &nbsp; грузовики и спецтехника',
+            'value' => '&nbsp; &nbsp; грузовики и спецтехника',
         ),
         array(
-           'value' => '&nbsp; &nbsp; водный транспорт',
+            'value' => '&nbsp; &nbsp; водный транспорт',
         ),
         array(
-           'value' => '&nbsp; &nbsp; запчасти и аксессуары',
+            'value' => '&nbsp; &nbsp; запчасти и аксессуары',
         ),
         array(
-           'value' => 'недвижимость',
+            'value' => 'недвижимость',
         ),
         array(
-           'value' => '&nbsp; &nbsp; квартиры',
+            'value' => '&nbsp; &nbsp; квартиры',
         ),
         array(
-           'value' => '&nbsp; &nbsp; комнаты',
+            'value' => '&nbsp; &nbsp; комнаты',
         ),
         array(
-           'value' => '&nbsp; &nbsp; дома, дачи, коттеджи',
+            'value' => '&nbsp; &nbsp; дома, дачи, коттеджи',
         ),
         array(
             'value' => '&nbsp; &nbsp; земельные участки',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; гаражи и машиноместа',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; коммерческая недвижимость',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; недвижимость за рубежом',
-        ),array(
+        ), array(
             'value' => 'личные вещи',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; одежда , обувь, аксессуары',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; детская одежда и обувь',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; товары для детей и игрушки',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; часы и украшения',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; красота и здоровье',
-        ),array(
+        ), array(
             'value' => 'для дома и дачи',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; бытовая техника',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; мебель и интерьер',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; посуда и товары для кухни',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; продукты питания',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; ремонт и строительство',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; растения',
-        ),array(
+        ), array(
             'value' => 'бытовая электроника',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; аудио и видео',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; игры ,приставки и программы',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; настольные компьютеры',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; ноутбуки',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; оргтехника и расходники',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; планшеты и электронные книги',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; телефоны',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; товары для компьютера',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; фототехника',
-        ),array(
+        ), array(
             'value' => 'хобби и отдых',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; билеты и путешествия',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; велосипеды',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; книги и журналы',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; коллекционирование',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; музыкальные инструменты',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; охота и рыбалка',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; спорт и отдых',
-        ),array(
+        ), array(
             'value' => 'животные',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; собаки',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; кошки',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; птицы',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; аквариум',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; другие животные',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; товары для животных',
-        ),array(
+        ), array(
             'value' => 'для биснеса',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; готовый бизнес',
-        ),array(
+        ), array(
             'value' => '&nbsp; &nbsp; оборудование для бизнеса',
         ),
     );
     $out = ' <select class="form-control" name="value">';
-    foreach ($option as $item){
-        $out .= '<option value="'.$item['value'].'">'.$item['value'].'</option>';
+    foreach ($option as $item) {
+        $out .= '<option value="' . $item['value'] . '">' . $item['value'] . '</option>';
     }
     $out .= '</select>';
     echo $out;
     return;
 }
-function add_ads(){
+
+function add_ads()
+{
     $data = $_POST;
-    if (isset($data['submit'])){
+    if (isset($data['submit'])) {
         $price = $data['price'];
         $errors = array();
-        if ($data['title'] == ''){
+        if ($data['title'] == '') {
             $errors[] = 'Введите пожалуйста заголовок';
         }
-        if ($data['title'] > 5){
+        if ($data['title'] > 5) {
             $errors[] = 'Короткий заголовок';
         }
-        if ($price == ''){
+        if ($price == '') {
             $errors[] = 'Укажите пожалуйста цену';
         }
-        if (!preg_match("/^(?!0.*$)([0-9]{1,3}(,[0-9]{3})?(,[0-9]{3})?(\.[0-9]{2})?)$/", "$price")){
+        if (!preg_match("/^(?!0.*$)([0-9]{1,3}(,[0-9]{3})?(,[0-9]{3})?(\.[0-9]{2})?)$/", "$price")) {
             $errors[] = 'Должны быть только цифры';
         }
-        if ($data['text'] == ''){
+        if ($data['text'] == '') {
             $errors[] = 'Введите текст о вещи/услуги';
         }
-        if ($data['text'] > 10){
+        if ($data['text'] > 10) {
             $errors[] = 'Мало символов';
         }
-        if (empty($errors)){
-            $result = do_query("SELECT COUNT(*) as count FROM `ads`, `users` WHERE `title` = '{$data['title']}' AND `email` = '".$_SESSION['email']."'");
-            $result = $result->fetch_object();
-            if (empty($result->count)) {
-                $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}')");
-                if (!empty($wer)) {
-                    echo '<div class="go">Успешно подано</div>';
-            } else {
-                echo '<div class="errors">Такая запись уже есть</div>';
+        if (empty($errors)) {
+            if (!empty($data['file'])){
+                if (isset($_FILES['file'])) {
+                    $update = 'ads_img/';
+                    $file = $_FILES['file']['name'];
+                    $update_file = $update . $file;
+                    if (!file_exists($update_file)) {
+                        if (is_uploaded_file($_FILES['file']['tmp_name'])) {
+                            if ($_FILES['file']['size'] > 1024 * 3 * 1024) {
+                                echo '<div class="errors">Файл должен быть не больше 3 МБ</div>';
+                            } else {
+                                $ext = pathinfo($update_file, PATHINFO_EXTENSION);
+                                $allow = array('jpeg', 'jpg', 'png');
+                                if (in_array($ext, $allow)) {
+                                    if (move_uploaded_file($_FILES['file']['tmp_name'], $update_file)) {
+                                        $result = do_query("SELECT COUNT(*) as count FROM `ads`, `users` WHERE `title` = '{$data['title']}' AND `email` = '" . $_SESSION['email'] . "'");
+                                        $result = $result->fetch_object();
+                                        if (empty($result->count)) {
+                                            $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`, `photo`) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}','{$file}')");
+                                            if (!empty($wer)) {
+                                                echo '<div class="go">Успешно подано</div>';
+                                            } else {
+                                                echo '<div class="errors">Такая запись уже есть</div>';
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
+            else {
+                $result = do_query("SELECT COUNT(*) as count FROM `ads`, `users` WHERE `title` = '{$data['title']}' AND `email` = '" . $_SESSION['email'] . "'");
+                $result = $result->fetch_object();
+                if (empty($result->count)) {
+                    $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}')");
+                    if (!empty($wer)) {
+                        echo '<div class="go">Успешно подано</div>';
+                    } else {
+                        echo '<div class="errors">Такая запись уже есть</div>';
+                    }
+                }
             }
-        } else{
-            echo '<div class="errors">'.array_shift($errors).'</div>';
+        } else {
+            echo '<div class="errors">' . array_shift($errors) . '</div>';
         }
     }
     return;

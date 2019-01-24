@@ -25,9 +25,9 @@
         $title = $us['title'];
         $text = $us['text'];
         $price = $us['price'];
-        $data = $us['date'];
+        $data = new DateTime($us['date']);
         if (!empty($us['photo'])) {
-            $img = '<img src="' . $us['photo'] . '" class="post_img">';
+            $img = '<img src="ads_img/' . $us['photo'] . '" class="post_img">';
         } else {
             $img = '<div class="post_no-img"><p>Нет фото</p></div>';
         }
@@ -39,8 +39,8 @@
                     <p><?php echo $title;?></p>
                 </div>
                 <div class="post_text"><p><?php echo $text;?></p></div>
-                <div class="post_price"><p><?php echo $price;?></p></div>
-                <div class="post_data"><p><?php echo $data;?></p></div>
+                <div class="post_price"><p class="fa fa-rub"><?php echo $price;?></p></div>
+                <div class="post_data"><p><?php echo $data->format('d:m:Y H:m:s');?></p></div>
             </div>
         </div>
 
