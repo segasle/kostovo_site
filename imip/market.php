@@ -1,9 +1,6 @@
 <h1 class="text-center">Барахолка</h1>
 <?php
-if (!empty($_POST['search'])) {
-    $search_result = search ($_POST['search']);
-    echo $search_result;
-}
+search();
 ?>
 <form method="post" class="row">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
@@ -27,7 +24,7 @@ if (!empty($_POST['search'])) {
 <div class="row">
     <?php
     $post = do_query("SELECT * FROM `ads`");
-    while ($us = mysqli_fetch_array($post)) {
+    while ($us = mysqli_fetch_assoc($post)) {
         $title = $us['title'];
         $text = $us['text'];
         $price = $us['price'];
