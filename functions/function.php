@@ -533,31 +533,43 @@ function add_ads()
 function search ()
 {
     if (isset($_POST['submit'])){
-        $search = explode(' ', $_POST['search']);
-        $res =  array();
-        $cound = count($search);
-        $co = 0;
-        foreach ($search as $item){
-            $co++;
-            if ($co < $cound) {
-                $res[] = "CONCAT (`title`, `text`) LIKE '%".$item."%' OR ";
-            }else{
-                $res[] = "CONCAT (`title`, `text`) LIKE '%".$item."%'";
-            }
-        }
-        $sql = do_query("SELECT * FROM ads WHERE").implode("", $res);
+        if (!empty($_POST['search'])){
 
-        while ($us = mysqli_fetch_assoc($sql)){//print_r($sql);
-            $title = $us['title'];
-                    $text = $us['text'];
-                    $price = $us['price'];
-                    $data = new DateTime($us['date']);
-                    if (!empty($us['photo'])) {
-                        $img = '<img src="ads_img/' . $us['photo'] . '" class="post_img">';
-                    } else {
-                        $img = '<div class="post_no-img"><p>Нет фото</p></div>';
+            $search = explode(' ', $_POST['search']);
+            $res =  array();
+            $cound = count($search);
+            $co = 0;
+            $errors = array();
+            if (strlen($_POST['search']) < 3){
+                $errors[] = 'Слишком короткий поисковый запрос.';
+            }
+            if (strlen($_POST['search']) > 64){
+                $errors[] = 'Слишком длинный поисковый запрос.';
+            }
+            if (empty($errors)) {
+                foreach ($search as $item){
+                    $co++;
+                    if ($co < $cound) {
+                        $res[] = "CONCAT (`title`, `text`) LIKE '%".$item."%' OR ";
+                    }else{
+                        $res[] = "CONCAT (`title`, `text`) LIKE '%".$item."%'";
                     }
-                    echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                }
+
+                $implode = implode("", $res);
+                $sql = do_query("SELECT * FROM ads WHERE $implode");
+                if (mysqli_affected_rows() > 0 ){
+                    while ($us = mysqli_fetch_assoc($sql)){
+                        $title = $us['title'];
+                        $text = $us['text'];
+                        $price = $us['price'];
+                        $data = new DateTime($us['date']);
+                        if (!empty($us['photo'])) {
+                            $img = '<img src="ads_img/' . $us['photo'] . '" class="post_img">';
+                        } else {
+                            $img = '<div class="post_no-img"><p>Нет фото</p></div>';
+                        }
+                        echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
             <div class="post">'.$img.'
                 <div class="post_title">
                     <p>'. $title.'</p>
@@ -567,6 +579,14 @@ function search ()
                 <div class="post_data"><p>' .$data->format('d:m:Y H:m:s').'</p></div>
             </div>
         </div>';
+                    }
+                }
+
+            }else{
+                echo '<div class="errors">' . array_shift($errors) . '</div>';
+            }
+
+
         }
 
     }
@@ -577,9 +597,9 @@ function search ()
 //    if (!empty($query))
 //    {
 //        if (strlen($query) < 3) {
-//            $text = '<p>Слишком короткий поисковый запрос.</p>';
+//            $text = '<p></p>';
 //        } else if (strlen($query) > 128) {
-//            $text = '<p>Слишком длинный поисковый запрос.</p>';
+//            $text = '<p></p>';
 //        } else {
 //            $q = do_query("SELECT `id`, `title`, `text`, `vaul`
 //                  FROM `ads` WHERE `text` LIKE '%$query%'
