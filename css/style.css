@@ -409,27 +409,44 @@ body {
   cursor: auto;
   overflow: auto;
 }
-.container-fluid .contain .post_img {
+.container-fluid .contain .post_img,
+.container-fluid .contain .post_no-img {
   width: 100%;
   margin: 10px 0;
 }
 .container-fluid .contain .post_text {
   font-weight: 300;
 }
+.container-fluid .contain .post_title {
+  margin: 5px 0;
+  font-size: 20px;
+  font-weight: 500;
+}
 .container-fluid .contain .post_data {
   margin: 10px 0;
   text-align: right;
   font-weight: bold;
 }
+.container-fluid .contain .post_price p {
+  font-weight: 800;
+}
 .container-fluid .contain .post_no-img {
   background: darkgray;
   font-size: 25px;
-  text-align: center;
   width: 100%;
   height: 150px;
+  position: relative;
+  text-align: center;
 }
 .container-fluid .contain .post_no-img p {
-  padding-top: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 }
 .container-fluid .footer {
   height: 100px;
@@ -539,7 +556,7 @@ body {
     left: 0;
   }
   50% {
-    left: 100%;
+    left: 92%;
   }
   to {
     left: 0;

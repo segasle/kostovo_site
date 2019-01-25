@@ -1,9 +1,15 @@
 </div>
 <footer>
     <div class="footer">
-        <p>Все права защищены &copy;<?php echo date('Y'); ?></p>
-        <div class="block_icon">
-                <?php get_soclal();?>
+        <div class="row">
+            <div class="col-lg-6 col-xs-12">
+                <p>Все права защищены &copy;<?php echo date('Y'); ?></p>
+            </div>
+            <div class="col-lg-6 col-xs-12">
+                <div class="block_icon">
+                    <?php get_soclal();?>
+                </div>
+            </div>
         </div>
     </div>
 </footer>

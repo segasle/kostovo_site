@@ -205,6 +205,7 @@ function users_authorization()
                 $_SESSION['photo'] = $resilt['photo'];
                 $_SESSION['phone'] = $resilt['phone'];
                 $_SESSION['surname'] = $resilt['surname'];
+                $_SESSION['address'] = $resilt['address'];
                 header('location: ?page=main');
             } else {
                 echo '<div class="errors">Пароль не верный</div>';
@@ -308,16 +309,18 @@ function users_data()
         if (!preg_match("/(^(?!\+.*\(.*\).*\-\-.*$)(?!\+.*\(.*\).*\-$)(\+[0-9]{1,3}\([0-9]{1,3}\)[0-9]{1}([-0-9]{0,8})?([0-9]{0,1})?)$)|(^[0-9]{1,4}$)/", "$phone")) {
             $errors[] = "Вы непраильно ввели номер телефона, пример: +7(915)5473712";
         }
+        if (trim($data['address']) == '') {
+            $errors[] = "Вы не ввели адрес";
+        }
 
         if (empty($errors)) {
-            $users = do_query("UPDATE `users` SET `surname` ='" . $data['familia'] . "', `phone` = '" . $phone . "', `name` = '" . $data['name'] . "' WHERE `email` = '" . $_SESSION['email'] . "'");
+            $users = do_query("UPDATE `users` SET `address` = '".$data['address']."' `surname` ='" . $data['familia'] . "', `phone` = '" . $phone . "', `name` = '" . $data['name'] . "' WHERE `email` = '" . $_SESSION['email'] . "'");
             if ($users) {
                 echo '<div class="go">Данные обновлены</div>';
             }
         } else {
             echo '<div class="errors">' . array_shift($errors) . '</div>';
         }
-
     }
     return;
 }
