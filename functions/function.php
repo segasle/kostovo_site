@@ -532,34 +532,33 @@ function add_ads()
 }
 function search ()
 {
-    if (isset($_POST['submit'])){
-        if (!empty($_POST['search'])){
+    if (isset($_POST['submit'])) {
+        if (!empty($_POST['search'])) {
 
             $search = explode(' ', $_POST['search']);
-            $res =  array();
+            $res = array();
             $cound = count($search);
             $co = 0;
             $errors = array();
-            if (strlen($_POST['search']) < 3){
+            if (strlen($_POST['search']) < 3) {
                 $errors[] = 'Слишком короткий поисковый запрос.';
             }
-            if (strlen($_POST['search']) > 64){
+            if (strlen($_POST['search']) > 64) {
                 $errors[] = 'Слишком длинный поисковый запрос.';
             }
             if (empty($errors)) {
-                foreach ($search as $item){
+                foreach ($search as $item) {
                     $co++;
                     if ($co < $cound) {
-                        $res[] = "CONCAT (`title`, `text`) LIKE '%".$item."%' OR ";
-                    }else{
-                        $res[] = "CONCAT (`title`, `text`) LIKE '%".$item."%'";
+                        $res[] = "CONCAT (`title`, `text`) LIKE '%" . $item . "%' OR ";
+                    } else {
+                        $res[] = "CONCAT (`title`, `text`) LIKE '%" . $item . "%'";
                     }
                 }
-
                 $implode = implode("", $res);
                 $sql = do_query("SELECT * FROM ads WHERE $implode");
-                if (mysqli_affected_rows() > 0 ){
-                    while ($us = mysqli_fetch_assoc($sql)){
+                if (mysqli_num_rows($sql) > 0) {
+                    while ($us = mysqli_fetch_assoc($sql)) {
                         $title = $us['title'];
                         $text = $us['text'];
                         $price = $us['price'];
@@ -570,62 +569,27 @@ function search ()
                             $img = '<div class="post_no-img"><p>Нет фото</p></div>';
                         }
                         echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-            <div class="post">'.$img.'
+            <div class="post">' . $img . '
                 <div class="post_title">
-                    <p>'. $title.'</p>
+                    <p>' . $title . '</p>
                 </div>
-                <div class="post_text"><p>'. $text.'</p></div>
-                <div class="post_price"><p class="fa fa-rub">'.$price.'</p></div>
-                <div class="post_data"><p>' .$data->format('d:m:Y H:m:s').'</p></div>
+                <div class="post_text"><p>' . $text . '</p></div>
+                <div class="post_price"><p class="fa fa-rub">' . $price . '</p></div>
+                <div class="post_data"><p>' . $data->format('d:m:Y H:m:s') . '</p></div>
             </div>
         </div>';
                     }
+                } else {
+                    echo '<div class="errors">По вашему запросу ничего не найдено.</div>';
                 }
 
-            }else{
+            } else {
                 echo '<div class="errors">' . array_shift($errors) . '</div>';
             }
-
-
+        } else {
+            echo '<div class="errors">Задан пустой поисковый запрос.</div>';
         }
 
     }
     return;
-  //  $query = trim($query);
-    ///$query = mysqli_real_escape_string($query);
-//    $query = htmlspecialchars($query);
-//    if (!empty($query))
-//    {
-//        if (strlen($query) < 3) {
-//            $text = '<p></p>';
-//        } else if (strlen($query) > 128) {
-//            $text = '<p></p>';
-//        } else {
-//            $q = do_query("SELECT `id`, `title`, `text`, `vaul`
-//                  FROM `ads` WHERE `text` LIKE '%$query%'
-//                  OR `title` LIKE '%$query%' OR `vaul` LIKE '%$query%'");
-//            if (mysqli_affected_rows() > 0) {
-//                $row = mysqli_fetch_assoc($q);
-//                $num = mysqli_num_rows($q);
-//                $text = '<p>По запросу <b>'.$query.'</b> найдено совпадений: '.$num.'</p>';
-//                do {
-//                    // Делаем запрос, получающий ссылки на статьи
-//                    $q1 = do_query("SELECT `title` FROM `ads` WHERE `text` = '$row[id]'");
-//
-//
-//                    if (mysqli_affected_rows() > 0) {
-//                        $us = mysqli_fetch_assoc($q1);
-//                    }
-//
-//
-//                } while ($row = mysqli_fetch_assoc($q));
-//            } else {
-//                $text = '<p>По вашему запросу ничего не найдено.</p>';
-//            }
-//        }
-//    } else {
-//        $text = '<p>Задан пустой поисковый запрос.</p>';
-//    }
-//
-//    return $text;
 }
