@@ -89,7 +89,7 @@
                                 </label>
 
                                 <?php
-                                if (isset($_SESSION['id'])) {
+                                if (isset($_SESSION['id']) or isset($_SESSION['token'])) {
                                     echo '<div class="nav">';
                                     echo '<nav class=\'float-left\'>';
 
