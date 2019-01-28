@@ -597,7 +597,6 @@ function search ()
     return;
 }
 function vk_authorization(){
-    global $token2;
     global $scope;
     global $redirect_uri;
     global $id;
@@ -606,8 +605,8 @@ function vk_authorization(){
         echo ' <a href="https://oauth.vk.com/authorize?client_id='.$id.'&display=page&redirect_uri='.$redirect_uri.'&scope='.$scope.'&response_type=code&v=5.92" class="fa fa-vk fa-2x" aria-hidden="true"></a>';
         if (!empty($_GET['code'])){
             $content = file_get_contents('https://oauth.vk.com/access_token?client_id="'.$id.'"&client_secret="'.$appkey.'"&redirect_uri="'.$redirect_uri.'"&code="'.$_GET['code'].'"');
-            $content = json_decode($content, true);
-            print_r($content);
+            $token2 = json_decode($content, true);
+            print_r($token2);
         }else{
             echo 'iuyytrrt';
         }
