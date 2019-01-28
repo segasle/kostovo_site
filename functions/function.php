@@ -596,3 +596,30 @@ function search ()
     }
     return;
 }
+function vk_authorization(){
+    global $token2;
+    global $scope;
+    global $redirect_uri;
+    global $id;
+    global $appkey;
+    if (empty($_SESSION['token'])){
+        echo ' <a href="https://oauth.vk.com/authorize?client_id='.$id.'&display=page&redirect_uri='.$redirect_uri.'&scope='.$scope.'&response_type=code&v=5.92" class="fa fa-vk fa-2x" aria-hidden="true"></a>';
+        if (!empty($_GET['code'])){
+            $content = file_get_contents('https://oauth.vk.com/access_token?client_id="'.$id.'"&client_secret="'.$appkey.'"&redirect_uri="'.$redirect_uri.'"&code="'.$_GET['code'].'"');
+            $content = json_decode($content, true);
+            print_r($content);
+        }else{
+            echo 'iuyytrrt';
+        }
+    }
+
+
+
+    /*<div class="block-icons">
+                                                <i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i>
+                                                <i class="fa fa-odnoklassniki fa-2x" aria-hidden="true"></i>
+
+                                                <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+                                            </div>                                                             */
+    return;
+}

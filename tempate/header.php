@@ -69,12 +69,7 @@
                                             </form>
                                             <?php link_reg(); ?>
                                             <p class="">Или можно авторизоваться с помощью соц сети</p>
-                                            <div class="block-icons">
-                                                <i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i>
-                                                <i class="fa fa-odnoklassniki fa-2x" aria-hidden="true"></i>
-                                                <i class="fa fa-vk fa-2x" aria-hidden="true"></i>
-                                                <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
-                                            </div>
+                                            <?php vk_authorization();?>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
