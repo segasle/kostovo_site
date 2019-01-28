@@ -1,9 +1,9 @@
-                                                     -- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:8889
--- Время создания: Янв 22 2019 г., 15:28
+-- Время создания: Янв 28 2019 г., 18:46
 -- Версия сервера: 5.7.23
 -- Версия PHP: 7.2.8
 
@@ -26,9 +26,19 @@ CREATE TABLE `ads` (
   `vaul` varchar(255) NOT NULL,
   `price` tinyint(4) NOT NULL,
   `text` text NOT NULL,
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `photo` mediumblob NOT NULL
+  `date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `photo` mediumblob
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `ads`
+--
+
+INSERT INTO `ads` (`id`, `title`, `vaul`, `price`, `text`, `date`, `photo`) VALUES
+(1, 'Продам айпэд', 'Транспорт', 123, 'Аппарат практически новый. ipad air', '2019-01-23 17:23:22', NULL),
+(2, 'yuyhytrtt', 'Транспорт', 123, 'укбьошоогтр типпирт ьтичсми мм', '2019-01-23 17:25:18', NULL),
+(3, 'asdfdds', 'Транспорт', 123, 'ренекаргнекуцйеннщдж\r\nждлорпапаппека', '2019-01-24 12:36:22', 0x52556c454534333275784d2e6a7067),
+(4, 'кенгнгн', 'Транспорт', 123, 'гнепрорпае\r\nорпрорпгдлор\r\nдлорпрр', '2019-01-24 12:46:19', NULL);
 
 -- --------------------------------------------------------
 
@@ -135,18 +145,21 @@ CREATE TABLE `users` (
   `name` varchar(255) DEFAULT NULL,
   `surname` varchar(255) DEFAULT NULL,
   `email` text NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `photo` mediumblob,
   `phone` varchar(255) DEFAULT NULL,
-  `address` text
+  `address` text,
+  `users-id` int(11) DEFAULT NULL,
+  `token` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `surname`, `email`, `password`, `photo`, `phone`, `address`) VALUES
-(1, 'Сергей', 'Слепенков', 'segasle@gmail.ccm', '$2y$10$UusrGyJnKaibjCuqvC1Lgej9dtsfNA3FCkBpig2Gf26SZyNbPRLtK', 0x52556c454534333275784d2e6a7067, '+7(915)954-37-12', NULL);
+INSERT INTO `users` (`id`, `name`, `surname`, `email`, `password`, `photo`, `phone`, `address`, `users-id`, `token`) VALUES
+(1, 'Сергей', 'Слепенков', 'segasle@gmail.ccm', '$2y$10$UusrGyJnKaibjCuqvC1Lgej9dtsfNA3FCkBpig2Gf26SZyNbPRLtK', 0x52556c454534333275784d2e6a7067, '+7(915)954-37-12', 'Московская область', NULL, NULL),
+(10, 'Сергей', 'Слепенков', 'segasle@gmail.com', NULL, 0x68747470733a2f2f70702e757365726170692e636f6d2f633834383632302f763834383632303133352f653832342f71514133746643303251412e6a70673f6176613d31, NULL, NULL, 176938709, 'd10d3dc8deaeab68e99bb762bdc0569f5d60b1c9f0e185ca8b92da8189e80cfd42caa4d7032a31e9795c5');
 
 -- --------------------------------------------------------
 
@@ -227,7 +240,7 @@ ALTER TABLE `users_menu`
 -- AUTO_INCREMENT для таблицы `ads`
 --
 ALTER TABLE `ads`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `input_reg`
@@ -257,7 +270,7 @@ ALTER TABLE `social_network`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT для таблицы `users_menu`
