@@ -276,6 +276,7 @@ function users_data()
 {
     $data = $_POST;
     if (isset($data['submit'])) {
+
         if (isset($_FILES['file'])) {
             $update = 'update/';
             $file = $_FILES['file']['name'];
@@ -301,28 +302,32 @@ function users_data()
             }
         }
         $errors = array();
-        $phone = $data['phone'];
-        if (trim($data['name']) == '') {
-            $errors[] = "Вы не ввели имя";
-        }
-        if (trim($data['familia']) == '') {
-            $errors[] = "Вы не ввели фамилию";
-        }
-
-        if (!preg_match("/(^(?!\+.*\(.*\).*\-\-.*$)(?!\+.*\(.*\).*\-$)(\+[0-9]{1,3}\([0-9]{1,3}\)[0-9]{1}([-0-9]{0,8})?([0-9]{0,1})?)$)|(^[0-9]{1,4}$)/", "$phone")) {
-            $errors[] = "Вы непраильно ввели номер телефона, пример: +7(915)5473712";
-        }
-        if (trim($data['address']) == '') {
-            $errors[] = "Вы не ввели адрес";
-        }
-
-        if (empty($errors)) {
-            $users = do_query("UPDATE `users` SET `address` = '".$data['address']."' `surname` ='" . $data['familia'] . "', `phone` = '" . $phone . "', `name` = '" . $data['name'] . "' WHERE `email` = '" . $_SESSION['email'] . "'");
-            if ($users) {
-                echo '<div class="go">Данные обновлены</div>';
+        if (isset($data['name']) or isset($data['familia']) or isset($data['phone']) or isset($data['address'])){
+            $phone = $data['phone'];
+            if (trim($data['name']) == '') {
+                $errors[] = "Вы не ввели имя";
             }
-        } else {
-            echo '<div class="errors">' . array_shift($errors) . '</div>';
+            if (trim($data['familia']) == '') {
+                $errors[] = "Вы не ввели фамилию";
+            }
+
+            if (!preg_match("/(^(?!\+.*\(.*\).*\-\-.*$)(?!\+.*\(.*\).*\-$)(\+[0-9]{1,3}\([0-9]{1,3}\)[0-9]{1}([-0-9]{0,8})?([0-9]{0,1})?)$)|(^[0-9]{1,4}$)/", "$phone")) {
+                $errors[] = "Вы непраильно ввели номер телефона, пример: +7(915)5473712";
+            }
+            if (trim($data['address']) == '') {
+                $errors[] = "Вы не ввели адрес";
+            }
+
+            if (empty($errors)) {
+                $users = do_query("UPDATE `users` SET `address` = '".$data['address']."' `surname` ='" . $data['familia'] . "', `phone` = '" . $phone . "', `name` = '" . $data['name'] . "' WHERE `email` = '" . $_SESSION['email'] . "'");
+                if ($users) {
+                    echo '<div class="go">Данные обновлены</div>';
+                }
+            } else {
+                echo '<div class="errors">' . array_shift($errors) . '</div>';
+            }
+        }else{
+            echo 'iuytytk/';
         }
     }
     return;
