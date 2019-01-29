@@ -81,18 +81,15 @@
                             </div>
                         </div>
                         <div class="col-12 menu-header">
-
                             <div class="menu">
                                 <input type="checkbox" id="checkbox">
                                 <label class="burger" for="checkbox">
                                     <div class="burger_open"></div>
                                 </label>
-
                                 <?php
                                 if (isset($_SESSION['id']) or isset($_SESSION['token'])) {
                                     echo '<div class="nav">';
                                     echo '<nav class=\'float-left\'>';
-
                                     get_users_menu();
                                     echo '</nav>';
                                     echo '<nav class=\'float-left\'>';
@@ -100,18 +97,12 @@
                                     echo '</nav>';
                                     echo '</div>';
                                 } else {
-
                                     echo '<nav class="nav-one">';
-
                                     get_menu();
                                     echo '</nav>';
                                 }
-
                                 ?>
-
-
                             </div>
-
                         </div>
                     </div>
                 </div>

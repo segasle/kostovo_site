@@ -220,11 +220,8 @@ function users_authorization()
 function auto_users()
 {
     if (isset($_SESSION['id']) or isset($_SESSION['token'])) {
-        if (!empty( $_SESSION['name']))                                           {
             echo '<button class="btn btn-primary modal-open float-left">Привет, ' . $_SESSION['name'] . '!</button><form method="post" class="float-left"><button type="submit" class="btn btn-primary modal-open" name="input">Выйти</button></form>';
-        }else{
-            echo '<button class="btn btn-primary modal-open float-left">Привет, ' . $_SESSION['last_name'] . '!</button><form method="post" class="float-left"><button type="submit" class="btn btn-primary modal-open" name="input">Выйти</button></form>';
-        }
+
 
         if (isset($_POST['input'])) {
             unset($_SESSION['id'] );
@@ -611,12 +608,11 @@ function vk_authorization(){
     if (empty($_SESSION['token'])){
         echo ' <a href="https://oauth.vk.com/authorize?client_id='.$id.'&display=page&redirect_uri='.$redirect_uri.'&scope='.$scope.'&response_type=code&v=5.92" class="fa fa-vk fa-2x" aria-hidden="true"></a>';
         if (!empty($_GET['code'])){
-            $code =                         $_GET['code'];
+            $code = $_GET['code'];
             $content = file_get_contents("https://oauth.vk.com/access_token?client_id=$id&client_secret=$appkey&redirect_uri=$redirect_uri&code=$code");
             $token2 = json_decode($content, true);
-            //print_r($token2);
             $_SESSION['token'] = $token2['access_token'];
-            $_SESSION['emailVk'] = $token2['email'];
+            $_SESSION['email'] = $token2['email'];
             $_SESSION['user_id'] = $token2['user_id'];
 
             $vkid = $_SESSION['user_id'];
@@ -626,19 +622,17 @@ function vk_authorization(){
                 $user = json_decode($use, true);
 
                 foreach ($user['response'] as $item){
-                    $_SESSION['first_name'] = $item['first_name'];
-                    $_SESSION['last_name'] = $item['last_name'];
-                    $_SESSION['photo_200'] = $item['photo_max'];
+                    $_SESSION['name'] = $item['first_name'];
+                    $_SESSION['surname'] = $item['last_name'];
+                    $_SESSION['photo'] = $item['photo_max'];
                 }
 
-                $result = do_query("SELECT COUNT(*) as count FROM users WHERE `email` = '{$_SESSION['emailVk']}'");
+                $result = do_query("SELECT COUNT(*) as count FROM users WHERE `email` = '{$_SESSION['email']}'");
                 $result = $result->fetch_object();
                 if (empty($result->count)){
-                    $wer = do_query("INSERT INTO `users` (`email`,`name`, `surname`,  `photo`, `users-id`, `token`) VALUES ('{$_SESSION['emailVk']}','{$_SESSION['first_name']}','{$_SESSION['last_name']}', '{$_SESSION['photo_200']}', '{$_SESSION['user_id']}', '{$_SESSION['token']}')");
-                    header("location: ?page=main");
+                    $wer = do_query("INSERT INTO `users` (`email`,`name`, `surname`,  `photo`, `users-id`, `token`) VALUES ('{$_SESSION['email']}','{$_SESSION['name']}','{$_SESSION['surname']}', '{$_SESSION['photo']}', '{$_SESSION['user_id']}', '{$_SESSION['token']}')");
                 }else{
                     $users = do_query("UPDATE `users` SET `token` = '".$_SESSION['token']."' WHERE `email` = '" . $_SESSION['email'] . "'");
-                    header("location: ?page=main");
                 }
             }
 
