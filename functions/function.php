@@ -202,6 +202,10 @@ function users_authorization()
         $resilt = mysqli_fetch_assoc(do_query("SELECT * FROM `users` WHERE `email` ='" . $email . "'"));
         if ($resilt) {
             if (password_verify($password, $resilt['password'])) {
+//                setcookie('id', $data['email'], time()+3600*24*30*12, '/');
+//                setcookie('password', $data['password'], time()+3600*24*30*12, '/');
+//                header('location: ' .$_SERVER['HTTP_REFERER']);
+
                 $_SESSION['outh'] = true;
                 $_SESSION['id'] = $resilt['id'];
                 $_SESSION['email'] = $resilt['email'];
