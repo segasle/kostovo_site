@@ -304,6 +304,12 @@ function users_data()
         $errors = array();
         if (isset($data['name']) or isset($data['familia']) or isset($data['phone']) or isset($data['address'])) {
             $phone = $data['phone'];
+            if (!empty($_SESSION['name'])) {
+                $data['name'] = $_SESSION['name'];
+            }
+            if (!empty($_SESSION['surname'])) {
+                $data['familia'] = $_SESSION['surname'];
+            }
             if (trim($data['name']) == '') {
                 $errors[] = "Вы не ввели имя";
             }
@@ -610,7 +616,6 @@ function link_authorization()
     global $scope;
     global $redirect_uri;
     global $id;
-
     if (empty($_SESSION['token'])) {
         echo ' <a href="https://oauth.vk.com/authorize?client_id=' . $id . '&display=page&redirect_uri=' . $redirect_uri . '&scope=' . $scope . '&response_type=code&v=5.92" class="fa fa-vk fa-2x" aria-hidden="true"></a>';
     }
@@ -619,12 +624,10 @@ function link_authorization()
 
 function vk_authorization()
 {
-    global $scope;
     global $users;
     global $redirect_uri;
     global $id;
     global $appkey;
-
     if (!empty($_GET['code'])) {
         $code = $_GET['code'];
         $content = file_get_contents("https://oauth.vk.com/access_token?client_id=$id&client_secret=$appkey&redirect_uri=$redirect_uri&code=$code");
@@ -650,7 +653,8 @@ function vk_authorization()
                 $wer = do_query("INSERT INTO `users` (`email`,`name`, `surname`,  `photo`, `users-id`, `token`) VALUES ('{$_SESSION['email']}','{$_SESSION['name']}','{$_SESSION['surname']}', '{$_SESSION['photo']}', '{$_SESSION['user_id']}', '{$_SESSION['token']}')");
             } else {
                 $users = do_query("UPDATE `users` SET `token` = '" . $_SESSION['token'] . "' WHERE `email` = '" . $_SESSION['email'] . "'");
-            }   header('location: /kostovo_site');
+            }
+            header('location: /kostovo_site');
             die();
         }
 
