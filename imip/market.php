@@ -35,7 +35,6 @@
                 $img = '<div class="post_no-img"><p>Нет фото</p></div>';
             }
             ?>
-
             <div class="col-12">
                 <div class="post">
                     <div class="row">
@@ -43,7 +42,6 @@
                             <?php echo $img; ?>
                         </div>
                         <div class="col-xs-12 col-md-10">
-
                             <div class="post_title">
                                 <p><?php echo $title; ?></p>
                             </div>
@@ -52,16 +50,11 @@
                             <div class="post_data"><p><?php echo $data->format('d:m:Y H:m:s'); ?></p></div>
                         </div>
                     </div>
-
                 </div>
             </div>
-
             <?php
         }
-
-
     }
-
     ?>
 </div>
 
