@@ -220,11 +220,11 @@ function users_authorization()
 function auto_users()
 {
     if (isset($_SESSION['id']) or isset($_SESSION['token'])) {
-            echo '<button class="btn btn-primary modal-open float-left">Привет, ' . $_SESSION['name'] . '!</button><form method="post" class="float-left"><button type="submit" class="btn btn-primary modal-open" name="input">Выйти</button></form>';
+        echo '<button class="btn btn-primary modal-open float-left">Привет, ' . $_SESSION['name'] . '!</button><form method="post" class="float-left"><button type="submit" class="btn btn-primary modal-open" name="input">Выйти</button></form>';
 
 
         if (isset($_POST['input'])) {
-            unset($_SESSION['id'] );
+            unset($_SESSION['id']);
             unset($_SESSION['token']);
             header('location: ?page=main');
         }
@@ -302,7 +302,7 @@ function users_data()
             }
         }
         $errors = array();
-        if (isset($data['name']) or isset($data['familia']) or isset($data['phone']) or isset($data['address'])){
+        if (isset($data['name']) or isset($data['familia']) or isset($data['phone']) or isset($data['address'])) {
             $phone = $data['phone'];
             if (trim($data['name']) == '') {
                 $errors[] = "Вы не ввели имя";
@@ -319,14 +319,14 @@ function users_data()
             }
 
             if (empty($errors)) {
-                $users = do_query("UPDATE `users` SET `address` = '".$data['address']."' `surname` ='" . $data['familia'] . "', `phone` = '" . $phone . "', `name` = '" . $data['name'] . "' WHERE `email` = '" . $_SESSION['email'] . "'");
+                $users = do_query("UPDATE `users` SET `address` = '" . $data['address'] . "' `surname` ='" . $data['familia'] . "', `phone` = '" . $phone . "', `name` = '" . $data['name'] . "' WHERE `email` = '" . $_SESSION['email'] . "'");
                 if ($users) {
                     echo '<div class="go">Данные обновлены</div>';
                 }
             } else {
                 echo '<div class="errors">' . array_shift($errors) . '</div>';
             }
-        }else{
+        } else {
             echo 'iuytytk/';
         }
     }
@@ -492,7 +492,7 @@ function add_ads()
             $errors[] = 'Мало символов';
         }
         if (empty($errors)) {
-            if (!empty($data['file'])){
+            if (!empty($data['file'])) {
                 if (isset($_FILES['file'])) {
                     $update = 'ads_img/';
                     $file = $_FILES['file']['name'];
@@ -522,8 +522,7 @@ function add_ads()
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 $result = do_query("SELECT COUNT(*) as count FROM `ads`, `users` WHERE `title` = '{$data['title']}' AND `email` = '" . $_SESSION['email'] . "'");
                 $result = $result->fetch_object();
                 if (empty($result->count)) {
@@ -541,7 +540,8 @@ function add_ads()
     }
     return;
 }
-function search ()
+
+function search()
 {
     if (isset($_POST['submit'])) {
         if (!empty($_POST['search'])) {
@@ -604,46 +604,57 @@ function search ()
     }
     return;
 }
-function vk_authorization(){
+
+function link_authorization()
+{
+    global $scope;
+    global $redirect_uri;
+    global $id;
+
+    if (empty($_SESSION['token'])) {
+        echo ' <a href="https://oauth.vk.com/authorize?client_id=' . $id . '&display=page&redirect_uri=' . $redirect_uri . '&scope=' . $scope . '&response_type=code&v=5.92" class="fa fa-vk fa-2x" aria-hidden="true"></a>';
+    }
+    return;
+}
+
+function vk_authorization()
+{
     global $scope;
     global $users;
     global $redirect_uri;
     global $id;
     global $appkey;
-    if (empty($_SESSION['token'])){
-        echo ' <a href="https://oauth.vk.com/authorize?client_id='.$id.'&display=page&redirect_uri='.$redirect_uri.'&scope='.$scope.'&response_type=code&v=5.92" class="fa fa-vk fa-2x" aria-hidden="true"></a>';
-        if (!empty($_GET['code'])){
-            $code = $_GET['code'];
-            $content = file_get_contents("https://oauth.vk.com/access_token?client_id=$id&client_secret=$appkey&redirect_uri=$redirect_uri&code=$code");
-            $token2 = json_decode($content, true);
-            $_SESSION['token'] = $token2['access_token'];
-            $_SESSION['email'] = $token2['email'];
-            $_SESSION['user_id'] = $token2['user_id'];
 
-            $vkid = $_SESSION['user_id'];
-            $token = $_SESSION['token'];
-            if (isset($_SESSION['token'])){
-                $use = file_get_contents("https://api.vk.com/method/users.get?user_ids=$vkid&fields=$users&access_token=$token&v=5.92");
-                $user = json_decode($use, true);
+    if (!empty($_GET['code'])) {
+        $code = $_GET['code'];
+        $content = file_get_contents("https://oauth.vk.com/access_token?client_id=$id&client_secret=$appkey&redirect_uri=$redirect_uri&code=$code");
+        $token2 = json_decode($content, true);
+        $_SESSION['token'] = $token2['access_token'];
+        $_SESSION['email'] = $token2['email'];
+        $_SESSION['user_id'] = $token2['user_id'];
+        $vkid = $_SESSION['user_id'];
+        $token = $_SESSION['token'];
+        if (isset($_SESSION['token'])) {
+            $use = file_get_contents("https://api.vk.com/method/users.get?user_ids=$vkid&fields=$users&access_token=$token&v=5.92");
+            $user = json_decode($use, true);
 
-                foreach ($user['response'] as $item){
-                    $_SESSION['name'] = $item['first_name'];
-                    $_SESSION['surname'] = $item['last_name'];
-                    $_SESSION['photo'] = $item['photo_max'];
-                }
-
-                $result = do_query("SELECT COUNT(*) as count FROM users WHERE `email` = '{$_SESSION['email']}'");
-                $result = $result->fetch_object();
-                if (empty($result->count)){
-                    $wer = do_query("INSERT INTO `users` (`email`,`name`, `surname`,  `photo`, `users-id`, `token`) VALUES ('{$_SESSION['email']}','{$_SESSION['name']}','{$_SESSION['surname']}', '{$_SESSION['photo']}', '{$_SESSION['user_id']}', '{$_SESSION['token']}')");
-                }else{
-                    $users = do_query("UPDATE `users` SET `token` = '".$_SESSION['token']."' WHERE `email` = '" . $_SESSION['email'] . "'");
-                }
+            foreach ($user['response'] as $item) {
+                $_SESSION['name'] = $item['first_name'];
+                $_SESSION['surname'] = $item['last_name'];
+                $_SESSION['photo'] = $item['photo_max'];
             }
 
+            $result = do_query("SELECT COUNT(*) as count FROM users WHERE `email` = '{$_SESSION['email']}'");
+            $result = $result->fetch_object();
+            if (empty($result->count)) {
+                $wer = do_query("INSERT INTO `users` (`email`,`name`, `surname`,  `photo`, `users-id`, `token`) VALUES ('{$_SESSION['email']}','{$_SESSION['name']}','{$_SESSION['surname']}', '{$_SESSION['photo']}', '{$_SESSION['user_id']}', '{$_SESSION['token']}')");
+            } else {
+                $users = do_query("UPDATE `users` SET `token` = '" . $_SESSION['token'] . "' WHERE `email` = '" . $_SESSION['email'] . "'");
+            }   header('location: /kostovo_site');
+            die();
         }
-    }
 
+    }
 
 
     /*<div class="block-icons">

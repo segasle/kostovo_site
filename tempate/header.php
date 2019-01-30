@@ -69,7 +69,7 @@
                                             </form>
                                             <?php link_reg(); ?>
                                             <p class="">Или можно авторизоваться с помощью соц сети</p>
-                                            <?php vk_authorization();?>
+                                            <?php link_authorization();?>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
