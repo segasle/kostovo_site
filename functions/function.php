@@ -100,8 +100,9 @@ function get_soclal()
 
 function get_post_vk()
 {
+    global $token;
     $out = '<div class="container"><div class="row">';
-    $content2 = file_get_contents("https://api.vk.com/method/wall.get?owner_id=-70567817&count=100&extended=1&filter=all&access_token=6b3dcb09a02d5b169df16faeb42f9c192a94b804697aaf1b1cc17bc9289c46893523fe04436fa7731d46b&v=5.60");
+    $content2 = file_get_contents("https://api.vk.com/method/wall.get?owner_id=-70567817&count=100&extended=1&filter=all&$token&v=5.60");
     $elements2 = json_decode($content2, true);
     if (!empty($_GET['page'])) {
         $page = $_GET['page'];
