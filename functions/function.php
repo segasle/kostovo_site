@@ -100,7 +100,7 @@ function get_soclal()
 
 function get_post_vk()
 {
-    $out = '<div class="row">';
+    $out = '<div class="container"><div class="row">';
     $content2 = file_get_contents("https://api.vk.com/method/wall.get?owner_id=-70567817&count=100&extended=1&filter=all&access_token=6b3dcb09a02d5b169df16faeb42f9c192a94b804697aaf1b1cc17bc9289c46893523fe04436fa7731d46b&v=5.60");
     $elements2 = json_decode($content2, true);
     if (!empty($_GET['page'])) {
@@ -114,7 +114,10 @@ function get_post_vk()
     foreach ($elements2 as $value) {
         foreach ($value['profiles'] as $profile) {
             $fio = $profile['first_name'] . ' ' . $profile['last_name'];
-            $link = $profile['screen_name'];
+            if (isset($profile['screen_name'])){
+                $link = 'https://vk.com/'.$profile['screen_name'];
+            }
+
         }
         foreach ($value['items'] as $item) {
             $link_post = $item['from_id'] . '_' . $item['id'];
@@ -131,10 +134,10 @@ function get_post_vk()
                     }
                 }
             }
-            $out .= '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><div class="post"><p class="post_text">' . $text . '</p>' . '<img src="' . $img . '" class="post_img">' . '<a class="post_link" href="https://vk.com/' . $link . '" target="_blank">' . $fio . '</a>' . '<p class="post_data">' . $data . '</p><a href="https://vk.com/wall' . $link_post . '" target="_blank">Ссылка на пост</a></div></div>';
+            $out .= '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="post"><p class="post_text">' . $text . '</p>' . '<img src="' . $img . '" class="post_img">' . '<a class="post_link" href="' . @$link . '" target="_blank">' . $fio . '</a>' . '<p class="post_data">' . $data . '</p><a href="https://vk.com/wall' . $link_post . '" target="_blank">Ссылка на пост</a></div></div>';
         }
     }
-    $out .= '</div>';
+    $out .= '</div></div>';
 
     echo $out;
     return;
@@ -276,7 +279,6 @@ function users_data()
 {
     $data = $_POST;
     if (isset($data['submit'])) {
-
         if (isset($_FILES['file'])) {
             $update = 'update/';
             $file = $_FILES['file']['name'];
@@ -302,7 +304,7 @@ function users_data()
             }
         }
         $errors = array();
-        if (isset($data['name']) or isset($data['familia']) or isset($data['phone']) or isset($data['address'])) {
+      //  if (isset($data['name']) or isset($data['familia']) or isset($data['phone']) or isset($data['address'])) {
             $phone = $data['phone'];
             if (!empty($_SESSION['name'])) {
                 $data['name'] = $_SESSION['name'];
@@ -310,6 +312,7 @@ function users_data()
             if (!empty($_SESSION['surname'])) {
                 $data['familia'] = $_SESSION['surname'];
             }
+
             if (trim($data['name']) == '') {
                 $errors[] = "Вы не ввели имя";
             }
@@ -332,9 +335,7 @@ function users_data()
             } else {
                 echo '<div class="errors">' . array_shift($errors) . '</div>';
             }
-        } else {
-            echo 'iuytytk/';
-        }
+        //}
     }
     return;
 }
