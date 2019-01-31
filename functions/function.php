@@ -309,14 +309,15 @@ function users_data()
             }
         }
         $errors = array();
-      //  if (isset($data['name']) or isset($data['familia']) or isset($data['phone']) or isset($data['address'])) {
-            $phone = $data['phone'];
-            if (!empty($_SESSION['name'])) {
-                $data['name'] = $_SESSION['name'];
-            }
-            if (!empty($_SESSION['surname'])) {
-                $data['familia'] = $_SESSION['surname'];
-            }
+        $phone = $data['phone'];
+        if (!empty($_SESSION['name'])) {
+            $data['name'] = $_SESSION['name'];
+        }
+        if (!empty($_SESSION['surname'])) {
+            $data['familia'] = $_SESSION['surname'];
+        }
+       if (isset($data['name']) or isset($data['familia']) or isset($data['phone']) or isset($data['address'])) {
+
 
             if (trim($data['name']) == '') {
                 $errors[] = "Вы не ввели имя";
@@ -340,7 +341,7 @@ function users_data()
             } else {
                 echo '<div class="errors">' . array_shift($errors) . '</div>';
             }
-        //}
+        }
     }
     return;
 }
@@ -504,6 +505,9 @@ function add_ads()
             $errors[] = 'Мало символов';
         }
         if (empty($errors)) {
+            if (isset($_SESSION['id'])){
+                $id = $_SESSION['id'];
+            }
             if (!empty($data['file'])) {
                 if (isset($_FILES['file'])) {
                     $update = 'ads_img/';
@@ -518,10 +522,10 @@ function add_ads()
                                 $allow = array('jpeg', 'jpg', 'png');
                                 if (in_array($ext, $allow)) {
                                     if (move_uploaded_file($_FILES['file']['tmp_name'], $update_file)) {
-                                        $result = do_query("SELECT COUNT(*) as count FROM `ads`, `users` WHERE `title` = '{$data['title']}' AND `email` = '" . $_SESSION['email'] . "'");
+                                        $result = do_query("SELECT COUNT(*) as count FROM `ads` WHERE `title` = '{$data['title']}' AND `author_id` = '{$_SESSION['id']}'");
                                         $result = $result->fetch_object();
                                         if (empty($result->count)) {
-                                            $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`, `photo`) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}','{$file}')");
+                                            $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`, `photo`, `author_id` ) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}','{$file}','{$id}')");
                                             if (!empty($wer)) {
                                                 echo '<div class="go">Успешно подано</div>';
                                             } else {
@@ -535,10 +539,10 @@ function add_ads()
                     }
                 }
             } else {
-                $result = do_query("SELECT COUNT(*) as count FROM `ads`, `users` WHERE `title` = '{$data['title']}' AND `email` = '" . $_SESSION['email'] . "'");
+                $result = do_query("SELECT COUNT(*) as count FROM `ads` WHERE `title` = '{$data['title']}'");
                 $result = $result->fetch_object();
                 if (empty($result->count)) {
-                    $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}')");
+                    $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`, `author_id` ) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}','{$id}')");
                     if (!empty($wer)) {
                         echo '<div class="go">Успешно подано</div>';
                     } else {
