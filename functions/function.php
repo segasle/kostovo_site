@@ -486,19 +486,19 @@ function add_ads()
     if (isset($data['submit'])) {
         $price = $data['price'];
         $errors = array();
-        if ($data['title'] == '') {
+        if (empty($data['title'])) {
             $errors[] = 'Введите пожалуйста заголовок';
         }
         if ($data['title'] > 5) {
             $errors[] = 'Короткий заголовок';
         }
-        if ($price == '') {
+        if (empty($price)) {
             $errors[] = 'Укажите пожалуйста цену';
         }
         if (!preg_match("/^(?!0.*$)([0-9]{1,3}(,[0-9]{3})?(,[0-9]{3})?(\.[0-9]{2})?)$/", "$price")) {
             $errors[] = 'Должны быть только цифры';
         }
-        if ($data['text'] == '') {
+        if (empty($data['text'])) {
             $errors[] = 'Введите текст о вещи/услуги';
         }
         if ($data['text'] > 10) {
