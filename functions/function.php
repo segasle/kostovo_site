@@ -522,10 +522,10 @@ function add_ads()
                                 $allow = array('jpeg', 'jpg', 'png');
                                 if (in_array($ext, $allow)) {
                                     if (move_uploaded_file($_FILES['file']['tmp_name'], $update_file)) {
-                                        $result = do_query("SELECT COUNT(*) as count FROM `ads` WHERE `title` = '{$data['title']}' AND `author_id` = '{$_SESSION['id']}'");
+                                        $result = do_query("SELECT COUNT(*) as count FROM `ads` WHERE `title` = '{$data['title']}' AND `author_id` = '{$id}'");
                                         $result = $result->fetch_object();
                                         if (empty($result->count)) {
-                                            $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`, `photo`, `author_id` ) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}','{$file}','{$id}')");
+                                            $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`, `photo`, `author_id` ) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}','{$file}','".@$id."')");
                                             if (!empty($wer)) {
                                                 echo '<div class="go">Успешно подано</div>';
                                             } else {
@@ -539,10 +539,10 @@ function add_ads()
                     }
                 }
             } else {
-                $result = do_query("SELECT COUNT(*) as count FROM `ads` WHERE `title` = '{$data['title']}'");
+                $result = do_query("SELECT COUNT(*) as count FROM `ads` WHERE `title` = '{$data['title']}'AND `author_id` = '{$id}'");
                 $result = $result->fetch_object();
                 if (empty($result->count)) {
-                    $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`, `author_id` ) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}','{$id}')");
+                    $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`, `author_id` ) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}','".@$id."')");
                     if (!empty($wer)) {
                         echo '<div class="go">Успешно подано</div>';
                     } else {
