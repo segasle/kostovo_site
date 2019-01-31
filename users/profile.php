@@ -30,13 +30,13 @@ if (!empty($_SESSION['photo'] or $_SESSION['phone'] or $_SESSION['surname'] or $
     if (empty($_SESSION['name'])) {
         echo '<div class="form-group">
         <label for="exampleInputName">Имя<label>
-        <input type="text" class="form-control" id="exampleInputName" placeholder="Имя" name="name">
+        <input type="text" class="form-control" id="exampleInputName" placeholder="Имя" name="name" value="'.$_SESSION['name'].'">
     </div>';
     }
     if (empty($_SESSION['surname'])) {
         echo '<div class="form-group">
         <label for="exampleInputFamilia">Фамилия</label>
-        <input type="text" class="form-control" id="exampleInputFamilia" placeholder="Фамилия" name="familia">
+        <input type="text" class="form-control" id="exampleInputFamilia" placeholder="Фамилия" name="familia" value="'.$_SESSION['surname'].'">
     </div>';
     }
 
