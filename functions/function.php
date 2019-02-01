@@ -554,7 +554,49 @@ function add_ads()
     }
     return;
 }
+function post_tempate($sql){
+    while ($us = mysqli_fetch_assoc($sql)) {
+        $title = $us['title'];
+        $text = $us['text'];
+        $price = $us['price'];
+        $data = new DateTime($us['date']);
+        $name = $us['name'];
+        if (!empty($us['photo_ads'])) {
+            $img = '<img src="ads_img/' . $us['photo_ads'] . '" class="post_img">';
+        } else {
+            $img = '<div class="post_no-img"><p>Нет фото</p></div>';
+        }
+        if (!empty($us['users-id'])) {
+            $link = '<a href="https://vk.com/id' . $us['users-id'] . '">Ссылка на профиль</a>';
+        } else {
+            $link = '<a href="tel:' . $us['phone'] . '">' . $us['phone'] . '</a>';
+        }
+        ?>
+        <div class="col-12">
+            <div class="post">
+                <div class="row">
+                    <div class="col-xs-12 col-md-2">
+                        <?php echo $img; ?>
+                    </div>
+                    <div class="col-xs-12 col-md-10">
+                        <div class="post_title">
+                            <p><?php echo $title; ?></p>
+                        </div>
+                        <div class="post_text"><p><?php echo $text; ?></p></div>
+                        <div class="post_price"><p class="fa fa-rub"><?php echo $price; ?></p></div>
+                        <div class="post_info">
+                            <p>Продавец:<?php echo ' ' . $name . ' '.$link; ?></p>
+                        </div>
 
+                        <div class="post_data"><p><?php echo $data->format('d:m:Y H:m:s'); ?></p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+    }
+    return true;
+}
 function search()
 {
     if (isset($_POST['submit'])) {
@@ -581,29 +623,9 @@ function search()
                     }
                 }
                 $implode = implode("", $res);
-                $sql = do_query("SELECT * FROM ads WHERE $implode");
+                $sql = do_query("SELECT * FROM `ads`, `users` WHERE users.email = ads.author_id AND $implode");
                 if (mysqli_num_rows($sql) > 0) {
-                    while ($us = mysqli_fetch_assoc($sql)) {
-                        $title = $us['title'];
-                        $text = $us['text'];
-                        $price = $us['price'];
-                        $data = new DateTime($us['date']);
-                        if (!empty($us['photo'])) {
-                            $img = '<img src="ads_img/' . $us['photo'] . '" class="post_img">';
-                        } else {
-                            $img = '<div class="post_no-img"><p>Нет фото</p></div>';
-                        }
-                        echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-            <div class="post">' . $img . '
-                <div class="post_title">
-                    <p>' . $title . '</p>
-                </div>
-                <div class="post_text"><p>' . $text . '</p></div>
-                <div class="post_price"><p class="fa fa-rub">' . $price . '</p></div>
-                <div class="post_data"><p>' . $data->format('d:m:Y H:m:s') . '</p></div>
-            </div>
-        </div>';
-                    }
+                    post_tempate($sql);
                 } else {
                     echo '<div class="errors">По вашему запросу ничего не найдено.</div>';
                 }

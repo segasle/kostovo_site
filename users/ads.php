@@ -1,6 +1,6 @@
 <h1 class="text-center">Мои объявления</h1>
 <?php
-$user = do_query("SELECT * FROM `ads` WHERE ads.author_id = '{$_SESSION['email']}'");
+$user = do_query("SELECT * FROM `ads` WHERE author_id = '{$_SESSION['email']}'");
 while ($us = mysqli_fetch_assoc($user)) {
     $title = $us['title'];
     $text = $us['text'];
