@@ -115,8 +115,8 @@ function get_post_vk()
     foreach ($elements2 as $value) {
         foreach ($value['profiles'] as $profile) {
             $fio = $profile['first_name'] . ' ' . $profile['last_name'];
-            if (isset($profile['screen_name'])){
-                $link = 'https://vk.com/'.$profile['screen_name'];
+            if (isset($profile['screen_name'])) {
+                $link = 'https://vk.com/' . $profile['screen_name'];
             }
 
         }
@@ -316,7 +316,7 @@ function users_data()
         if (!empty($_SESSION['surname'])) {
             $data['familia'] = $_SESSION['surname'];
         }
-       if (isset($data['name']) or isset($data['familia']) or isset($data['phone']) or isset($data['address'])) {
+        if (isset($data['name']) or isset($data['familia']) or isset($data['phone']) or isset($data['address'])) {
 
 
             if (trim($data['name']) == '') {
@@ -505,10 +505,9 @@ function add_ads()
             $errors[] = 'Мало символов';
         }
         if (empty($errors)) {
-            if (isset($_SESSION['id'])){
+            if (isset($_SESSION['id'])) {
                 $id = $_SESSION['id'];
-            }
-            else{
+            } else {
                 $id = $_SESSION['user_id'];
             }
             if (!empty($data['file'])) {
@@ -542,21 +541,16 @@ function add_ads()
                     }
                 }
             } else {
-              //  $res = do_query("SELECT * FROM `ads` JOIN users ON users.id = ads.author_id WHERE ads.author_id = '".$_SESSION['id']."'");
-                //if (!empty($res)){
-                    echo                      $id;
-                    $result = do_query("SELECT COUNT(*) as count FROM `ads` WHERE `title` = '{$data['title']}'");
-                    $result = $result->fetch_object();
-                    if (empty($result->count)) {
-                        $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`, `author_id`) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}', '{$id}')");
-                        if (!empty($wer)) {
-                            echo '<div class="go">Успешно подано</div>';
-                        } else {
-                            echo '<div class="errors">Такая запись уже есть</div>';
-                        }
+                $result = do_query("SELECT COUNT(*) as count FROM `ads` WHERE `title` = '{$data['title']}'");
+                $result = $result->fetch_object();
+                if (empty($result->count)) {
+                    $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`, `author_id`) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}', '{$id}')");
+                    if (!empty($wer)) {
+                        echo '<div class="go">Успешно подано</div>';
+                    } else {
+                        echo '<div class="errors">Такая запись уже есть</div>';
                     }
-
-              //  }
+                }
 
             }
         } else {
@@ -654,7 +648,7 @@ function vk_authorization()
         $_SESSION['token'] = $token2['access_token'];
         $_SESSION['email'] = $token2['email'];
         $_SESSION['user_id'] = $token2['user_id'];
-       // $_SESSION['id'] = $token2['id'];
+        // $_SESSION['id'] = $token2['id'];
         $vkid = $_SESSION['user_id'];
         $token = $_SESSION['token'];
         if (isset($_SESSION['token'])) {
