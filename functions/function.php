@@ -554,7 +554,9 @@ function add_ads()
     }
     return;
 }
-function post_tempate($sql){
+
+function post_tempate($sql)
+{
     while ($us = mysqli_fetch_assoc($sql)) {
         $title = $us['title'];
         $text = $us['text'];
@@ -579,13 +581,18 @@ function post_tempate($sql){
                         <?php echo $img; ?>
                     </div>
                     <div class="col-xs-12 col-md-10">
+                        <div class="post_favourites">
+                            <form action="" method="post">
+                                <button type="submit"  name="star"><i class="fa fa-star fa-2x" aria-hidden="true"></i></button>
+                            </form>
+                        </div>
                         <div class="post_title">
                             <p><?php echo $title; ?></p>
                         </div>
                         <div class="post_text"><p><?php echo $text; ?></p></div>
                         <div class="post_price"><p class="fa fa-rub"><?php echo $price; ?></p></div>
                         <div class="post_info">
-                            <p>Продавец:<?php echo ' ' . $name . ' '.$link; ?></p>
+                            <p>Продавец:<?php echo ' ' . $name . ' ' . $link; ?></p>
                         </div>
 
                         <div class="post_data"><p><?php echo $data->format('d:m:Y H:m:s'); ?></p></div>
@@ -597,6 +604,7 @@ function post_tempate($sql){
     }
     return true;
 }
+
 function search()
 {
     if (isset($_POST['submit'])) {

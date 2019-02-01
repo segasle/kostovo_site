@@ -405,10 +405,7 @@ body {
   margin: 5px 0;
   padding: 10px;
   width: 100%;
-  /*
-      height: 300px;
-      cursor: auto;
-      overflow: auto;*/
+  position: relative;
 }
 .container-fluid .contain .post_img,
 .container-fluid .contain .post_no-img {
@@ -417,6 +414,17 @@ body {
 }
 .container-fluid .contain .post_text {
   font-weight: 300;
+}
+.container-fluid .contain .post_favourites {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.container-fluid .contain .post_favourites .fa-star {
+  border: none;
+}
+.container-fluid .contain .post_favourites .fa-star:hover {
+  color: #ffa210;
 }
 .container-fluid .contain .post_title {
   margin: 5px 0;
