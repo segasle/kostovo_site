@@ -508,6 +508,9 @@ function add_ads()
             if (isset($_SESSION['id'])){
                 $id = $_SESSION['id'];
             }
+            else{
+                $id = $_SESSION['user_id'];
+            }
             if (!empty($data['file'])) {
                 if (isset($_FILES['file'])) {
                     $update = 'ads_img/';
@@ -522,10 +525,10 @@ function add_ads()
                                 $allow = array('jpeg', 'jpg', 'png');
                                 if (in_array($ext, $allow)) {
                                     if (move_uploaded_file($_FILES['file']['tmp_name'], $update_file)) {
-                                        $result = do_query("SELECT COUNT(*) as count FROM `ads` WHERE `title` = '{$data['title']}' AND `author_id` = '{$id}'");
+                                        $result = do_query("SELECT COUNT(*) as count FROM `ads` WHERE `title` = '{$data['title']}'");
                                         $result = $result->fetch_object();
                                         if (empty($result->count)) {
-                                            $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`, `photo`, `author_id` ) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}','{$file}','".@$id."')");
+                                            $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`, `photo`, `author_id` ) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}','{$file}','{$id}'')");
                                             if (!empty($wer)) {
                                                 echo '<div class="go">Успешно подано</div>';
                                             } else {
@@ -539,16 +542,22 @@ function add_ads()
                     }
                 }
             } else {
-                $result = do_query("SELECT COUNT(*) as count FROM `ads` WHERE `title` = '{$data['title']}'AND `author_id` = '{$id}'");
-                $result = $result->fetch_object();
-                if (empty($result->count)) {
-                    $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`, `author_id` ) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}','".@$id."')");
-                    if (!empty($wer)) {
-                        echo '<div class="go">Успешно подано</div>';
-                    } else {
-                        echo '<div class="errors">Такая запись уже есть</div>';
+              //  $res = do_query("SELECT * FROM `ads` JOIN users ON users.id = ads.author_id WHERE ads.author_id = '".$_SESSION['id']."'");
+                //if (!empty($res)){
+                    echo                      $id;
+                    $result = do_query("SELECT COUNT(*) as count FROM `ads` WHERE `title` = '{$data['title']}'");
+                    $result = $result->fetch_object();
+                    if (empty($result->count)) {
+                        $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`, `author_id`) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}', '{$id}')");
+                        if (!empty($wer)) {
+                            echo '<div class="go">Успешно подано</div>';
+                        } else {
+                            echo '<div class="errors">Такая запись уже есть</div>';
+                        }
                     }
-                }
+
+              //  }
+
             }
         } else {
             echo '<div class="errors">' . array_shift($errors) . '</div>';
@@ -645,22 +654,22 @@ function vk_authorization()
         $_SESSION['token'] = $token2['access_token'];
         $_SESSION['email'] = $token2['email'];
         $_SESSION['user_id'] = $token2['user_id'];
+       // $_SESSION['id'] = $token2['id'];
         $vkid = $_SESSION['user_id'];
         $token = $_SESSION['token'];
         if (isset($_SESSION['token'])) {
             $use = file_get_contents("https://api.vk.com/method/users.get?user_ids=$vkid&fields=$users&access_token=$token&v=5.92");
             $user = json_decode($use, true);
-
             foreach ($user['response'] as $item) {
                 $_SESSION['name'] = $item['first_name'];
                 $_SESSION['surname'] = $item['last_name'];
                 $_SESSION['photo'] = $item['photo_max'];
             }
-
             $result = do_query("SELECT COUNT(*) as count FROM users WHERE `email` = '{$_SESSION['email']}'");
             $result = $result->fetch_object();
             if (empty($result->count)) {
                 $wer = do_query("INSERT INTO `users` (`email`,`name`, `surname`,  `photo`, `users-id`, `token`) VALUES ('{$_SESSION['email']}','{$_SESSION['name']}','{$_SESSION['surname']}', '{$_SESSION['photo']}', '{$_SESSION['user_id']}', '{$_SESSION['token']}')");
+
             } else {
                 $users = do_query("UPDATE `users` SET `token` = '" . $_SESSION['token'] . "' WHERE `email` = '" . $_SESSION['email'] . "'");
             }

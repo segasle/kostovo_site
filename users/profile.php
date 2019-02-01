@@ -13,7 +13,7 @@ if (isset($_SESSION['id']) or isset($_SESSION['token'])) {
         $phone =  $_SESSION['phone'];
     }
 if (!empty($_SESSION['photo'] or $_SESSION['phone'] or $_SESSION['surname'] or $_SESSION['name'] or $_SESSION['email'] or $_SESSION['address'])) {
-    echo '<div class="author"><div class="author-img"><img src="' . $img . '" alt="" class="author-photo"></div><div class="author-fio"><p>' . $_SESSION['name'] . ' ' . $_SESSION['surname'] . '</p></div><div class="author-phone">
+    echo '<div class="author"><div class="author-img"><img src="' . $img . '" alt="" class="author-photo"></div><div class="author-fio"><p>' . $_SESSION['name'] . ' ' . $_SESSION['surname'] . '</p></div><div class="author-phone"><p>'.@$_SESSION['user_id'].'</p>
 <p>' . @$phone . '</p></div><div class="author-email"><p>' . $_SESSION['email'] . '</p></div><div class="author-address"><p>' . @$address. '</p></div></div>';
 } ?>
 <form action="" method="post" enctype="multipart/form-data">   <?php if (empty($_SESSION['photo'])) {

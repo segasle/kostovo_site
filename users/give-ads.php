@@ -1,6 +1,10 @@
 <h1 class="text-center">Объявление</h1>
 <?php
 add_ads();
+if (isset($_SESSION['token']) ){
+    echo                                                                                                $_SESSION['user_id'];
+
+}
 ?>
 <form method="post" enctype="multipart/form-data" class="row">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
