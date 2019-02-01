@@ -18,6 +18,9 @@
         </div>
     </div>
 </form>
+ <?php
+ favourites();
+ ?>
 <div class="row">
     <?php
     if (isset($_POST['submit'])) {

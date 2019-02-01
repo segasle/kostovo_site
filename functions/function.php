@@ -583,7 +583,7 @@ function post_tempate($sql)
                     <div class="col-xs-12 col-md-10">
                         <div class="post_favourites">
                             <form action="" method="post">
-                                <button type="submit"  name="star"><i class="fa fa-star fa-2x" aria-hidden="true"></i></button>
+                                <button type="submit"  name="star" value="1"><i class="fa fa-star fa-2x" aria-hidden="true"></i></button>
                             </form>
                         </div>
                         <div class="post_title">
@@ -706,4 +706,19 @@ function vk_authorization()
                                                 <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
                                             </div>                                                             */
     return;
+}
+function favourites(){
+    if (isset($_POST['star'])){
+        if (isset($_SESSION['id']) or isset($_SESSION['token'])){
+            $data = $_POST['star'];
+            if ($data == '1'){
+              //  $users = do_query("INSERT INTO `ads` (`favorites`)");
+            }else{
+
+            }
+        }else{
+            echo '<div class="errors">Вы должны авторизоваться</div>';
+        }
+    }
+    return true;
 }
