@@ -505,11 +505,6 @@ function add_ads()
             $errors[] = 'Мало символов';
         }
         if (empty($errors)) {
-            if (isset($_SESSION['id'])) {
-                $id = $_SESSION['id'];
-            } else {
-                $id = $_SESSION['user_id'];
-            }
             if (!empty($data['file'])) {
                 if (isset($_FILES['file'])) {
                     $update = 'ads_img/';
@@ -527,7 +522,7 @@ function add_ads()
                                         $result = do_query("SELECT COUNT(*) as count FROM `ads` WHERE `title` = '{$data['title']}'");
                                         $result = $result->fetch_object();
                                         if (empty($result->count)) {
-                                            $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`, `photo`, `author_id` ) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}','{$file}','{$id}'')");
+                                            $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`, `photo`, `author_id` ) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}','{$file}','{$_SESSION['email']}'')");
                                             if (!empty($wer)) {
                                                 echo '<div class="go">Успешно подано</div>';
                                             } else {
@@ -544,7 +539,7 @@ function add_ads()
                 $result = do_query("SELECT COUNT(*) as count FROM `ads` WHERE `title` = '{$data['title']}'");
                 $result = $result->fetch_object();
                 if (empty($result->count)) {
-                    $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`, `author_id`) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}', '{$id}')");
+                    $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`, `author_id`) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}', '{$_SESSION['email']}')");
                     if (!empty($wer)) {
                         echo '<div class="go">Успешно подано</div>';
                     } else {

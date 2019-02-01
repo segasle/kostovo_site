@@ -23,16 +23,25 @@
     if (isset($_POST['submit'])) {
         search();
     } else {
-        $post = do_query("SELECT * FROM `ads`");
+        $post = do_query("SELECT * FROM `ads`, `users` WHERE users.email = ads.author_id");
         while ($us = mysqli_fetch_assoc($post)) {
+            echo '<pre>';
+            print_r($us);
+            echo '</pre>';
             $title = $us['title'];
             $text = $us['text'];
             $price = $us['price'];
             $data = new DateTime($us['date']);
-            if (!empty($us['photo'])) {
-                $img = '<img src="ads_img/' . $us['photo'] . '" class="post_img">';
+            $name = $us['name'];
+            if (!empty($us['photo_ads'])) {
+                $img = '<img src="ads_img/' . $us['photo_ads'] . '" class="post_img">';
             } else {
                 $img = '<div class="post_no-img"><p>Нет фото</p></div>';
+            }
+            if (!empty($us['users-id'])) {
+                $link = '<a href="https://vk.com/id' . $us['users-id'] . '">Ссылка на профиль</a>';
+            } else {
+                $link = '<a href="tel:' . $us['phone'] . '">' . $us['phone'] . '</a>';
             }
             ?>
             <div class="col-12">
@@ -47,6 +56,10 @@
                             </div>
                             <div class="post_text"><p><?php echo $text; ?></p></div>
                             <div class="post_price"><p class="fa fa-rub"><?php echo $price; ?></p></div>
+                            <div class="post_info">
+                                <p>Продавец:<?php echo ' ' . $name . ' '.$link; ?></p>
+                            </div>
+
                             <div class="post_data"><p><?php echo $data->format('d:m:Y H:m:s'); ?></p></div>
                         </div>
                     </div>
