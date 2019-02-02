@@ -101,8 +101,9 @@ function get_soclal()
 function get_post_vk()
 {
     global $token;
+    global $owner_id;
     $out = '<div class="container"><div class="row">';
-    $content2 = file_get_contents("https://api.vk.com/method/wall.get?owner_id=-70567817&count=100&extended=1&filter=all&$token&v=5.60");
+    $content2 = file_get_contents("https://api.vk.com/method/wall.get?owner_id=$owner_id&count=100&extended=1&filter=all&$token&v=5.60");
     $elements2 = json_decode($content2, true);
     if (!empty($_GET['page'])) {
         $page = $_GET['page'];
@@ -730,3 +731,14 @@ function favourites(){
     }
     return true;
 }
+function group_photo_vk(){
+    global $token2;
+    global $owner_id;
+    global $album_id;
+    $content = file_get_contents("https://api.vk.com/method/photos.get?owner_id=$owner_id&album_id=$album_id&$token2&v=4.1");
+    $js = json_decode($content, true);
+    foreach ($js as $item){
+        print_r($js);
+    }
+    return;
+}          group_photo_vk();

@@ -6,6 +6,8 @@ $token2 = 'access_token=48188f4b3d31e87bee34497e19813a6245ec18cee7522d098b1c2d2b
 $id ='6813787';
 $scope = 'friends,photos,audio,video,offline,stats,market,docs,notes,stories,status,groups,email';
 $users = 'photo_max,first_name,last_name';
+$owner_id = '-70567817';
+$album_id = '194340901';
 $v = '5.52';
 $link = '<a href="https://oauth.vk.com/authorize?client_id='.$id.'&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope='.$scope.'&response_type=token&v='.$v.'">ссылка</a>';
 //echo $link;
