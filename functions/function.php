@@ -114,6 +114,7 @@ function get_post_vk()
         $page = 1;
     }
     foreach ($elements2 as $value) {
+        // print_r($elements2);
         foreach ($value['profiles'] as $profile) {
             $fio = $profile['first_name'] . ' ' . $profile['last_name'];
             if (isset($profile['screen_name'])) {
@@ -143,7 +144,7 @@ function get_post_vk()
 
     echo $out;
     return;
-}
+}        //                               get_post_vk();
 
 function users_reg()
 {
@@ -585,7 +586,8 @@ function post_tempate($sql)
                     <div class="col-xs-12 col-md-10">
                         <div class="post_favourites">
                             <form action="" method="post">
-                                <button type="submit"  name="star" value="1"><i class="fa <?php echo $class;?> fa-2x" aria-hidden="true"></i></button>
+                                <button type="submit" name="star" value="1"><i class="fa <?php echo $class; ?> fa-2x"
+                                                                               aria-hidden="true"></i></button>
                             </form>
                         </div>
                         <div class="post_title">
@@ -709,36 +711,52 @@ function vk_authorization()
                                             </div>                                                             */
     return;
 }
-function favourites(){
-    if (isset($_POST['star'])){
-        if (isset($_SESSION['id']) or isset($_SESSION['token'])){
+
+function favourites()
+{
+    if (isset($_POST['star'])) {
+        if (isset($_SESSION['id']) or isset($_SESSION['token'])) {
             $data = $_POST['star'];
-            if ($data == '1'){
+            if ($data == '1') {
                 $users = mysqli_fetch_assoc(do_query("SELECT * FROM `ads`, `users` WHERE users.email = ads.author_id"));
-                if ($users){
+                if ($users) {
                     $class = 'favo-ok';
-                    if (isset($class)){
+                    if (isset($class)) {
                         $_SESSION['post_title'] = $users['title'];
 
                     }
                 }
-            }else{
+            } else {
                 $class = 'fa-star';
             }
-        }else{
+        } else {
             echo '<div class="errors">Вы должны авторизоваться</div>';
         }
     }
     return true;
 }
-function group_photo_vk(){
+
+function group_photo_vk()
+{
     global $token2;
     global $owner_id;
     global $album_id;
-    $content = file_get_contents("https://api.vk.com/method/photos.get?owner_id=$owner_id&album_id=$album_id&$token2&v=4.1");
-    $js = json_decode($content, true);
-    foreach ($js as $item){
-        print_r($js);
+    $class = 'active';
+    $content = file_get_contents("https://api.vk.com/method/photos.get?owner_id=-70567817&album_id=194340901&count=3&rev=1&access_token=48188f4b3d31e87bee34497e19813a6245ec18cee7522d098b1c2d2be2939ae418ba9ab7333c429e07a26&v=5.60");
+    $photos = json_decode($content, true);
+    foreach ($photos['response'] as $photo) {
+        if (!empty(is_array($photo) || is_object($photo))) {
+            foreach ($photo as $item) {
+                while($class <= 1){
+                    echo '<div class="carousel-item '.$class.'">
+            <img class="d-block w-100" src="'.$item['photo_807'].'" alt="Первый слайд">
+        </div>';
+                }
+  //              $data = date('d.m.Y H:m', $item['date']);
+
+            }
+        }
     }
+
     return;
-}          group_photo_vk();
+}
