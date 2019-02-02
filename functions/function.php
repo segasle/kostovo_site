@@ -573,6 +573,7 @@ function post_tempate($sql)
         } else {
             $link = '<a href="tel:' . $us['phone'] . '">' . $us['phone'] . '</a>';
         }
+        global $class;
         ?>
         <div class="col-12">
             <div class="post">
@@ -583,7 +584,7 @@ function post_tempate($sql)
                     <div class="col-xs-12 col-md-10">
                         <div class="post_favourites">
                             <form action="" method="post">
-                                <button type="submit"  name="star" value="1"><i class="fa fa-star fa-2x" aria-hidden="true"></i></button>
+                                <button type="submit"  name="star" value="1"><i class="fa <?php echo $class;?> fa-2x" aria-hidden="true"></i></button>
                             </form>
                         </div>
                         <div class="post_title">
@@ -712,9 +713,16 @@ function favourites(){
         if (isset($_SESSION['id']) or isset($_SESSION['token'])){
             $data = $_POST['star'];
             if ($data == '1'){
-              //  $users = do_query("INSERT INTO `ads` (`favorites`)");
-            }else{
+                $users = mysqli_fetch_assoc(do_query("SELECT * FROM `ads`, `users` WHERE users.email = ads.author_id"));
+                if ($users){
+                    $class = 'favo-ok';
+                    if (isset($class)){
+                        $_SESSION['post_title'] = $users['title'];
 
+                    }
+                }
+            }else{
+                $class = 'fa-star';
             }
         }else{
             echo '<div class="errors">Вы должны авторизоваться</div>';
