@@ -415,6 +415,11 @@ body {
 .container-fluid .contain .post_text {
   font-weight: 300;
 }
+.container-fluid .contain .post button[type=button] {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
 .container-fluid .contain .post_favourites {
   position: absolute;
   top: 5px;

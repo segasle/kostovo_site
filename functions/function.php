@@ -575,7 +575,7 @@ function post_tempate($sql)
         } else {
             $link = '<a href="tel:' . $us['phone'] . '">' . $us['phone'] . '</a>';
         }
-       global $class;
+        global $class;
         ?>
         <div class="col-12">
             <div class="post">
@@ -589,6 +589,41 @@ function post_tempate($sql)
                                 <button type="submit" name="star" value="1"><i class="fa <?php echo $class; ?> fa-2x"
                                                                                aria-hidden="true"></i></button>
                             </form>
+                        </div>
+                        <button type="button" class="" data-toggle="modal"
+                                data-target="#exampleModal2">
+                            <span class="fa fa-commenting-o fa-2x"></span>
+                        </button>
+                        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="message">
+                                            <div class="message-window">
+                                                <p class="window-text"></p>
+                                            </div>
+                                        </div>
+                                        <form action="" method="post" class="form-message">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control">
+                                                <button type="submit" class="fa fa-paper-plane-o fa-2x"></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                            Отмена
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="post_title">
                             <p><?php echo $title; ?></p>
