@@ -590,7 +590,7 @@ function post_tempate($sql)
                                                                                aria-hidden="true"></i></button>
                             </form>
                         </div>
-                        <button type="button" class="" data-toggle="modal"
+                        <button type="button" class="modal-message" data-toggle="modal"
                                 data-target="#exampleModal2">
                             <span class="fa fa-commenting-o fa-2x"></span>
                         </button>
@@ -611,9 +611,10 @@ function post_tempate($sql)
                                             </div>
                                         </div>
                                         <form action="" method="post" class="form-message">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control">
-                                                <button type="submit" class="fa fa-paper-plane-o fa-2x"></button>
+                                            <div class="form-group">  <div class="form-message-text">
+                                                    <input type="text" class="form-control"> <button type="submit" class="fa fa-paper-plane-o fa-2x"></button>
+                                                </div>
+
                                             </div>
                                         </form>
                                     </div>

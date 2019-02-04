@@ -9,7 +9,11 @@
         </div>
         <form action="" method="post" class="form-message">
             <div class="form-group">
-                <input type="text" class="form-control"><button type="submit" class="fa fa-paper-plane-o fa-2x"></button>
+                <div class="form-message-text">
+                    <input type="text" class="form-control"> <button type="submit" class="fa fa-paper-plane-o fa-2x"></button>
+                </div>
+
+
             </div>
         </form>
     </div>
