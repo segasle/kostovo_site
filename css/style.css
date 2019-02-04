@@ -460,6 +460,21 @@ body {
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
 }
+.container-fluid .contain .message-window {
+  width: 100%;
+  height: 700px;
+  cursor: auto;
+  background: #e2e2e2;
+  border: 2px solid black;
+}
+.container-fluid .contain .form-message .form-group {
+  position: relative;
+}
+.container-fluid .contain .form-message .fa-paper-plane-o {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 .container-fluid .footer {
   height: 100px;
   padding: 10px;
