@@ -1,7 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sergej
- * Date: 17.01.19
- * Time: 16:52
- */
+if (isset($_SESSION['id']) or isset($_SESSION['token'])){
+    if (isset($_SESSION['post_title']))
+}

@@ -426,6 +426,9 @@ body {
 .container-fluid .contain .post_favourites .fa-star:hover {
   color: #ffa210;
 }
+.container-fluid .contain .post_favourites .favo {
+  color: #ffa210;
+}
 .container-fluid .contain .post_title {
   margin: 5px 0;
   font-size: 20px;

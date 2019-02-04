@@ -575,7 +575,7 @@ function post_tempate($sql)
         } else {
             $link = '<a href="tel:' . $us['phone'] . '">' . $us['phone'] . '</a>';
         }
-        global $class;
+       global $class;
         ?>
         <div class="col-12">
             <div class="post">
@@ -599,7 +599,7 @@ function post_tempate($sql)
                             <p>Продавец:<?php echo ' ' . $name . ' ' . $link; ?></p>
                         </div>
 
-                        <div class="post_data"><p><?php echo $data->format('d:m:Y H:m:s'); ?></p></div>
+                        <div class="post_data"><p><?php echo $data->format('d.m.Y H:m:s'); ?></p></div>
                     </div>
                 </div>
             </div>
@@ -712,22 +712,43 @@ function vk_authorization()
     return;
 }
 
+/**
+ *   Функцция favourites()
+ * объявления в избранный
+ */
+$class = 'fa-star';
+
 function favourites()
 {
+
+    global $class;
+    // Если была нажжата кнопка в виде звезды
     if (isset($_POST['star'])) {
+        // проверяет, Если пользователь авторизовался
         if (isset($_SESSION['id']) or isset($_SESSION['token'])) {
             $data = $_POST['star'];
+            // Если кнопка равняется единице
             if ($data == '1') {
                 $users = mysqli_fetch_assoc(do_query("SELECT * FROM `ads`, `users` WHERE users.email = ads.author_id"));
+                // Если пост  найден
                 if ($users) {
-                    $class = 'favo-ok';
+                    // присвоится класс к кнопке
+                    $class = 'fa-star favo';
+                    // если есть класс
                     if (isset($class)) {
+                        // добавится сесии
                         $_SESSION['post_title'] = $users['title'];
+                        $_SESSION['post_price'] = $users['price'];
+                        $_SESSION['post_text'] = $users['text'];
+                        $_SESSION['post_photo_ads'] = $users['photo_ads'];
+                        $_SESSION['post_name'] = $users['name'];
+                        $_SESSION['post_date'] = $users['date'];
+                        $_SESSION['post_address'] = $users['address'];
+                        $_SESSION['post_phone'] = $users['phone'];
+                        $_SESSION['post_user'] = $users['users-id'];
 
                     }
                 }
-            } else {
-                $class = 'fa-star';
             }
         } else {
             echo '<div class="errors">Вы должны авторизоваться</div>';
@@ -747,13 +768,17 @@ function group_photo_vk()
     foreach ($photos['response'] as $photo) {
         if (!empty(is_array($photo) || is_object($photo))) {
             foreach ($photo as $item) {
-                while($class <= 1){
-                    echo '<div class="carousel-item '.$class.'">
-            <img class="d-block w-100" src="'.$item['photo_807'].'" alt="Первый слайд">
-        </div>';
-                }
-  //              $data = date('d.m.Y H:m', $item['date']);
 
+                /*
+                                do{
+                                    echo '<div class="carousel-item '.$class.'">
+                            <img class="d-block w-100" src="'.$item['photo_807'].'" alt="Первый слайд">
+                        </div>';
+                                }
+                                while($class <= 1);
+                  //              $data = date('d.m.Y H:m', $item['date']);
+
+                            }*/
             }
         }
     }
