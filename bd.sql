@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:8889
--- Время создания: Фев 05 2019 г., 07:47
+-- Время создания: Фев 05 2019 г., 16:58
 -- Версия сервера: 5.7.23
 -- Версия PHP: 7.2.8
 
@@ -106,6 +106,17 @@ INSERT INTO `menu` (`id`, `url`, `title`, `parent`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `post`
+--
+
+CREATE TABLE `post` (
+  `id` int(11) NOT NULL,
+  `text` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `reg`
 --
 
@@ -172,7 +183,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `surname`, `email`, `password`, `photo`, `phone`, `address`, `users-id`, `token`, `favorites`) VALUES
 (1, 'Сергей', 'Слепенков', 'segasle@gmail.ccm', '$2y$10$UusrGyJnKaibjCuqvC1Lgej9dtsfNA3FCkBpig2Gf26SZyNbPRLtK', 0x52556c454534333275784d2e6a7067, '+7(915)954-37-12', 'Московская область', NULL, NULL, NULL),
-(10, 'Сергей', 'Слепенков', 'segasle@gmail.com', NULL, 0x68747470733a2f2f70702e757365726170692e636f6d2f633834383632302f763834383632303133352f653832342f71514133746643303251412e6a70673f6176613d31, NULL, NULL, 176938709, '9930a5fb068329c8badbe715b569db0fe128e3cad852d412b0a9c6583360fc92e7ec4e3e4340c62f55656', NULL),
+(10, 'Сергей', 'Слепенков', 'segasle@gmail.com', NULL, 0x68747470733a2f2f70702e757365726170692e636f6d2f633834383632302f763834383632303133352f653832342f71514133746643303251412e6a70673f6176613d31, NULL, NULL, 176938709, '81d8c4bfac0a7bbd8ae73e4a07ab820ab074f51eb72e0159d24a3f6bd9b3d45e20edb6e43a6e51fba1605', NULL),
 (11, 'Даниил', 'Слепенков', 'Dendmisle@gmail.com', NULL, 0x68747470733a2f2f766b2e636f6d2f696d616765732f63616d6572615f3230302e706e673f6176613d31, NULL, NULL, 514298316, '9510327d280eae0fcacc546a3c9a5c3e3a6eb313e1beac4a0807f80c8e08aa28464bbc48dd1707327bb78', NULL);
 
 -- --------------------------------------------------------
@@ -229,6 +240,12 @@ ALTER TABLE `menu`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `post`
+--
+ALTER TABLE `post`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `reg`
 --
 ALTER TABLE `reg`
@@ -279,6 +296,12 @@ ALTER TABLE `input_reg`
 --
 ALTER TABLE `menu`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT для таблицы `post`
+--
+ALTER TABLE `post`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `reg`
