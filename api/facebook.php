@@ -1,6 +1,6 @@
 <?php
 $fb_id = '1759331964212959';
-$fb_key =
+$fb_key = '';
 //$fb = new Facebook\Facebook([
 //    'app_id' => '{app-id}', // Replace {app-id} with your app id
 //    'app_secret' => '{app-secret}',

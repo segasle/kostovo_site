@@ -1,5 +1,24 @@
 <h1 class="text-center">История</h1>
 <?php
+if (isset($_POST['submit'])){
+    $data = $_POST;
+    $errors = array();
+    if (empty($data['text'])){
+        $errors[] = 'Вы не ввели сообщения';
+    }
+    if ($data['text'] <= 10){
+        $errors[] = 'Ввели мало симловов';
+    }
+    if ($data['text'] >= 1000){
+        $errors[] = 'Ввели много симловов';
+    }
+    if (empty($errors)){
+        $message = do_query("INSERT INTO `post` (`text`) VALUES ('{$data['text']}')");
+
+    }else{
+        echo '<div class="errors">'.array_shift($errors).'</div>';
+    }
+}
 if (isset($_SESSION['token'])) {
     ?>
     <h2 class="h4">Вы можете написать пост</h2>
@@ -8,13 +27,13 @@ if (isset($_SESSION['token'])) {
             <label for="exampleInputText">Текст</label>
             <textarea class="form-control" id="exampleInputText" placeholder="Текст" rows="10" name="text"></textarea>
         </div>
-        <div class="form-group">
+      <!--  <div class="form-group">
             <p>Выберите фото</p>
             <input type="file" id="exampleInputFile" accept="image/jpeg,image/png" name="file" class="inputfile hide"
                    data-multiple-caption="{count} files selected" multiple> <label for="exampleInputFile"
                                                                                    class="btn-primary btn btn-default"><span>Выбрать</span></label>
-        </div>
-        <button type="submit" class="btn btn-default btn-primary">Отправить</button>
+        </div>-->
+        <button type="submit" class="btn btn-default btn-primary" name="submit">Отправить</button>
 
     </form>
     <?php

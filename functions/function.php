@@ -611,8 +611,10 @@ function post_tempate($sql)
                                             </div>
                                         </div>
                                         <form action="" method="post" class="form-message">
-                                            <div class="form-group">  <div class="form-message-text">
-                                                    <input type="text" class="form-control"> <button type="submit" class="fa fa-paper-plane-o fa-2x"></button>
+                                            <div class="form-group">
+                                                <div class="form-message-text">
+                                                    <input type="text" class="form-control">
+                                                    <button type="submit" class="fa fa-paper-plane-o fa-2x"></button>
                                                 </div>
 
                                             </div>
@@ -713,6 +715,8 @@ function vk_authorization()
         $_SESSION['token'] = $token2['access_token'];
         $_SESSION['email'] = $token2['email'];
         $_SESSION['user_id'] = $token2['user_id'];
+        //$_SESSION['phone'] = $token2['phone'];
+
         // $_SESSION['id'] = $token2['id'];
         $vkid = $_SESSION['user_id'];
         $token = $_SESSION['token'];
@@ -732,8 +736,7 @@ function vk_authorization()
             } else {
                 $users = do_query("UPDATE `users` SET `token` = '" . $_SESSION['token'] . "' WHERE `email` = '" . $_SESSION['email'] . "'");
             }
-            header('location: /kostovo_site');
-            die();
+            print_r($token2);
         }
 
     }
@@ -748,6 +751,7 @@ function vk_authorization()
     return;
 }
 
+//                vk_authorization();
 /**
  *   Функцция favourites()
  * объявления в избранный
@@ -772,15 +776,15 @@ function favourites()
                 if ($users) {
                     $favo = do_query("SELECT * FROM `favo`");
                     //$favo = $favo->fetch_assoc();
-                    if (empty($favo)){
-                        if (isset($_SESSION['id'])){
+                    if (empty($favo)) {
+                        if (isset($_SESSION['id'])) {
                             $id = $_SESSION['id'];
-                        }else{
+                        } else {
                             $id = $_SESSION['user_id'];
                         }
                         $fa = do_query("INSERT INTO `favo` (`user_id`, `ads_id`) WHERE ('{$id}','{$_SESSION['post_id']}')");
 
-                        if ($fa){
+                        if ($fa) {
                             // присвоится класс к кнопке
                             $class = 'fa-star favo';
                             // если есть класс
@@ -808,7 +812,8 @@ function favourites()
     }
     return true;
 }
-                                favourites();
+
+//favourites();
 function group_photo_vk()
 {
     global $token2;
