@@ -773,7 +773,13 @@ function favourites()
                     $favo = do_query("SELECT * FROM `favo`");
                     //$favo = $favo->fetch_assoc();
                     if (empty($favo)){
-                        $fa = do_query("INSERT INTO `favo` (`user_id`, `ads_id`) WHERE ('{$_SESSION['id']}','{$_SESSION['post_id']}')");
+                        if (isset($_SESSION['id'])){
+                            $id = $_SESSION['id'];
+                        }else{
+                            $id = $_SESSION['user_id'];
+                        }
+                        $fa = do_query("INSERT INTO `favo` (`user_id`, `ads_id`) WHERE ('{$id}','{$_SESSION['post_id']}')");
+
                         if ($fa){
                             // присвоится класс к кнопке
                             $class = 'fa-star favo';
