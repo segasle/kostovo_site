@@ -1,24 +1,5 @@
 <h1 class="text-center">История</h1>
 <?php
-if (isset($_POST['submit'])){
-    $data = $_POST;
-    $errors = array();
-    if (empty($data['text'])){
-        $errors[] = 'Вы не ввели сообщения';
-    }
-    if ($data['text'] <= 10){
-        $errors[] = 'Ввели мало симловов';
-    }
-    if (empty($errors)){
-        $message = do_query("INSERT INTO `post` (`text`, `users`) VALUES ('{$data['text']}', '{$_SESSION['user_id']}')");
-        if ($message){
-
-            echo '<div class="go">Успешно отправлено</div>';
-        }
-    }else{
-        echo '<div class="errors">'.array_shift($errors).'</div>';
-    }
-}
 if (isset($_SESSION['token'])) {
     ?>
     <h2 class="h4">Вы можете написать пост</h2>
@@ -41,5 +22,28 @@ if (isset($_SESSION['token'])) {
     ?>
     <h2 class="text-center">Авторизуйтесь через вк пожалуйста, чтобы написать пост</h2>
     <?php
+}
+
+if (isset($_POST['submit'])){
+    $data = $_POST;
+    $errors = array();
+    if (empty($data['text'])){
+        $errors[] = 'Вы не ввели сообщения';
+    }
+    if ($data['text'] <= 10){
+        $errors[] = 'Ввели мало симловов';
+    }
+    if (empty($errors)){
+        $message = do_query("INSERT INTO `post` (`text`, `user`) VALUES ('{$data['text']}', '{$_SESSION['user_id']}')");
+        if ($message){
+            $get =mysqli_fetch_assoc(do_query("SELECT * FROM `post` JOIN `users` ON users.users-id = post.user WHERE post.user"));
+            print_r($get);
+
+
+            echo '<div class="go">Успешно отправлено</div>';
+        }
+    }else{
+        echo '<div class="errors">'.array_shift($errors).'</div>';
+    }
 }
 get_post_vk();

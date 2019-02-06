@@ -769,36 +769,40 @@ function favourites()
             $data = $_POST['star'];
             // Если кнопка равняется единице
             if ($data == '1') {
-                $users = mysqli_fetch_assoc(do_query("SELECT * FROM `ads`, `users` WHERE users.email = ads.author_id"));
+                $class = 'fa-star favo';
+                // таблица с объявлениями
+                $users = mysqli_fetch_assoc(do_query("SELECT * FROM `ads`"));
                 $_SESSION['post_id'] = $users['id'];
                 // Если пост  найден
-                print_r($users);
+                echo '<pre>';
+                print_r($users['id']);
+                echo '</pre>';
                 if ($users) {
                     $favo = do_query("SELECT * FROM `favo`");
                     //$favo = $favo->fetch_assoc();
-                    if (empty($favo)) {
+                    if ($favo) {
                         if (isset($_SESSION['id'])) {
                             $id = $_SESSION['id'];
                         } else {
                             $id = $_SESSION['user_id'];
                         }
-                        $fa = do_query("INSERT INTO `favo` (`user_id`, `ads_id`) WHERE ('{$id}','{$_SESSION['post_id']}')");
+                        $fa = do_query("INSERT INTO `favo` (`user_id`, `ads_id`) VALUES ('{$id}','{$_SESSION['post_id']}')");
 
                         if ($fa) {
                             // присвоится класс к кнопке
-                            $class = 'fa-star favo';
+
                             // если есть класс
                             if (isset($class)) {
-                                // добавится сесии
-                                $_SESSION['post_title'] = $users['title'];
-                                $_SESSION['post_price'] = $users['price'];
-                                $_SESSION['post_text'] = $users['text'];
-                                $_SESSION['post_photo_ads'] = $users['photo_ads'];
-                                $_SESSION['post_name'] = $users['name'];
-                                $_SESSION['post_date'] = $users['date'];
-                                $_SESSION['post_address'] = $users['address'];
-                                $_SESSION['post_phone'] = $users['phone'];
-                                $_SESSION['post_user'] = $users['users-id'];
+//                                // добавится сесии
+//                                $_SESSION['post_title'] = $users['title'];
+//                                $_SESSION['post_price'] = $users['price'];
+//                                $_SESSION['post_text'] = $users['text'];
+//                                $_SESSION['post_photo_ads'] = $users['photo_ads'];
+//                                $_SESSION['post_name'] = $users['name'];
+//                                $_SESSION['post_date'] = $users['date'];
+//                                $_SESSION['post_address'] = $users['address'];
+//                                $_SESSION['post_phone'] = $users['phone'];
+//                                $_SESSION['post_user'] = $users['users-id'];
 
                             }
                         }
