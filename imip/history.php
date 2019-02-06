@@ -9,12 +9,12 @@ if (isset($_POST['submit'])){
     if ($data['text'] <= 10){
         $errors[] = 'Ввели мало симловов';
     }
-    if ($data['text'] >= 1000){
-        $errors[] = 'Ввели много симловов';
-    }
     if (empty($errors)){
-        $message = do_query("INSERT INTO `post` (`text`) VALUES ('{$data['text']}')");
+        $message = do_query("INSERT INTO `post` (`text`, `users`) VALUES ('{$data['text']}', '{$_SESSION['user_id']}')");
+        if ($message){
 
+            echo '<div class="go">Успешно отправлено</div>';
+        }
     }else{
         echo '<div class="errors">'.array_shift($errors).'</div>';
     }
