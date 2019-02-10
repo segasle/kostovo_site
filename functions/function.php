@@ -543,7 +543,7 @@ function add_ads()
                 if (empty($result->count)) {
                     $wer = do_query("INSERT INTO `ads` (`vaul`,`title`, `price`,  `text`, `author_id`) VALUES ('{$data['value']}','{$data['title']}','{$data['price']}', '{$data['text']}', '{$_SESSION['email']}')");
                     if (!empty($wer)) {
-                        echo '<div class="go">Успешно подано</div>';
+                        echo '</div class="go">Успешно подано</div>';
                     } else {
                         echo '<div class="errors">Такая запись уже есть</div>';
                     }
@@ -560,6 +560,7 @@ function add_ads()
 function post_tempate($sql)
 {
     while ($us = mysqli_fetch_assoc($sql)) {
+
         $title = $us['title'];
         $text = $us['text'];
         $price = $us['price'];
@@ -575,6 +576,7 @@ function post_tempate($sql)
         } else {
             $link = '<a href="tel:' . $us['phone'] . '">' . $us['phone'] . '</a>';
         }
+        //$class = 'fa-star';
         global $class;
         ?>
         <div class="col-12">
@@ -736,7 +738,7 @@ function vk_authorization()
             } else {
                 $users = do_query("UPDATE `users` SET `token` = '" . $_SESSION['token'] . "' WHERE `email` = '" . $_SESSION['email'] . "'");
             }
-            print_r($token2);
+   //         print_r($token2);
         }
 
     }
@@ -756,12 +758,12 @@ function vk_authorization()
  *   Функцция favourites()
  * объявления в избранный
  */
-$class = 'fa-star';
+//
 
 function favourites()
 {
-
-    global $class;
+    $class = 'fa-star';
+    //global $class;
     // Если была нажжата кнопка в виде звезды
     if (isset($_POST['star'])) {
         // проверяет, Если пользователь авторизовался
@@ -771,12 +773,15 @@ function favourites()
             if ($data == '1') {
                 $class = 'fa-star favo';
                 // таблица с объявлениями
-                $users = mysqli_fetch_assoc(do_query("SELECT * FROM `ads`"));
+                $users =do_query("SELECT * FROM `ads`");
+                foreach ($users as $user){
+                    echo '<pre>';
+                    print_r($user);
+                    echo '</pre>';
+                }
                 $_SESSION['post_id'] = $users['id'];
                 // Если пост  найден
-                echo '<pre>';
-                print_r($users['id']);
-                echo '</pre>';
+
                 if ($users) {
                     $favo = do_query("SELECT * FROM `favo`");
                     //$favo = $favo->fetch_assoc();
