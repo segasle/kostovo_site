@@ -738,7 +738,7 @@ function vk_authorization()
             } else {
                 $users = do_query("UPDATE `users` SET `token` = '" . $_SESSION['token'] . "' WHERE `email` = '" . $_SESSION['email'] . "'");
             }
-   //         print_r($token2);
+            //         print_r($token2);
         }
 
     }
@@ -773,8 +773,8 @@ function favourites()
             if ($data == '1') {
                 $class = 'fa-star favo';
                 // таблица с объявлениями
-                $users =do_query("SELECT * FROM `ads`");
-                foreach ($users as $user){
+                $users = do_query("SELECT * FROM `ads`");
+                foreach ($users as $user) {
                     echo '<pre>';
                     print_r($user);
                     echo '</pre>';
@@ -826,18 +826,20 @@ function favourites()
 function group_photo_vk()
 {
 
-    $content = file_get_contents("https://api.vk.com/method/photos.get?owner_id=-70567817&album_id=194340901&count=3&rev=1&access_token=48188f4b3d31e87bee34497e19813a6245ec18cee7522d098b1c2d2be2939ae418ba9ab7333c429e07a26&v=5.60");
+    $content = file_get_contents("https://api.vk.com/method/photos.get?owner_id=-70567817&album_id=194340901&count=50&access_token=48188f4b3d31e87bee34497e19813a6245ec18cee7522d098b1c2d2be2939ae418ba9ab7333c429e07a26&v=5.60");
     $photos = json_decode($content, true);
     foreach ($photos['response'] as $photo) {
         if (!empty(is_array($photo) || is_object($photo))) {
             foreach ($photo as $item) {
-             /*   echo '<pre>';
-                print_r($item);
-                echo '</pre>';*/
-                echo '<div class="col-lg-6 col-xs-12"><div class="slide"><img src="'.$item['photo_1280'].'" class=""><div class="slide_post"><p><a href="https://vk.com/photo'.$item['owner_id'].'_'.$item['id'].'">Сcылка на фото</a></p></div></div></div>';
+                if (isset($item['photo_1280'])) {
+                    $img = $item['photo_1280'];
+                }else{
+                    $img = $item['photo_604'];
+                }
+                echo '<div class="col-lg-6 col-xs-12"><div class="slide"><img src="' . $img. '" class=""><div class="slide_post"><p><a href="https://vk.com/photo' . $item['owner_id'] . '_' . $item['id'] . '">Сcылка на фото</a></p></div></div></div>';
             }
         }
     }
 
-    return ;
+    return;
 }

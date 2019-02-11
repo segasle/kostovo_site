@@ -483,9 +483,16 @@ body {
   top: 0;
   right: 0;
 }
+.container-fluid .contain .slide {
+  padding: 15px 0;
+}
 .container-fluid .contain .slide img {
   width: 100%;
   display: block;
+}
+.container-fluid .contain .slide_post {
+  text-align: center;
+  padding: 10px;
 }
 .container-fluid .footer {
   height: 100px;
