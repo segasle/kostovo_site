@@ -30,15 +30,11 @@ if (isset($_POST['submit'])){
     if (empty($data['text'])){
         $errors[] = 'Вы не ввели сообщения';
     }
-    if ($data['text'] <= 10){
-        $errors[] = 'Ввели мало симловов';
-    }
     if (empty($errors)){
         $message = do_query("INSERT INTO `post` (`text`, `user`) VALUES ('{$data['text']}', '{$_SESSION['user_id']}')");
         if ($message){
-            $get =mysqli_fetch_assoc(do_query("SELECT * FROM `post` JOIN `users` ON users.users-id = post.user WHERE post.user"));
+            $get =mysqli_fetch_assoc(do_query("SELECT * FROM `post`, `users` WHERE users.users-id = post.user"));
             print_r($get);
-
 
             echo '<div class="go">Успешно отправлено</div>';
         }

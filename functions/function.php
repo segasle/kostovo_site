@@ -825,6 +825,7 @@ function favourites()
 //favourites();
 function group_photo_vk()
 {
+    $img = '';
     global $token2;
     global $owner_id;
     global $album_id;
@@ -834,20 +835,13 @@ function group_photo_vk()
     foreach ($photos['response'] as $photo) {
         if (!empty(is_array($photo) || is_object($photo))) {
             foreach ($photo as $item) {
-
-                /*
-                                do{
-                                    echo '<div class="carousel-item '.$class.'">
-                            <img class="d-block w-100" src="'.$item['photo_807'].'" alt="Первый слайд">
-                        </div>';
-                                }
-                                while($class <= 1);
-                  //              $data = date('d.m.Y H:m', $item['date']);
-
-                            }*/
+                echo '<pre>';
+                print_r($item);
+                echo '</pre>';
+                echo '<div class="col-lg-6 col-xs-12"><div class="slide"><img src="'.$item['photo_1280'].'" class=""></div></div>';
             }
         }
     }
 
-    return;
+    return ;
 }
