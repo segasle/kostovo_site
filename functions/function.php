@@ -144,8 +144,24 @@ function get_post_vk()
 
     echo $out;
     return;
-}        //                               get_post_vk();
-
+}
+function get_news(){
+    global $token;
+    $out = '<div class="row">';
+    $content = file_get_contents("https://api.vk.com/method/wall.get?owner_id=-178156792&count=100&extended=1&filter=all&$token&v=5.60");
+    $elements = json_decode($content, true);
+    foreach ($elements as $element){
+        foreach ($element['groups'] as $item){
+            echo '<h1 class="text-center">'.$item['name'].'</h1>';
+        }
+        foreach ($element['items'] as $item){
+            $out .= '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="post"><p class="post_text">'.$item['text'].'</p></div></div>';
+        }
+    }
+    $out .= '</div>';
+    echo $out;
+    return;
+}
 function users_reg()
 {
     $data = $_POST;
