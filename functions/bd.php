@@ -1,7 +1,7 @@
 <?php
 global $mysqli;
 if (empty($mysqli)){
-    $mysqli = mysqli_connect('localhost', 'root', 'root', 'kostrobo');
+    $mysqli = mysqli_connect('localhost', 'root', 'root', 'kostovo');
     mysqli_set_charset($mysqli, 'UTF8');
 }
 

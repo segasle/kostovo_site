@@ -163,21 +163,25 @@ function get_news()
             $link = $item['owner_id'] . '_' . $item['id'];
             $data = date('d.m.Y h:m', $item['date']);
             if (isset($item['attachments'])) {
-                foreach ($item['attachments'] as $attachment => $key) {
-                    echo '<pre>';
-                    print_r($key['photo']['photo_1280']);
-                    echo '</pre>';
-                    if (isset($key['photo']['photo_1280'])) {
-                        $img = "<img src='" . $key['photo']['photo_1280'] . "'>";
-                    } else {
-                        $img = '';
+                if (is_array($item['attachments']) || is_object($item['attachments'])) {
+
+                    foreach ($item['attachments'] as $attachment => $key) {
+                        echo '<pre>';
+                        print_r($key['photo']['photo_1280']);
+                        echo '</pre>';
+                        if (isset($key['photo'])) {
+                            $img = "<img src='" . $key['photo']['photo_1280'] . "'>";
+                        } else {
+                            $img = '';
+                        }
+                        // echo $img;
                     }
-                    echo $img;
+
                 }
             }
 
+            $out .= '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="post"><p class="post_text">' . $text . '</p>' . @$img . '<p class="post_data">' . $data . '</p><a href="https://vk.com/wall' . $link . '" class="post_link">Ссылка на пост</a></div></div>';
         }
-        $out .= '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="post"><p class="post_text">' . $text . '</p>' . $img . '<p class="post_data">' . $data . '</p><a href="https://vk.com/wall' . $link . '" class="post_link">Ссылка на пост</a></div></div>';
     }
     $out .= '</div>';
     echo $out;
