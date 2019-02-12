@@ -145,32 +145,45 @@ function get_post_vk()
     echo $out;
     return;
 }
-function get_news(){
+
+function get_news()
+{
     global $token;
     $out = '<div class="row">';
     $content = file_get_contents("https://api.vk.com/method/wall.get?owner_id=-178156792&count=100&extended=1&filter=all&$token&v=5.60");
     $elements = json_decode($content, true);
-    foreach ($elements as $element){
-        foreach ($element['groups'] as $item){
-            echo '<h1 class="text-center">'.$item['name'].'</h1>';
+    foreach ($elements as $element) {
+        foreach ($element['groups'] as $item) {
+            echo '<h1 class="text-center">' . $item['name'] . '</h1>';
         }
-        foreach ($element['attachments'] as $attachment=>$value){
-            print_r($value);
-            if (isset($item['photo_1280'])){
 
-            }
-        }
-        foreach ($element['items'] as $item){
-            $link = $item['owner_id'].'_'.$item['id'];
+
+        foreach ($element['items'] as $item) {
+            $text = $item['text'];
+            $link = $item['owner_id'] . '_' . $item['id'];
             $data = date('d.m.Y h:m', $item['date']);
+            if (isset($item['attachments'])) {
+                foreach ($item['attachments'] as $attachment => $key) {
+                    echo '<pre>';
+                    print_r($key['photo']['photo_1280']);
+                    echo '</pre>';
+                    if (isset($key['photo']['photo_1280'])) {
+                        $img = "<img src='" . $key['photo']['photo_1280'] . "'>";
+                    } else {
+                        $img = '';
+                    }
+                    echo $img;
+                }
+            }
 
-            $out .= '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="post"><p class="post_text">'.$item['text'].'</p><p class="post_data">'.$data.'</p><a href="https://vk.com/wall'.$link.'" class="post_link">Ссылка на пост</a></div></div>';
         }
+        $out .= '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="post"><p class="post_text">' . $text . '</p>' . $img . '<p class="post_data">' . $data . '</p><a href="https://vk.com/wall' . $link . '" class="post_link">Ссылка на пост</a></div></div>';
     }
     $out .= '</div>';
     echo $out;
     return;
 }
+
 function users_reg()
 {
     $data = $_POST;
@@ -858,10 +871,10 @@ function group_photo_vk()
             foreach ($photo as $item) {
                 if (isset($item['photo_1280'])) {
                     $img = $item['photo_1280'];
-                }else{
+                } else {
                     $img = $item['photo_604'];
                 }
-                echo '<div class="col-lg-6 col-xs-12"><div class="slide"><img src="' . $img. '" class=""><div class="slide_post"><p><a href="https://vk.com/photo' . $item['owner_id'] . '_' . $item['id'] . '">Сcылка на фото</a></p></div></div></div>';
+                echo '<div class="col-lg-6 col-xs-12"><div class="slide"><img src="' . $img . '" class=""><div class="slide_post"><p><a href="https://vk.com/photo' . $item['owner_id'] . '_' . $item['id'] . '">Сcылка на фото</a></p></div></div></div>';
             }
         }
     }
