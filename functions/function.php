@@ -154,10 +154,16 @@ function get_news(){
         foreach ($element['groups'] as $item){
             echo '<h1 class="text-center">'.$item['name'].'</h1>';
         }
+        foreach ($element['attachments'] as $attachment=>$value){
+            print_r($value);
+            if (isset($item['photo_1280'])){
+
+            }
+        }
         foreach ($element['items'] as $item){
             $link = $item['owner_id'].'_'.$item['id'];
             $data = date('d.m.Y h:m', $item['date']);
-//            $newData = $data->format();
+
             $out .= '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="post"><p class="post_text">'.$item['text'].'</p><p class="post_data">'.$data.'</p><a href="https://vk.com/wall'.$link.'" class="post_link">Ссылка на пост</a></div></div>';
         }
     }
