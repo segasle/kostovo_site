@@ -36,9 +36,15 @@ if (isset($_POST['submit'])){
         if (isset($data['checkbox']) && $data['chexkbox'] == 1){
             $content = file_get_contents("https://api.vk.com/method/wall.post?owner_id=$owner_id&message='".$data['text']."'&signed=0&'".$_SESSION['token']."'&v=5.70");
             $js = json_decode($content, true);
+            if ($js){
+                echo '<div class="go">Успешно отправленол</div>';
+            }
         }else{
             $content = file_get_contents("https://api.vk.com/method/wall.post?owner_id=$owner_id&message='".$data['text']."'&signed=1&'".$_SESSION['token']."'&v=5.70");
             $js = json_decode($content, true);
+            if ($js){
+                echo '<div class="go">Успешно отправленол</div>';
+            }
         }
         /*$message = do_query("INSERT INTO `post` (`text`, `user`) VALUES ('{$data['text']}', '{$_SESSION['user_id']}')");
         if ($message){
