@@ -14,7 +14,7 @@ if (isset($_SESSION['token'])) {
                    data-multiple-caption="{count} files selected" multiple> <label for="exampleInputFile"
                                                                                    class="btn-primary btn btn-default"><span>Выбрать</span></label>
         </div>-->
-        <div class="form-group"><input type="checkbox">Анон</div>
+        <div class="form-group"><input type="checkbox" value="1">Анон</div>
         <button type="submit" class="btn btn-default btn-primary" name="submit">Отправить</button>
 
     </form>
