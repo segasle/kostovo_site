@@ -170,7 +170,7 @@ function get_news()
                         print_r($key['photo']['photo_1280']);
                         echo '</pre>';
                         if (isset($key['photo'])) {
-                            $img = "<img src='" . $key['photo']['photo_1280'] . "'>";
+                            $img = "<img src='" . $key['photo']['photo_1280'] . "' class='w-100'>";
                         } else {
                             $img = '';
                         }
@@ -759,9 +759,6 @@ function vk_authorization()
         $_SESSION['token'] = $token2['access_token'];
         $_SESSION['email'] = $token2['email'];
         $_SESSION['user_id'] = $token2['user_id'];
-        //$_SESSION['phone'] = $token2['phone'];
-
-        // $_SESSION['id'] = $token2['id'];
         $vkid = $_SESSION['user_id'];
         $token = $_SESSION['token'];
         if (isset($_SESSION['token'])) {
