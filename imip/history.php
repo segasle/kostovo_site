@@ -14,7 +14,7 @@ if (isset($_SESSION['token'])) {
                    data-multiple-caption="{count} files selected" multiple> <label for="exampleInputFile"
                                                                                    class="btn-primary btn btn-default"><span>Выбрать</span></label>
         </div>-->
-        <div class="form-group"><input type="checkbox" value="1">Анон</div>
+        <div class="form-group"><label for="chexkbox"><input id="chexkbox" type="checkbox" name="chexkbox" value="1">Анон</label></div>
         <button type="submit" class="btn btn-default btn-primary" name="submit">Отправить</button>
 
     </form>
@@ -32,8 +32,14 @@ if (isset($_POST['submit'])){
         $errors[] = 'Вы не ввели сообщения';
     }
     if (empty($errors)){
-        $content = file_get_contents("https://api.vk.com/method/wall.post?owner_id=-178156792&message='".$data['text']."'");
-        $js = json_decode($content, true);
+        global $owner_id;
+        if (isset($data['checkbox']) && $data['chexkbox'] == 1){
+            $content = file_get_contents("https://api.vk.com/method/wall.post?owner_id=$owner_id&message='".$data['text']."'&signed=0&'".$_SESSION['token']."'&v=5.70");
+            $js = json_decode($content, true);
+        }else{
+            $content = file_get_contents("https://api.vk.com/method/wall.post?owner_id=$owner_id&message='".$data['text']."'&signed=1&'".$_SESSION['token']."'&v=5.70");
+            $js = json_decode($content, true);
+        }
         /*$message = do_query("INSERT INTO `post` (`text`, `user`) VALUES ('{$data['text']}', '{$_SESSION['user_id']}')");
         if ($message){
             $get =mysqli_fetch_assoc(do_query("SELECT * FROM `post`, `users` WHERE users.users-id = post.user"));
