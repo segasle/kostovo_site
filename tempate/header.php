@@ -11,28 +11,56 @@
     <link rel="stylesheet" href="css/style.css?t=<?php echo(microtime(true) . rand()); ?>">
     <link rel="stylesheet" href="font-icons/css/font-awesome.css">
     <script>
-        window.fbAsyncInit = function() {
+        window.fbAsyncInit = function () {
             FB.init({
-                appId      : '1759331964212959',
-                cookie     : true,
-                xfbml      : true,
-                version    : 'v3.2'
+                appId: '1759331964212959',
+                cookie: true,
+                xfbml: true,
+                version: 'v3.2'
             });
 
             FB.AppEvents.logPageView();
 
         };
 
-        (function(d, s, id){
+        (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
             js.src = "https://connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
 </head>
 <body>
+<?php
+/**
+ * Created by PhpStorm.
+ * User: sergej
+ * Date: 14.02.19
+ * Time: 18:39
+ */
+
+if (empty($_COOKIE['ap'])) { ?>
+
+
+    <div id="appomed-overlay"></div>
+    <div id="appomed-pop-main">
+        <div id="appomed-pop-caption">
+            <div id="appomed-pop-h4">Внимание!</div>
+            <div id="appomed-pop-close"></div>
+        </div>
+        <div id="appomed-pop-main2">
+            <p>У нас новый номер телефона</p>
+            <p><i class="fa fa-phone-square"></i> +7 (495) 104-26-84</p>
+            <div id="appomed-pop-but">Вернуться к просмотру сайта</div>
+        </div>
+    </div>
+
+<?php } ?>
 <div class="container-fluid">
     <header>
         <div class="header">
@@ -90,7 +118,7 @@
                                             </form>
                                             <?php link_reg(); ?>
                                             <p class="">Или можно авторизоваться с помощью соц сети</p>
-                                            <?php link_authorization();?>
+                                            <?php link_authorization(); ?>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
