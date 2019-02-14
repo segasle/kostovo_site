@@ -361,15 +361,12 @@ function users_data()
             $data['familia'] = $_SESSION['surname'];
         }
         if (isset($data['name']) or isset($data['familia']) or isset($data['phone']) or isset($data['address'])) {
-
-
             if (trim($data['name']) == '') {
                 $errors[] = "Вы не ввели имя";
             }
             if (trim($data['familia']) == '') {
                 $errors[] = "Вы не ввели фамилию";
             }
-
             if (!preg_match("/(^(?!\+.*\(.*\).*\-\-.*$)(?!\+.*\(.*\).*\-$)(\+[0-9]{1,3}\([0-9]{1,3}\)[0-9]{1}([-0-9]{0,8})?([0-9]{0,1})?)$)|(^[0-9]{1,4}$)/", "$phone")) {
                 $errors[] = "Вы непраильно ввели номер телефона, пример: +7(915)5473712";
             }
