@@ -54,8 +54,11 @@ if (empty($_COOKIE['ap'])) { ?>
             <div id="appomed-pop-close"></div>
         </div>
         <div id="appomed-pop-main2">
-            <p>У нас новый номер телефона</p>
-            <p><i class="fa fa-phone-square"></i> +7 (495) 104-26-84</p>
+            <p>Сайт находится в бете тестирование!!! Если нашли баг/ошибку, пишите на почту или в соц сеть</p>
+            <p><i class="fa fa-mail-forward"></i> segasle@yandex.ru</p>
+            <div class="block_icon">
+                <?php get_soclal(); ?>
+            </div>
             <div id="appomed-pop-but">Вернуться к просмотру сайта</div>
         </div>
     </div>
