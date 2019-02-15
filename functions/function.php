@@ -91,7 +91,7 @@ function get_soclal()
     $out = '<div class="block_img">';
     $sql = do_query('SELECT * FROM `social_network`');
     foreach ($sql as $item) {
-        $out .= '<a href="' . $item['url'] . '" class="' . $item['class'] . ' img_icons"></a>';
+        $out .= '<a href="' . $item['url'] . '" class="' . $item['class'] . ' img_icons" target="_blank"></a>';
     }
     $out .= '</div>';
     echo $out;
