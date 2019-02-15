@@ -1,7 +1,6 @@
+<h1 class="text-center">Мероприятия</h1>
 <?php
-/**
- * Created by PhpStorm.
- * User: sergej
- * Date: 09.01.19
- * Time: 14:36
- */
+$content = file_get_contents("https://www.kostrovodk.ru/meropriyatiya");
+//$js = json_decode($content, true);
+$js = explode('<div id="comp-in8s4jllinlineContent"', $content);
+print_r($js);
