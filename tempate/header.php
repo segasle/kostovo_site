@@ -37,13 +37,7 @@
 </head>
 <body>
 <?php
-/**
- * Created by PhpStorm.
- * User: sergej
- * Date: 14.02.19
- * Time: 18:39
- */
-
+$email = 'segasle@yandex.ru';
 if (empty($_COOKIE['ap'])) { ?>
 
 
@@ -55,7 +49,7 @@ if (empty($_COOKIE['ap'])) { ?>
         </div>
         <div id="appomed-pop-main-2">
             <p class="text-center">Сайт находится в бете тестирование!!! Если нашли баг/ошибку, пишите на почту или в соц сеть</p>
-            <p class="text-center h3"><i class="fa fa-mail-forward"></i> segasle@yandex.ru</p>
+            <p class="text-center h3"><i class="fa fa-envelope-o"></i><a href="mailto:<?php echo $email;?>"><?php echo $email;?></a></p>
             <div class="block_icon block-center">
                 <?php get_soclal(); ?>
             </div>
