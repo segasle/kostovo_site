@@ -171,6 +171,9 @@ body {
   line-height: 35px;
   color: #52B152;
 }
+#appomed-pop-main-2 > p a {
+  margin-left: 15px;
+}
 #appomed-pop-caption {
   width: 100%;
   min-height: 37px;
