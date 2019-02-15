@@ -1,6 +1,9 @@
 <h1 class="text-center">Мероприятия</h1>
 <?php
-$content = file_get_contents("https://www.kostrovodk.ru/meropriyatiya");
-//$js = json_decode($content, true);
-$js = explode('<div id="comp-in8s4jllinlineContent"', $content);
-print_r($js);
+require 'panser/simple_html_dom.php';
+$content = file_get_html("https://www.kostrovodk.ru/meropriyatiya");
+
+foreach ($content->find('div#comp-in8s4jllinlineContent') as $item){
+    echo $item;
+  //  print_r($item);
+}
