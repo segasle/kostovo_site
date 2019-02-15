@@ -97,8 +97,9 @@ body {
   position: inherit;
   padding: 0;
 }
-.block_icon {
-  float: right;
+.block-center {
+  display: table;
+  margin: auto;
 }
 .block_icon .block_img {
   float: left;
