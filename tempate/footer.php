@@ -6,7 +6,7 @@
                 <p>Все права защищены &copy;<?php echo date('Y'); ?></p>
             </div>
             <div class="col-lg-6 col-xs-12">
-                <div class="block_icon">
+                <div class="block_icon float-right">
                     <?php get_soclal(); ?>
                 </div>
             </div>
