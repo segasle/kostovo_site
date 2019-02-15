@@ -147,8 +147,7 @@ body {
   opacity: 0;
 }
 #appomed-pop-main {
-  min-width: 320px;
-  height: auto;
+  min-width: 300px;
   position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -160,9 +159,20 @@ body {
   visibility: hidden;
   display: block;
 }
+#appomed-pop-main-2 {
+  width: 100%;
+  margin-top: 20px;
+  height: auto;
+  display: block;
+  padding: 0 15px 10px;
+}
+#appomed-pop-main-2 > p i {
+  font-size: 35px;
+  line-height: 35px;
+  color: #52B152;
+}
 #appomed-pop-caption {
   width: 100%;
-  height: auto;
   min-height: 37px;
   background: #52B152;
   display: block;
@@ -197,12 +207,6 @@ body {
   font: normal normal normal 16px/35px FontAwesome;
   color: #fff;
 }
-#appomed-pop-main2 {
-  width: 100%;
-  height: auto;
-  display: block;
-  padding: 0 15px 10px;
-}
 #appomed-pop-but {
   background: #52B152;
   color: #fff;
@@ -220,21 +224,6 @@ body {
 }
 #appomed-pop-but:hover {
   opacity: 0.8;
-}
-#appomed-pop-main2 > p:nth-child(1) {
-  text-align: center;
-  font-size: 16px;
-  margin-top: 20px;
-}
-#appomed-pop-main2 > p:nth-child(2) {
-  text-align: center;
-  font-size: 35px;
-  line-height: 35px;
-}
-#appomed-pop-main2 > p:nth-child(2) i {
-  font-size: 35px;
-  line-height: 35px;
-  color: #52B152;
 }
 .container-fluid {
   padding: 0;
