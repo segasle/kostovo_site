@@ -53,9 +53,9 @@ if (empty($_COOKIE['ap'])) { ?>
             <div id="appomed-pop-h4">Внимание!</div>
             <div id="appomed-pop-close"></div>
         </div>
-        <div id="appomed-pop-main2">
-            <p>Сайт находится в бете тестирование!!! Если нашли баг/ошибку, пишите на почту или в соц сеть</p>
-            <p><i class="fa fa-mail-forward"></i> segasle@yandex.ru</p>
+        <div id="appomed-pop-main-2">
+            <p class="text-center">Сайт находится в бете тестирование!!! Если нашли баг/ошибку, пишите на почту или в соц сеть</p>
+            <p class="text-center h3"><i class="fa fa-mail-forward"></i> segasle@yandex.ru</p>
             <div class="block_icon block-center">
                 <?php get_soclal(); ?>
             </div>
