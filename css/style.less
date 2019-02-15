@@ -44,7 +44,43 @@ body {
   position: inherit;
   padding: 0;
 }
-
+.block {
+  &_icon {
+    float: right;
+    @wh: 48px;
+    .block_img {
+      float: left;
+      display: table;
+      .img_icons {
+        background-image: url(../photo/icons.png);
+        width: @wh;
+        height: @wh;
+        display: block;
+        float: left;
+      }
+      .icon_ok {
+        width: @wh;
+        height: @wh;
+        background-position: 0 0;
+      }
+      .icon_instagram {
+        width: @wh;
+        height: @wh;
+        background-position: -@wh*2 0;
+      }
+      .icon_facebook {
+        width: @wh;
+        height: @wh;
+        background-position: -@wh*3 0;
+      }
+      .icon_vk {
+        width: @wh;
+        height: @wh;
+        background-position: -@wh*5 0;
+      }
+    }
+  }
+}
 #appomed-overlay {
   background: rgba(0, 0, 0, 0.5);
   bottom: 0;
@@ -79,7 +115,7 @@ body {
   width: 100%;
   height: auto;
   min-height: 37px;
-  background: #21ad33;
+  background: @bg;
   display: block;
 }
 
@@ -124,7 +160,7 @@ body {
 }
 
 #appomed-pop-but {
-  background: #21ad33;
+  background: @bg;
   color: #fff;
   cursor: pointer;
   padding: 14px 0;
@@ -158,7 +194,7 @@ body {
 #appomed-pop-main2 > p:nth-child(2) i {
   font-size: 35px;
   line-height: 35px;
-  color: #2bb671;
+  color: @bg;
 }
 
 .container-fluid {
@@ -528,44 +564,9 @@ body {
     background: -moz- @bg_footer;
     background: -webkit- @bg_footer;
     background: @bg_footer;
-    .block {
-      &_icon {
-        float: right;
-        @wh: 48px;
-        .block_img {
-          float: left;
-          display: table;
-          .img_icons {
-            background-image: url(../photo/icons.png);
-            width: @wh;
-            height: @wh;
-            display: block;
-            float: left;
-          }
-          .icon_ok {
-            width: @wh;
-            height: @wh;
-            background-position: 0 0;
-          }
-          .icon_instagram {
-            width: @wh;
-            height: @wh;
-            background-position: -@wh*2 0;
-          }
-          .icon_facebook {
-            width: @wh;
-            height: @wh;
-            background-position: -@wh*3 0;
-          }
-          .icon_vk {
-            width: @wh;
-            height: @wh;
-            background-position: -@wh*5 0;
-          }
-        }
-      }
-    }
+
   }
+
 }
 
 @media (min-width: 1024px) {

@@ -97,6 +97,40 @@ body {
   position: inherit;
   padding: 0;
 }
+.block_icon {
+  float: right;
+}
+.block_icon .block_img {
+  float: left;
+  display: table;
+}
+.block_icon .block_img .img_icons {
+  background-image: url(../photo/icons.png);
+  width: 48px;
+  height: 48px;
+  display: block;
+  float: left;
+}
+.block_icon .block_img .icon_ok {
+  width: 48px;
+  height: 48px;
+  background-position: 0 0;
+}
+.block_icon .block_img .icon_instagram {
+  width: 48px;
+  height: 48px;
+  background-position: -96px 0;
+}
+.block_icon .block_img .icon_facebook {
+  width: 48px;
+  height: 48px;
+  background-position: -144px 0;
+}
+.block_icon .block_img .icon_vk {
+  width: 48px;
+  height: 48px;
+  background-position: -240px 0;
+}
 #appomed-overlay {
   background: rgba(0, 0, 0, 0.5);
   bottom: 0;
@@ -129,7 +163,7 @@ body {
   width: 100%;
   height: auto;
   min-height: 37px;
-  background: #21ad33;
+  background: #52B152;
   display: block;
 }
 #appomed-pop-h4 {
@@ -169,7 +203,7 @@ body {
   padding: 0 15px 10px;
 }
 #appomed-pop-but {
-  background: #21ad33;
+  background: #52B152;
   color: #fff;
   cursor: pointer;
   padding: 14px 0;
@@ -199,7 +233,7 @@ body {
 #appomed-pop-main2 > p:nth-child(2) i {
   font-size: 35px;
   line-height: 35px;
-  color: #2bb671;
+  color: #52B152;
 }
 .container-fluid {
   padding: 0;
@@ -604,40 +638,6 @@ body {
   background: -moz- linear-gradient(to bottom, #b4ddb4 0%, #83c783 17%, #52b152 33%, #008a00 67%, #005700 83%, #002400 100%);
   background: -webkit- linear-gradient(to bottom, #b4ddb4 0%, #83c783 17%, #52b152 33%, #008a00 67%, #005700 83%, #002400 100%);
   background: linear-gradient(to bottom, #b4ddb4 0%, #83c783 17%, #52b152 33%, #008a00 67%, #005700 83%, #002400 100%);
-}
-.container-fluid .footer .block_icon {
-  float: right;
-}
-.container-fluid .footer .block_icon .block_img {
-  float: left;
-  display: table;
-}
-.container-fluid .footer .block_icon .block_img .img_icons {
-  background-image: url(../photo/icons.png);
-  width: 48px;
-  height: 48px;
-  display: block;
-  float: left;
-}
-.container-fluid .footer .block_icon .block_img .icon_ok {
-  width: 48px;
-  height: 48px;
-  background-position: 0 0;
-}
-.container-fluid .footer .block_icon .block_img .icon_instagram {
-  width: 48px;
-  height: 48px;
-  background-position: -96px 0;
-}
-.container-fluid .footer .block_icon .block_img .icon_facebook {
-  width: 48px;
-  height: 48px;
-  background-position: -144px 0;
-}
-.container-fluid .footer .block_icon .block_img .icon_vk {
-  width: 48px;
-  height: 48px;
-  background-position: -240px 0;
 }
 @media (min-width: 1024px) {
   .container-fluid .header .no-col {
