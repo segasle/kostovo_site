@@ -3,15 +3,15 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:8889
--- Время создания: Фев 06 2019 г., 07:39
+-- Время создания: Фев 17 2019 г., 13:42
 -- Версия сервера: 5.7.23
--- Версия PHP: 7.2.8
+-- Версия PHP: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- База данных: `kostrobo`
+-- База данных: `kostovo`
 --
 
 -- --------------------------------------------------------
@@ -51,6 +51,27 @@ CREATE TABLE `favo` (
   `user_id` int(11) NOT NULL,
   `ads_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `feeback`
+--
+
+CREATE TABLE `feeback` (
+  `id` int(11) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `email` text NOT NULL,
+  `text` text NOT NULL,
+  `data` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `feeback`
+--
+
+INSERT INTO `feeback` (`id`, `name`, `email`, `text`, `data`) VALUES
+(1, 'Сергей', 'segasle@gmail.com', 'qwertyuioopasdfg', '2019-02-17 16:38:29');
 
 -- --------------------------------------------------------
 
@@ -239,6 +260,12 @@ ALTER TABLE `favo`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `feeback`
+--
+ALTER TABLE `feeback`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `input_reg`
 --
 ALTER TABLE `input_reg`
@@ -295,6 +322,12 @@ ALTER TABLE `ads`
 --
 ALTER TABLE `favo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `feeback`
+--
+ALTER TABLE `feeback`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `input_reg`
