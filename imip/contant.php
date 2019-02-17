@@ -64,3 +64,4 @@ if (isset($_POST['submit'])){
         echo '<div class="errors">'.array_shift($errors).'</div>';
     }
 }
+event_mail();
