@@ -37,7 +37,7 @@
 </head>
 <body>
 <?php
-$email = 'segasle@yandex.ru';
+global $email;
 if (empty($_COOKIE['ap'])) { ?>
 
 
