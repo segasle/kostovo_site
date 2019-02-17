@@ -35,10 +35,12 @@ if (isset($_POST['submit'])){
     $data = $_POST;
     $errors = array();
     $emailUser = $data['email'];
+    $name = htmlentities($data['name'], ENT_QUOTES);
+    $text = htmlentities($data['text'], ENT_QUOTES);
     if (empty($data['name']) or $data['name'] == ' '){
         $errors[] = 'Не ввели имя';
     }
-    if ($data['name'] <= 3 or $data['name'] >= 20){
+    if ($data['name'] >= 3){
         $errors[] = 'Имя должно быть не меньше 3 симловов и не больше 20';
     }
     if (empty($data['email'])){
@@ -50,11 +52,14 @@ if (isset($_POST['submit'])){
     if (empty($data['text']) or $data['text'] == ' '){
         $errors[] = 'Поле сообщение пустое';
     }
-    if ($data['text'] <= 10 or $data['text'] >= 1000) {
-        $errors[] = 'Имя должно быть не меньше 3 симловов и не больше 20';
+    if ($data['text'] >= 10) {
+        $errors[] = 'Имя должно быть не меньше 10 симловов и не больше 1000';
     }
     if (empty($errors)){
-
+        $users = do_query("INSERT INTO `feeback` (`name`, `email`, `text`) VALUES ('".$name."','{$data['email']}', '".$text."')");
+        if ($users){
+            echo '<div class="go">Успешно отправлено</div>';
+        }
     }else{
         echo '<div class="errors">'.array_shift($errors).'</div>';
     }
