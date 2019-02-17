@@ -228,6 +228,14 @@ body {
 #appomed-pop-but:hover {
   opacity: 0.8;
 }
+.flex_display .font_6 {
+  font-size: 29px;
+  font-weight: bold;
+}
+.flex_display .font_8 {
+  font-size: 20px;
+  font-weight: 500;
+}
 .container-fluid {
   padding: 0;
 }
