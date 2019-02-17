@@ -5,7 +5,7 @@ echo '<p class="h5">Контент взят с официального сайт
 require 'panser/simple_html_dom.php';
 $content = file_get_html("$link");
 
-foreach ($content->find('div#comp-in8s4jllinlineContent') as $item){
+foreach ($content->find('div#comp-in8s4jll_TeamListView_i6m8gew6109_dup_i6qm3pfb338_dup_i6ro0rw0157_dup_i70h8xkx181_dup_i7ek4o403_imomtrwe_in8s4jm2_Array__0_0_paginatedlistinlineContent') as $item){
     echo $item;
   //  print_r($item);
 }
