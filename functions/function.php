@@ -105,16 +105,8 @@ function get_post_vk()
     $out = '<div class="container"><div class="row">';
     $content2 = file_get_contents("https://api.vk.com/method/wall.get?owner_id=$owner_id&count=100&extended=1&filter=all&$token&v=5.60");
     $elements2 = json_decode($content2, true);
-    if (!empty($_GET['page'])) {
-        $page = $_GET['page'];
-        if (0 > $page) {
-            $page = 1;
-        }
-    } else {
-        $page = 1;
-    }
     foreach ($elements2 as $value) {
-        // print_r($elements2);
+
         foreach ($value['profiles'] as $profile) {
             $fio = $profile['first_name'] . ' ' . $profile['last_name'];
             if (isset($profile['screen_name'])) {
@@ -141,8 +133,8 @@ function get_post_vk()
         }
     }
     $out .= '</div></div>';
-
     echo $out;
+
     return;
 }
 
@@ -166,15 +158,13 @@ function get_news()
                 if (is_array($item['attachments']) || is_object($item['attachments'])) {
 
                     foreach ($item['attachments'] as $attachment => $key) {
-                        echo '<pre>';
-                        print_r($key['photo']['photo_1280']);
-                        echo '</pre>';
+
                         if (isset($key['photo'])) {
                             $img = "<img src='" . $key['photo']['photo_1280'] . "' class='w-100'>";
                         } else {
                             $img = '';
                         }
-                        // echo $img;
+
                     }
 
                 }
@@ -877,5 +867,34 @@ function group_photo_vk()
         }
     }
 
+    return;
+}
+
+function event_mail(){
+    if (isset($_POST)){
+        $data = $_POST;
+        if (!empty($data)){
+            $messi = array(
+                'Имя' => "{$data['name']}",
+                'Почта' => "{$data['email']}",
+                'Тема' => "{$data['topic']}",
+                'Сообщение' => "{$data['text']}",
+            );
+            foreach ($messi as $key => $value){
+                $asd = $messi;
+            }
+            $mess = implode("", $asd);
+            $to      = 'segasle@yandex.ru';
+            $subject = 'Обратная связь';
+            $message = "$mess";
+            $headers = 'From: segasle@kafe-lyi.ru' . "\r\n" .
+                'Reply-To: segasle@kafe-lyi.ru' . "\r\n" .
+                "Content-Type: text/plain; charset=\"UTF-8\"\r\n"
+                .'X-Mailer: PHP/' . phpversion();
+
+            mail("$to", "$subject", "$message", "$headers");
+
+        }
+    }
     return;
 }
