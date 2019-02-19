@@ -62,8 +62,8 @@ function input_reg()
     $sql = do_query('SELECT * FROM `input_reg` ORDER BY input_reg.id');
     $output = "<form method='post' action=''>";
     foreach ($sql as $r) {
-        $name = $r['name'];
-        $output .= "<div class='form-group'><label for='" . $r['for'] . "'>" . $r['text'] . "</label><input class='form-control' type='" . $r['type'] . "' name='" . $r['name'] . "' placeholder='" . $r['placeholder'] . "' id='" . $r['for'] . "' value='" . @$_POST[$name] . "'></div>";
+        //$name = $r['name'];
+        $output .= "<div class='form-group'><label for='" . $r['for'] . "'>" . $r['text'] . "</label><input class='form-control' type='" . $r['type'] . "' name='" . $r['name'] . "' placeholder='" . $r['placeholder'] . "' id='" . $r['for'] . "'></div>";
     }
     $output .= "<div class=\"checkbox\">
     <label>
@@ -184,6 +184,7 @@ function users_reg()
     if (isset($data['submit'])) {
         $email = $data['email'];
         $errors = array();
+        $phone = $data['phone'];
         if (!isset($data['checkbox'])) {
             $errors[] = 'Не поставили галочку';
         }
@@ -207,12 +208,18 @@ function users_reg()
         if ($data['password2'] != $data['password1']) {
             $errors[] = 'Вы не правильно ввели пароль';
         }
+        if (!preg_match("/(^(?!\+.*\(.*\).*\-\-.*$)(?!\+.*\(.*\).*\-$)(\+[0-9]{1,3}\([0-9]{1,3}\)[0-9]{1}([-0-9]{0,8})?([0-9]{0,1})?)$)|(^[0-9]{1,4}$)/", "$phone")) {
+            $errors[] = "Вы непраильно ввели номер телефона, пример: +7(915)5473712";
+        }
+        if (trim($data['address']) == '') {
+            $errors[] = "Вы не ввели адрес";
+        }
         if (empty($errors)) {
             $result = do_query("SELECT COUNT(*) as count FROM users WHERE `email` = '{$data['email']}'");
             $result = $result->fetch_object();
             if (empty($result->count)) {
                 // сохраняет все данные в БД
-                $wer = do_query("INSERT INTO users (`name`,`email`, `password`) VALUES ('{$data['name']}','{$data['email']}','" . password_hash($data['password2'], PASSWORD_DEFAULT) . "')");
+                $wer = do_query("INSERT INTO users (`name`,`email`, `password`, `phone`, `address`) VALUES ('{$data['name']}','{$data['email']}','" . password_hash($data['password2'], PASSWORD_DEFAULT) . "','{$data['phone']}','{$data['address']}')");
                 if (!empty($wer)) {
                     echo '<div class="go">Успешно зарегиревались</div>';
                 }
