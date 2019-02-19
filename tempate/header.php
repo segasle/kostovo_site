@@ -95,7 +95,7 @@ if (empty($_COOKIE['ap'])) { ?>
                                                 <div class="form-group">
                                                     <label for="exampleInputEmailGo">Email</label>
                                                     <input type="email" class="form-control" id="exampleInputEmailGo"
-                                                           name="email" placeholder="Email">
+                                                           name="email" placeholder="Email" value="<?php echo @$_POST['email']?>">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputPassword">Пароль</label>
