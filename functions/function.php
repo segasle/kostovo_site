@@ -62,8 +62,8 @@ function input_reg()
     $sql = do_query('SELECT * FROM `input_reg` ORDER BY input_reg.id');
     $output = "<form method='post' action=''>";
     foreach ($sql as $r) {
-        //$name = $r['name'];
-        $output .= "<div class='form-group'><label for='" . $r['for'] . "'>" . $r['text'] . "</label><input class='form-control' type='" . $r['type'] . "' name='" . $r['name'] . "' placeholder='" . $r['placeholder'] . "' id='" . $r['for'] . "'></div>";
+        $name = $r['name'];
+        $output .= "<div class='form-group'><label for='" . $r['for'] . "'>" . $r['text'] . "</label><input class='form-control' type='" . $r['type'] . "' name='" . $r['name'] . "' placeholder='" . $r['placeholder'] . "' id='" . $r['for'] . "' value='".@$_POST[$name]."'></div>";
     }
     $output .= "<div class=\"checkbox\">
     <label>
@@ -202,7 +202,7 @@ function users_reg()
             $errors[] = 'Вы не ввели пароль';
 
         }
-        if ($data['password1'] <= 6) {
+        if ($data['password1'] >= 6) {
             $errors[] = 'короткий пароль';
         }
         if ($data['password2'] != $data['password1']) {
