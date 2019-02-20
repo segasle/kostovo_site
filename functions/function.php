@@ -355,7 +355,7 @@ function users_data()
         }
         $errors = array();
         $phone = $data['phone'];
-        if (!empty($_SESSION['name'])) {
+       /* if (!empty($_SESSION['name'])) {
             $data['name'] = $_SESSION['name'];
         }
         if (!empty($_SESSION['surname'])) {
@@ -367,7 +367,7 @@ function users_data()
             }
             if (trim($data['familia']) == '') {
                 $errors[] = "Вы не ввели фамилию";
-            }
+            }*/
             if (!preg_match("/(^(?!\+.*\(.*\).*\-\-.*$)(?!\+.*\(.*\).*\-$)(\+[0-9]{1,3}\([0-9]{1,3}\)[0-9]{1}([-0-9]{0,8})?([0-9]{0,1})?)$)|(^[0-9]{1,4}$)/", "$phone")) {
                 $errors[] = "Вы непраильно ввели номер телефона, пример: +7(915)5473712";
             }
@@ -376,14 +376,14 @@ function users_data()
             }
 
             if (empty($errors)) {
-                $users = do_query("UPDATE `users` SET `address` = '" . $data['address'] . "' `surname` ='" . $data['familia'] . "', `phone` = '" . $phone . "', `name` = '" . $data['name'] . "' WHERE `email` = '" . $_SESSION['email'] . "'");
+                $users = do_query("UPDATE `users` SET `address` = '" . $data['address'] . "',`phone` = '" . $phone . "' WHERE `email` = '" . $_SESSION['email'] . "'");
                 if ($users) {
                     echo '<div class="go">Данные обновлены</div>';
                 }
             } else {
                 echo '<div class="errors">' . array_shift($errors) . '</div>';
             }
-        }
+        //}
     }
     return;
 }
