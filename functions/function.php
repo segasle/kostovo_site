@@ -192,6 +192,10 @@ function users_reg()
             $errors[] = 'Вы не ввели имя';
 
         }
+        if (trim($data['surname']) == '') {
+            $errors[] = 'Вы не ввели фамили≥';
+
+        }
         if (trim($data['email']) == '') {
             $errors[] = 'Вы не ввели электронную почту';
         }
@@ -219,7 +223,7 @@ function users_reg()
             $result = $result->fetch_object();
             if (empty($result->count)) {
                 // сохраняет все данные в БД
-                $wer = do_query("INSERT INTO users (`name`,`email`, `password`, `phone`, `address`) VALUES ('{$data['name']}','{$data['email']}','" . password_hash($data['password2'], PASSWORD_DEFAULT) . "','{$data['phone']}','{$data['address']}')");
+                $wer = do_query("INSERT INTO users (`name`, `surname`,`email`, `password`, `phone`, `address`) VALUES ('{$data['name']}','{$data['surname']}','{$data['email']}','" . password_hash($data['password2'], PASSWORD_DEFAULT) . "','{$data['phone']}','{$data['address']}')");
                 if (!empty($wer)) {
                     echo '<div class="go">Успешно зарегиревались</div>';
                 }
