@@ -63,7 +63,7 @@ function input_reg()
     $output = "<form method='post' action=''>";
     foreach ($sql as $r) {
         $name = $r['name'];
-        $output .= "<div class='form-group'><label for='" . $r['for'] . "'>" . $r['text'] . "</label><input class='form-control' type='" . $r['type'] . "' name='" . $r['name'] . "' placeholder='" . $r['placeholder'] . "' id='" . $r['for'] . "' value='".@$_POST[$name]."'></div>";
+        $output .= "<div class='form-group'><label for='" . $r['for'] . "'>" . $r['text'] . "</label><input class='form-control' type='" . $r['type'] . "' name='" . $r['name'] . "' placeholder='" . $r['placeholder'] . "' id='" . $r['for'] . "' value='" . @$_POST[$name] . "'></div>";
     }
     $output .= "<div class=\"checkbox\">
     <label>
@@ -97,46 +97,54 @@ function get_soclal()
     echo $out;
     return;
 }
-
-function get_post_vk()
-{
-    global $token;
-    global $owner_id;
-    $out = '<div class="container"><div class="row">';
-    $content2 = file_get_contents("https://api.vk.com/method/wall.get?owner_id=$owner_id&count=100&extended=1&filter=all&$token&v=5.60");
-    $elements2 = json_decode($content2, true);
-    foreach ($elements2 as $value) {
-
-        foreach ($value['profiles'] as $profile) {
-            $fio = $profile['first_name'] . ' ' . $profile['last_name'];
-            if (isset($profile['screen_name'])) {
-                $link = 'https://vk.com/' . $profile['screen_name'];
-            }
-
-        }
-        foreach ($value['items'] as $item) {
-            $link_post = $item['from_id'] . '_' . $item['id'];
-            $data = date('d.m.Y h:m', $item['date']);
-            $text = $item['text'];
-            if (isset($item['attachments'])) {
-                if (is_array($item['attachments']) || is_object($item['attachments'])) {
-                    foreach ($item['attachments'] as $key => $values) {
-                        if (isset($values['photo'])) {
-                            $img = $values['photo']['photo_604'];//;
-                        } else {
-                            $img = '';
-                        }
-                    }
-                }
-            }
-            $out .= '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="post"><p class="post_text">' . $text . '</p>' . '<img src="' . $img . '" class="post_img">' . '<a class="post_link" href="' . @$link . '" target="_blank">' . $fio . '</a>' . '<p class="post_data">' . $data . '</p><a href="https://vk.com/wall' . $link_post . '" target="_blank">Ссылка на пост</a></div></div>';
-        }
-    }
-    $out .= '</div></div>';
-    echo $out;
-
-    return;
-}
+//
+//function get_post_vk()
+//{
+//    global $token;
+//    global $owner_id;
+//    $out = '<div class="container"><div class="row">';
+//    $content2 = file_get_contents("https://api.vk.com/method/wall.get?owner_id=$owner_id&count=100&extended=1&filter=owner&$token&v=5.60");
+//    $elements2 = json_decode($content2, true);
+//    foreach ($elements2 as $value => $key) {
+//        if (isset($key)) {
+//            foreach ($key['items'] as $item) {
+//                $link_post = $item['from_id'] . '_' . $item['id'];
+//                $data = date('d.m.Y h:m', $item['date']);
+//                $text = $item['text'];
+//                if (isset($item['attachments'])) {
+//                    if (is_array($item['attachments']) || is_object($item['attachments'])) {
+//                        foreach ($item['attachments'] as $key => $values) {
+//                            if (isset($values['photo'])) {
+//                                $img = $values['photo']['photo_604'];//;
+//                            } else {
+//                                $img = '';
+//                            }
+//                        }
+//                    }
+//                }
+//
+//                //return $text;
+//                 $out1 = '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="post"><p class="post_text">' . $text . '</p>' . '<img src="' . $img . '" class="post_img">';
+//                return $out1;
+//            }
+//            foreach ($key['profiles'] as $profile) {
+//                $fio = $profile['first_name'] . ' ' . $profile['last_name'];
+//                if (isset($profile['screen_name'])) {
+//                    $link = 'https://vk.com/' . $profile['screen_name'];
+//                }
+//                //$out .= '<a class="post_link" href="' . @$link . '" target="_blank">' . $fio . '</a>';
+//            }
+//           // $out .= '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="post"><p class="post_text">' . $text . '</p>' . '<img src="' . $img . '" class="post_img">' . '<a class="post_link" href="' . @$link . '" target="_blank">' . $fio . '</a>' . '<p class="post_data">' . $data . '</p><a href="https://vk.com/wall' . $link_post . '" target="_blank">Ссылка на пост</a></div></div>';
+//        }
+//
+////        $out .= '</div></div>';
+//
+//    }
+////    $out .= '</div></div>';
+////    echo $out;
+//
+//    //return;
+//}
 
 function get_news()
 {
@@ -355,34 +363,34 @@ function users_data()
         }
         $errors = array();
         $phone = $data['phone'];
-       /* if (!empty($_SESSION['name'])) {
-            $data['name'] = $_SESSION['name'];
+        /* if (!empty($_SESSION['name'])) {
+             $data['name'] = $_SESSION['name'];
+         }
+         if (!empty($_SESSION['surname'])) {
+             $data['familia'] = $_SESSION['surname'];
+         }
+         if (isset($data['name']) or isset($data['familia']) or isset($data['phone']) or isset($data['address'])) {
+             if (trim($data['name']) == '') {
+                 $errors[] = "Вы не ввели имя";
+             }
+             if (trim($data['familia']) == '') {
+                 $errors[] = "Вы не ввели фамилию";
+             }*/
+        if (!preg_match("/(^(?!\+.*\(.*\).*\-\-.*$)(?!\+.*\(.*\).*\-$)(\+[0-9]{1,3}\([0-9]{1,3}\)[0-9]{1}([-0-9]{0,8})?([0-9]{0,1})?)$)|(^[0-9]{1,4}$)/", "$phone")) {
+            $errors[] = "Вы непраильно ввели номер телефона, пример: +7(915)5473712";
         }
-        if (!empty($_SESSION['surname'])) {
-            $data['familia'] = $_SESSION['surname'];
+        if (trim($data['address']) == '') {
+            $errors[] = "Вы не ввели адрес";
         }
-        if (isset($data['name']) or isset($data['familia']) or isset($data['phone']) or isset($data['address'])) {
-            if (trim($data['name']) == '') {
-                $errors[] = "Вы не ввели имя";
-            }
-            if (trim($data['familia']) == '') {
-                $errors[] = "Вы не ввели фамилию";
-            }*/
-            if (!preg_match("/(^(?!\+.*\(.*\).*\-\-.*$)(?!\+.*\(.*\).*\-$)(\+[0-9]{1,3}\([0-9]{1,3}\)[0-9]{1}([-0-9]{0,8})?([0-9]{0,1})?)$)|(^[0-9]{1,4}$)/", "$phone")) {
-                $errors[] = "Вы непраильно ввели номер телефона, пример: +7(915)5473712";
-            }
-            if (trim($data['address']) == '') {
-                $errors[] = "Вы не ввели адрес";
-            }
 
-            if (empty($errors)) {
-                $users = do_query("UPDATE `users` SET `address` = '" . $data['address'] . "',`phone` = '" . $phone . "' WHERE `email` = '" . $_SESSION['email'] . "'");
-                if ($users) {
-                    echo '<div class="go">Данные обновлены</div>';
-                }
-            } else {
-                echo '<div class="errors">' . array_shift($errors) . '</div>';
+        if (empty($errors)) {
+            $users = do_query("UPDATE `users` SET `address` = '" . $data['address'] . "',`phone` = '" . $phone . "' WHERE `email` = '" . $_SESSION['email'] . "'");
+            if ($users) {
+                echo '<div class="go">Данные обновлены</div>';
             }
+        } else {
+            echo '<div class="errors">' . array_shift($errors) . '</div>';
+        }
         //}
     }
     return;
@@ -632,6 +640,7 @@ function post_tempate($sql)
                                                                                aria-hidden="true"></i></button>
                             </form>
                         </div>
+                        <!--
                         <button type="button" class="modal-message" data-toggle="modal"
                                 data-target="#exampleModal2">
                             <span class="fa fa-commenting-o fa-2x"></span>
@@ -670,6 +679,7 @@ function post_tempate($sql)
                                 </div>
                             </div>
                         </div>
+                        -->
                         <div class="post_title">
                             <p><?php echo $title; ?></p>
                         </div>
@@ -881,27 +891,28 @@ function group_photo_vk()
     return;
 }
 
-function event_mail(){
-    if (isset($_POST)){
+function event_mail()
+{
+    if (isset($_POST)) {
         $data = $_POST;
-        if (!empty($data)){
+        if (!empty($data)) {
             $messi = array(
                 'Имя' => "{$data['name']}",
                 'Почта' => "{$data['email']}",
                 'Тема' => "{$data['topic']}",
                 'Сообщение' => "{$data['text']}",
             );
-            foreach ($messi as $key => $value){
+            foreach ($messi as $key => $value) {
                 $asd = $messi;
             }
             $mess = implode("", $asd);
-            $to      = 'segasle@yandex.ru';
+            $to = 'segasle@yandex.ru';
             $subject = 'Обратная связь';
             $message = "$mess";
             $headers = 'From: segasle@kafe-lyi.ru' . "\r\n" .
                 'Reply-To: segasle@kafe-lyi.ru' . "\r\n" .
                 "Content-Type: text/plain; charset=\"UTF-8\"\r\n"
-                .'X-Mailer: PHP/' . phpversion();
+                . 'X-Mailer: PHP/' . phpversion();
 
             mail("$to", "$subject", "$message", "$headers");
 
