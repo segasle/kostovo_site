@@ -22,6 +22,15 @@
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/52495369" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
+
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Сверхвидящее Кострово">
+    <meta property="og:description" content="ru_RU">
+    <meta property="og:site_name" content="">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="Кострово информация">
+    <meta name="description" content="">
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
