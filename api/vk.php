@@ -1,6 +1,6 @@
 <?php
 $appkey = 'qG0KCSlZ7x5VblkcR3z6';
-$redirect_uri = 'http://localhost:8888/kostovo_site/';
+$redirect_uri = 'http://kostrovoinfo.ru/';
 $token = 'access_token=e68531cae52f33044a9529a3c05096c30ddb38fdef1ff5aa5b5bc7dc2c8d6ff9290996e46ddeef10f6f00';
 $token2 = 'access_token=48188f4b3d31e87bee34497e19813a6245ec18cee7522d098b1c2d2be2939ae418ba9ab7333c429e07a26';
 $id ='6813787';
