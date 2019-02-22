@@ -2,27 +2,27 @@
 <?php
 if (isset($_SESSION['token'])) {
     ?>
-    <h2 class="h4">Вы можете написать пост</h2>
-    <form class="form-horizontal" method="post">
-        <div class="form-group">
-            <label for="exampleInputText">Текст</label>
-            <textarea class="form-control" id="exampleInputText" placeholder="Текст" rows="10" name="text"></textarea>
-        </div>
-        <!--  <div class="form-group">
-              <p>Выберите фото</p>
-              <input type="file" id="exampleInputFile" accept="image/jpeg,image/png" name="file" class="inputfile hide"
-                     data-multiple-caption="{count} files selected" multiple> <label for="exampleInputFile"
-                                                                                     class="btn-primary btn btn-default"><span>Выбрать</span></label>
-          </div>-->
+    <!--  <h2 class="h4">Вы можете написать пост</h2>
+     <form class="form-horizontal" method="post">
+         <div class="form-group">
+             <label for="exampleInputText">Текст</label>
+             <textarea class="form-control" id="exampleInputText" placeholder="Текст" rows="10" name="text"></textarea>
+         </div>
+    <!--  <div class="form-group">
+               <p>Выберите фото</p>
+               <input type="file" id="exampleInputFile" accept="image/jpeg,image/png" name="file" class="inputfile hide"
+                      data-multiple-caption="{count} files selected" multiple> <label for="exampleInputFile"
+                                                                                      class="btn-primary btn btn-default"><span>Выбрать</span></label>
+           </div>
         <div class="form-group"><label for="chexkbox"><input id="chexkbox" type="checkbox" name="chexkbox" value="1">Анон</label>
         </div>
         <button type="submit" class="btn btn-default btn-primary" name="submit">Отправить</button>
 
-    </form>
+    </form>-->
     <?php
 } else {
     ?>
-    <h2 class="text-center">Авторизуйтесь через вк пожалуйста, чтобы написать пост</h2>
+   <!-- <h2 class="text-center">Авторизуйтесь через вк пожалуйста, чтобы написать пост</h2> -->
     <?php
 }
 
@@ -65,7 +65,7 @@ $out = '<div class="container"><div class="row">';
 $content2 = file_get_contents("https://api.vk.com/method/wall.get?owner_id=$owner_id&count=100&extended=1&filter=all&$token&v=5.60");
 $elements2 = json_decode($content2, true);
 foreach ($elements2 as $value) {
-    foreach ($value as $profile) {
+    /*foreach ($value as $profile) {
         $fio = $profile['profiles']['first_name'] . ' ' . $profile['profiles']['last_name'];
         if (isset($profile['profiles']['screen_name'])) {
             $link = 'https://vk.com/' . $profile['screen_name'];
@@ -74,7 +74,7 @@ foreach ($elements2 as $value) {
         //global $fio;
         //exit($fio);
         //break;
-    }
+    }*/
 
 
     foreach ($value['items'] as $item) {
@@ -92,7 +92,9 @@ foreach ($elements2 as $value) {
                     //unset($img);
                     //break;
                 }
-                $out .= '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="post"><p class="post_text">' . $text . '</p>' . '<img src="' . $img . '" class="post_img">' . '<a class="post_link" href="' . @$link . '" target="_blank">' . $fio . '</a>' . '<p class="post_data">' . $data . '</p><a href="https://vk.com/wall' . $link_post . '" target="_blank">Ссылка на пост</a></div></div>';
+                $out .= '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="post"><p class="post_text">' . $text . '</p>' . '<img src="' . $img . '" class="post_img">'
+                    //.'<a class="post_link" href="' . @$link . '" target="_blank">' . $fio . '</a>'
+                    . '<p class="post_data">' . $data . '</p><a href="https://vk.com/wall' . $link_post . '" target="_blank">Ссылка на пост</a></div></div>';
 
             }
 
