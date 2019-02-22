@@ -31,7 +31,9 @@
     <meta name="robots" content="index, follow">
     <meta name="keywords" content="Кострово информация">
     <meta name="description" content="">
+    <link rel="icon" type="image/png" href="photo/favo.png">
     <title></title>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css?t=<?php echo(microtime(true) . rand()); ?>">
