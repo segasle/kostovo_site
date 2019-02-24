@@ -21,14 +21,19 @@
  <?php
  favourites();
  ?>
-<div class="row">
+
     <?php
     if (isset($_POST['submit'])) {
         search();
     } else {
         $sql = do_query("SELECT * FROM `ads`, `users` WHERE users.email = ads.author_id");
-        post_tempate($sql);
+        if (mysqli_num_rows($sql) > 0){
+            echo '<div class="row">';
+            post_tempate($sql);
+            echo '</div>';
+        }else{
+            echo "<h2 class='text-center h3'>В базе пока ничего нет</h2>";
+        }
     }
     ?>
-</div>
 
