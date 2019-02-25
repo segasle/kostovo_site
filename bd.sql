@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:8889
--- Время создания: Фев 21 2019 г., 12:13
+-- Время создания: Фев 25 2019 г., 13:42
 -- Версия сервера: 5.7.23
 -- Версия PHP: 7.2.10
 
@@ -111,6 +111,37 @@ INSERT INTO `menu` (`id`, `url`, `title`, `parent`) VALUES
 (5, '?page=event', 'Мероприятия ', 0),
 (6, '?page=market', 'Барахолка', 0),
 (7, '?page=contant', 'Контакты', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `meta_title`
+--
+
+CREATE TABLE `meta_title` (
+  `id` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `page` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `meta_title`
+--
+
+INSERT INTO `meta_title` (`id`, `title`, `page`) VALUES
+(1, 'Главная страница о Кострово', '?page=main'),
+(2, 'Новости о Кострово', '?page=news'),
+(3, 'История', '?page=history'),
+(4, 'Карта Кострово', '?page=maps'),
+(5, 'Мероприятия Кострово', '?page=event'),
+(6, 'Барахолка Кострово', '?page=market'),
+(7, 'Обратная связь', '?page=contant'),
+(8, 'Профиль пользователя ', '?page=profile'),
+(9, 'Настройки пользователя', '?page=settings'),
+(10, 'ИЗбранное пользователя', '?page=favourites'),
+(11, 'Мои Объявления', '?page=ads'),
+(12, 'Пользовательсообщения', '?page=message'),
+(13, 'Подать объявление', '?page=give-ads');
 
 -- --------------------------------------------------------
 
@@ -248,6 +279,12 @@ ALTER TABLE `menu`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `meta_title`
+--
+ALTER TABLE `meta_title`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `post`
 --
 ALTER TABLE `post`
@@ -310,6 +347,12 @@ ALTER TABLE `input_reg`
 --
 ALTER TABLE `menu`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT для таблицы `meta_title`
+--
+ALTER TABLE `meta_title`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT для таблицы `post`
