@@ -20,9 +20,8 @@
 </form>
  <?php
  favourites();
- ?>
 
-    <?php
+
     if (isset($_POST['submit'])) {
         search();
     } else {
@@ -35,5 +34,3 @@
             echo "<h2 class='text-center h3'>В базе пока ничего нет</h2>";
         }
     }
-    ?>
-
