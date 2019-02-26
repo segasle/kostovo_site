@@ -5,22 +5,29 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="yandex-verification" content="8ee07f1a11254e34" />
+    <meta name="yandex-verification" content="8ee07f1a11254e34"/>
     <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
-        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    <script type="text/javascript">
+        (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () {
+                (m[i].a = m[i].a || []).push(arguments)
+            };
+            m[i].l = 1 * new Date();
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })
         (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
         ym(52495369, "init", {
-            id:52495369,
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true,
-            webvisor:true
+            id: 52495369,
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true,
+            webvisor: true
         });
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/52495369" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/52495369" style="position:absolute; left:-9999px;" alt=""/></div>
+    </noscript>
     <!-- /Yandex.Metrika counter -->
 
     <meta property="og:locale" content="ru_RU">
@@ -34,8 +41,8 @@
     <link rel="icon" type="image/png" href="photo/favo.png">
     <title>
         <?php
-            include 'functions/head.php';
-            echo $title;
+        include 'functions/head.php';
+        echo $title;
         ?>
     </title>
 
@@ -72,8 +79,6 @@
 <?php
 global $email;
 if (empty($_COOKIE['ap'])) { ?>
-
-
     <div id="appomed-overlay"></div>
     <div id="appomed-pop-main">
         <div id="appomed-pop-caption">
@@ -81,8 +86,10 @@ if (empty($_COOKIE['ap'])) { ?>
             <div id="appomed-pop-close"></div>
         </div>
         <div id="appomed-pop-main-2">
-            <p class="text-center">Сайт работает в режиме beta-тестирования! Если нашли баг/ошибку, пишите на почту или в соц сеть</p>
-            <p class="text-center h3"><i class="fa fa-envelope-o"></i><a href="mailto:<?php echo $email;?>"><?php echo $email;?></a></p>
+            <p class="text-center">Сайт работает в режиме beta-тестирования! Если нашли баг/ошибку, пишите на почту или
+                в соц сеть</p>
+            <p class="text-center h3"><i class="fa fa-envelope-o"></i><a
+                        href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a></p>
             <div class="block_icon block-center">
                 <?php get_soclal(); ?>
             </div>
@@ -128,7 +135,8 @@ if (empty($_COOKIE['ap'])) { ?>
                                                 <div class="form-group">
                                                     <label for="exampleInputEmailGo">Email</label>
                                                     <input type="email" class="form-control" id="exampleInputEmailGo"
-                                                           name="email" placeholder="Email" value="<?php echo @$_POST['email']?>">
+                                                           name="email" placeholder="Email"
+                                                           value="<?php echo @$_POST['email'] ?>">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputPassword">Пароль</label>
