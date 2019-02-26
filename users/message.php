@@ -1,5 +1,5 @@
 <h1 class="text-center">Сообщения</h1>
-<div class="row">
+<!--<div class="row">
     <div class="col-3 col-xs-12"></div>
     <div class="col-9 col-xs-12">
         <div class="message">
@@ -17,7 +17,7 @@
             </div>
         </form>
     </div>
-</div>
+</div>-->
 <?php
 /**
  * Created by PhpStorm.
