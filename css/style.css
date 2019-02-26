@@ -433,6 +433,7 @@ body {
   display: none;
   background: #52B152;
   width: 100%;
+  z-index: 1000;
 }
 .container-fluid .header .menu nav.nav-one {
   width: 100%;
