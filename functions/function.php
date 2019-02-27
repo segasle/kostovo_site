@@ -15,18 +15,15 @@ function connections()
         $file = $_GET['page'];
     }
 
-        include 'tempate/header.php';
-        if (file_exists('users/' . $file . '.php')) {
-            if (isset($_SESSION['id']) or isset($_SESSION['token'])) {
-                include 'users/' . $file . '.php';
-        }else{
-                include 'imip/errors.php';
-            }
-    }
-    else {
-
+    include 'tempate/header.php';
+    if (file_exists('users/' . $file . '.php')) {
+        if (isset($_SESSION['id']) or isset($_SESSION['token'])) {
+            include 'users/' . $file . '.php';
+        } else {
+            include 'imip/errors.php';
+        }
+    } else {
         include 'imip/' . $file . '.php';
-
     }
 
     include 'tempate/footer.php';
@@ -105,6 +102,7 @@ function get_soclal()
     echo $out;
     return;
 }
+
 //
 //function get_post_vk()
 //{
@@ -295,11 +293,6 @@ function auto_users()
         echo '<button class="btn btn-primary modal-open float-left">Привет, ' . $_SESSION['name'] . '!</button><form method="post" class="float-left"><button type="submit" class="btn btn-primary modal-open" name="input">Выйти</button></form>';
 
 
-        if (isset($_POST['input'])) {
-            unset($_SESSION['id']);
-            unset($_SESSION['token']);
-            header('location: ?page=main');
-        }
     } else {
         echo ' <button type="button" class="btn btn-primary modal-open" data-toggle="modal"
                                     data-target="#exampleModal">
@@ -309,7 +302,14 @@ function auto_users()
 
     return;
 }
+function revo(){
 
+    if (isset($_POST['input'])) {
+        unset($_SESSION['id']);
+        unset($_SESSION['token']);
+        header('location: ?page=main');
+    }
+}
 function password_recovery()
 {
     $data = $_POST;
