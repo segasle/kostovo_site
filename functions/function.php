@@ -15,11 +15,15 @@ function connections()
         $file = $_GET['page'];
     }
     include 'tempate/header.php';
-    if (file_exists('imip/' . $file . '.php')) {
-        include 'imip/' . $file . '.php';
-    } else {
-        include 'users/' . $file . '.php';
+    if (isset($_SESSION['id']) or isset($_SESSION['token'])) {
+        if (file_exists('users/' . $file . '.php')) {
+            include 'users/' . $file . '.php';
+        }
     }
+    else {
+        header('location');
+    }
+    include 'imip/' . $file . '.php';
 
     include 'tempate/footer.php';
 
