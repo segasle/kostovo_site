@@ -14,16 +14,20 @@ function connections()
     } else {
         $file = $_GET['page'];
     }
-    include 'tempate/header.php';
-    if (isset($_SESSION['id']) or isset($_SESSION['token'])) {
+
+        include 'tempate/header.php';
         if (file_exists('users/' . $file . '.php')) {
-            include 'users/' . $file . '.php';
-        }
+            if (isset($_SESSION['id']) or isset($_SESSION['token'])) {
+                include 'users/' . $file . '.php';
+        }else{
+                include 'imip/errors.php';
+            }
     }
     else {
-        header('location');
+
+        include 'imip/' . $file . '.php';
+
     }
-    include 'imip/' . $file . '.php';
 
     include 'tempate/footer.php';
 
