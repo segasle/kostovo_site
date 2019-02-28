@@ -24,6 +24,24 @@ body {
 .float-left {
   float: left;
 }
+.fa-facebook-official {
+  color: #249dff;
+}
+.fa-odnoklassniki {
+  color: #ffa210;
+}
+.fa-vk {
+  color: #2c54ff;
+}
+.fa-instagram {
+  color: #ff6037;
+}
+.fa-eye {
+  background: #e2e2e2;
+  height: 100%;
+  width: 52px;
+  text-align: center;
+}
 .col,
 .col-1,
 .col-10,
@@ -285,6 +303,15 @@ body {
   cursor: pointer;
   padding: 20px;
 }
+.container-fluid form .form-group_input {
+  position: relative;
+}
+.container-fluid form .form-group_input .input-group-addon {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  right: 0;
+}
 .container-fluid .header {
   background: -moz- linear-gradient(to bottom, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%);
   background: -webkit- linear-gradient(to bottom, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%);
@@ -366,18 +393,6 @@ body {
 .container-fluid .header .modal-body form .btn-primary {
   background-color: #007bff;
   border-color: #007bff;
-}
-.container-fluid .header .modal-body .block-icons .fa-facebook-official {
-  color: #249dff;
-}
-.container-fluid .header .modal-body .block-icons .fa-odnoklassniki {
-  color: #ffa210;
-}
-.container-fluid .header .modal-body .block-icons .fa-vk {
-  color: #2c54ff;
-}
-.container-fluid .header .modal-body .block-icons .fa-instagram {
-  color: #ff6037;
 }
 .container-fluid .header .menu {
   position: relative;
