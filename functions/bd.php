@@ -4,7 +4,14 @@ $array = array(
         'host' => 'localhost',
         'user' => 'root',
         'password' => 'root',
-        'database' => 'kostovo',
+        'database' => array(
+            array(
+                'name' => 'kostrobo',
+            ),
+            array(
+                'name' => '',
+            ),
+        ),
     ),
     array(
         'host' => 'localhost',
@@ -14,12 +21,30 @@ $array = array(
     ),
 );
 global $mysqli;
-foreach ($array as $item){
-    if (empty($mysqli)){
-        $mysqli = mysqli_connect($item['host'], $item['user'], $item['password'], $item['database']);
+foreach ($array as $item => $key) {
+    if (isset($key['database'])) {
+        if (is_array($key['database']) || is_object($key['database'])) {
+            foreach ($key['database'] as $value){
+                if (isset($value['name'])){
+                    $base = $key['name'];
+                }else {
+                    $base = $key['database'];
+                }echo '<pre>';
+                print_r($base);
+                echo '</pre>';
+            }
+
+        }
+
+
+    }
+
+    if (empty($mysqli)) {
+        $mysqli = mysqli_connect($key['host'], $key['user'], $key['password'], $base);
         mysqli_set_charset($mysqli, 'UTF8');
     }
-    if (mysqli_connect_errno()){
-        echo 'ошибка в подключении к БД ('.mysqli_connect_errno().')'.mysqli_connect_error();
-    }session_start();
+    if (mysqli_connect_errno()) {
+        echo 'ошибка в подключении к БД (' . mysqli_connect_errno() . ')' . mysqli_connect_error();
+    }
+    session_start();
 }
