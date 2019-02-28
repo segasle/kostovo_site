@@ -220,12 +220,10 @@ function users_reg()
             $errors[] = 'Вы не ввели пароль';
 
         }
-        if ($data['password1'] > 6) {
+        if ($data['password1'] >= 6) {
             $errors[] = 'короткий пароль';
         }
-        if ($data['password1'] < 32) {
-            $errors[] = 'слишком длиный пароль';
-        }
+
         if ($data['password2'] != $data['password1']) {
             $errors[] = 'Вы не правильно ввели пароль';
         }
@@ -322,11 +320,8 @@ function password_recovery()
             $errors[] = 'Вы не ввели пароль';
 
         }
-        if ($data['password1'] < 6) {
+        if ($data['password1'] <= 6) {
             $errors[] = 'короткий пароль';
-        }
-        if ($data['password1'] < 32) {
-            $errors[] = 'Слишком длинный пароль';
         }
         if ($data['password2'] != $data['password1']) {
             $errors[] = 'Вы неправильно ввели пароль';
