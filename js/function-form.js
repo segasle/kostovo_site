@@ -18,3 +18,13 @@ Array.prototype.forEach.call( inputs, function( input )
             label.innerHTML = labelVal;
     });
 });
+
+/*
+$( document ).ready(function() {
+    $('#s-h-pass').click(function(){
+        var type = $('#passwordR').attr('type') == "text" ? "password" : 'text',
+            c = $(this).html() == "<span class=\"fa-eye-slash\" title=\"Скрыть пароль\"></span>" ? "<span class=\"fa fa-eye\" title=\"Показать пароль\"></span>" : "<span class=\"fa fa-eye-slash\" title=\"Скрыть пароль\"></span>";
+        $(this).html(c);
+        $('#passwordR').prop('type', type);
+    });
+});*/
