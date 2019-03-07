@@ -103,55 +103,6 @@ function get_soclal()
     return;
 }
 
-//
-//function get_post_vk()
-//{
-//    global $token;
-//    global $owner_id;
-//    $out = '<div class="container"><div class="row">';
-//    $content2 = file_get_contents("https://api.vk.com/method/wall.get?owner_id=$owner_id&count=100&extended=1&filter=owner&$token&v=5.60");
-//    $elements2 = json_decode($content2, true);
-//    foreach ($elements2 as $value => $key) {
-//        if (isset($key)) {
-//            foreach ($key['items'] as $item) {
-//                $link_post = $item['from_id'] . '_' . $item['id'];
-//                $data = date('d.m.Y h:m', $item['date']);
-//                $text = $item['text'];
-//                if (isset($item['attachments'])) {
-//                    if (is_array($item['attachments']) || is_object($item['attachments'])) {
-//                        foreach ($item['attachments'] as $key => $values) {
-//                            if (isset($values['photo'])) {
-//                                $img = $values['photo']['photo_604'];//;
-//                            } else {
-//                                $img = '';
-//                            }
-//                        }
-//                    }
-//                }
-//
-//                //return $text;
-//                 $out1 = '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="post"><p class="post_text">' . $text . '</p>' . '<img src="' . $img . '" class="post_img">';
-//                return $out1;
-//            }
-//            foreach ($key['profiles'] as $profile) {
-//                $fio = $profile['first_name'] . ' ' . $profile['last_name'];
-//                if (isset($profile['screen_name'])) {
-//                    $link = 'https://vk.com/' . $profile['screen_name'];
-//                }
-//                //$out .= '<a class="post_link" href="' . @$link . '" target="_blank">' . $fio . '</a>';
-//            }
-//           // $out .= '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="post"><p class="post_text">' . $text . '</p>' . '<img src="' . $img . '" class="post_img">' . '<a class="post_link" href="' . @$link . '" target="_blank">' . $fio . '</a>' . '<p class="post_data">' . $data . '</p><a href="https://vk.com/wall' . $link_post . '" target="_blank">Ссылка на пост</a></div></div>';
-//        }
-//
-////        $out .= '</div></div>';
-//
-//    }
-////    $out .= '</div></div>';
-////    echo $out;
-//
-//    //return;
-//}
-
 function get_news()
 {
     global $token;
@@ -261,28 +212,38 @@ function users_authorization()
         $password = $data['password'];
         $resilt = mysqli_fetch_assoc(do_query("SELECT * FROM `users` WHERE `email` ='" . $email . "'"));
         if ($resilt) {
-            if (password_verify($password, $resilt['password'])) {
+            if (!password_verify($password, $resilt['password'])) {
 //                setcookie('id', $data['email'], time()+3600*24*30*12, '/');
 //                setcookie('password', $data['password'], time()+3600*24*30*12, '/');
 //                header('location: ' .$_SERVER['HTTP_REFERER']);
-
-                $_SESSION['outh'] = true;
-                $_SESSION['id'] = $resilt['id'];
-                $_SESSION['email'] = $resilt['email'];
-                $_SESSION['name'] = $resilt['name'];
-                $_SESSION['photo'] = $resilt['photo'];
-                $_SESSION['phone'] = $resilt['phone'];
-                $_SESSION['surname'] = $resilt['surname'];
-                $_SESSION['address'] = $resilt['address'];
-                header('location: ?page=main');
-            } else {
                 echo '<div class="errors">Пароль не верный</div>';
+
             }
         } else {
             echo '<div class="errors">Пользоаатель не найден</div>';
         }
     }
     return;
+}
+
+function user_ses()
+{
+
+    if (isset($_POST['sub'])) {
+        $resilt = mysqli_fetch_assoc(do_query("SELECT * FROM `users`"));
+        if (isset($_SESSION)) {
+            $_SESSION['outh'] = true;
+            $_SESSION['id'] = $resilt['id'];
+            $_SESSION['email'] = $resilt['email'];
+            $_SESSION['name'] = $resilt['name'];
+            $_SESSION['photo'] = $resilt['photo'];
+            $_SESSION['phone'] = $resilt['phone'];
+            $_SESSION['surname'] = $resilt['surname'];
+            $_SESSION['address'] = $resilt['address'];
+            header('location: ?page=main');
+        }
+    }
+
 }
 
 function auto_users()
@@ -300,7 +261,9 @@ function auto_users()
 
     return;
 }
-function revo(){
+
+function revo()
+{
 
     if (isset($_POST['input'])) {
         unset($_SESSION['id']);
@@ -308,6 +271,7 @@ function revo(){
         header('location: ?page=main');
     }
 }
+
 function password_recovery()
 {
     $data = $_POST;
